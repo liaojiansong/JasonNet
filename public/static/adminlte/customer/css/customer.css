@@ -1,0 +1,44 @@
+/*设备列表*/
+.td-status {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.td-status p {
+    margin-top: 15%;
+}
+
+.td-icon div {
+    margin-top: 6%;
+}
+
+.span-info {
+    margin-bottom: 0.5em;
+}
+
+/**
+触发器
+ */
+.source-l select {
+    display: inline;
+    width: 100px;
+    height: 34px;
+    margin: 0 13px 0 10px
+}
+
+.source-l input {
+    width: 280px;
+    display: inline
+}
+
+/**
+设备详情
+ */
+.detail h4 {
+    margin-bottom: 1.5em;
+}
+
+/**
+全局
+ */
