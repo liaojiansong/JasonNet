@@ -105,6 +105,7 @@ class DealDataAndInsert extends Base
             $target_condition = $target_info['target_condition'];
             // 阈值
             $target_value = $target_info['target_value'];
+            var_dump($target_value);
             // 数字才判断
             if (is_numeric($need_check) && is_numeric($target_value)) {
                 switch ($target_condition) {

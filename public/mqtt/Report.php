@@ -49,6 +49,17 @@ class Report extends Base
             }
         }
     }
+
+    public function loopReport()
+    {
+        while (true) {
+            $this->getReportInfo();
+            sleep(30);
+        }
+
+    }
 }
 
 $obj = new Report();
+$obj->loopReport();
+
