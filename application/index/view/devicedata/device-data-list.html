@@ -85,7 +85,7 @@
                                             <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="详情" href="{{:url('detail')}}"><i class="glyphicon glyphicon-info-sign"></i></a>
                                             <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="添加触发器" href="{{:url('addTrigger')}}"><i class="glyphicon glyphicon-inbox"></i></a>
                                             <a class="btn btn-social-icon btn-default" data-toggle="modal" data-placement="top" data-target="#send-order" title="下发命令"><i class="glyphicon glyphicon-send"></i></a>
-                                            <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteAlert('http://net.com/index/index/edit.html',1,$(this))"><i class="glyphicon glyphicon-trash"></i></a>
+                                            <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteAlert(`{{:url('delete')}}`,1,$(this))"><i class="glyphicon glyphicon-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

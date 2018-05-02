@@ -50,14 +50,16 @@
 						<table id="example1" class="table table-bordered table-hover">
 							<colgroup>
 								<col class="col-md-1">
-								<col class="col-md-5">
+								<col class="col-md-3">
+								<col class="col-md-3">
 								<col class="col-md-2">
-								<col class="col-md-4">
+								<col class="col-md-3">
 							</colgroup>
 							<thead>
 							<tr>
 								<th class="text-center">设备ID</th>
 								<th class="text-center">设备信息</th>
+								<th class="text-center">鉴权信息</th>
 								<th class="text-center">在线状态</th>
 								<th class="text-center">操作</th>
 							</tr>
@@ -75,6 +77,9 @@
 										<span class="info-box-text span-info">设备名称：{{$value.device_name}}</span><span class="info-box-text span-info">创建时间：{{$value.create_time}}</span><span class="info-box-text span-info">设备描述：{{$value.device_description}}</span>
 									</div>
 								</td>
+                                <td class="td-status">
+                                    <p>{{$value.device_auth}}</p>
+                                </td>
 								<td class="td-status">
 									{{switch name="$value.status"}} {{case value="0"}}<p><i class="fa fa-circle text-gray"></i> &nbsp;离线</p>{{/case}} {{case value="1"}}<p><i class="fa fa-circle text-green"></i> &nbsp;在线</p>{{/case}} {{case value="2"}}value2{{/case}} {{case value="3"}}value2{{/case}} {{/switch}}
 								</td>
