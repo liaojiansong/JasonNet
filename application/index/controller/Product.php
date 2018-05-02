@@ -14,6 +14,7 @@ use app\index\model\DevicesModel;
 use app\index\model\ProductIndustryModel;
 use app\index\model\ProductModel;
 use think\Db;
+use think\Session;
 
 class Product extends BaseController
 {
@@ -61,6 +62,7 @@ class Product extends BaseController
     public function edit()
     {
         $product_id = $this->request->param('product_id');
+        request()->has('product_id') ? Session::set('product_id', request()->param('product_id')) : null;
         $one = ProductModel::get($product_id)->hidden(['create_time', 'update_time'])->toJson();
         $options = ProductIndustryModel::select_option();
         $this->assign([

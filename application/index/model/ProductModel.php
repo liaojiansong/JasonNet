@@ -15,7 +15,7 @@ class ProductModel extends BaseModel
 {
     protected $table = 'products';
     // 可写入字段
-    protected static $fillable = ['product_name', 'product_industry_id', 'product_description'];
+    protected static $fillable = ['product_name', 'product_industry_id', 'product_description','user_id'];
 
     public static function newCreate($param, $fillable = null)
     {

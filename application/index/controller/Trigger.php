@@ -11,6 +11,7 @@ namespace app\index\controller;
 
 use app\common\BaseController;
 use app\index\model\TriggerModel;
+use function dump;
 use function request;
 use think\Session;
 

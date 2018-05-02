@@ -9,7 +9,6 @@
 namespace app\index\controller;
 
 use app\index\model\UserModel;
-use function dump;
 use think\Controller;
 use think\Session;
 

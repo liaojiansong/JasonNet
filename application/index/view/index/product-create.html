@@ -46,13 +46,9 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label>产品描述</label> <textarea class="form-control" name="product_description" rows="3" placeholder="Enter ..." data-rule="required"></textarea>
+								<label>产品描述</label> <textarea class="form-control" name="product_description" rows="3" placeholder="Enter ..." data-rule="产品描述:required"></textarea>
 							</div>
-								<div class="box-footer text-center">
-									<button type="reset" class="btn btn-info">取消</button>
-									<button type="submit" class="btn btn-success">提交</button>
-								</div>
-							</form>
+								{{include file="public/form-footer" /}}
 						</div>
 						<div class="col-lg-2">
 						</div>
@@ -80,12 +76,7 @@
 <script src="__STATIC__/customer/js/customer.js"></script>
 <script>
     $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
-        });
-        validateLogin("{{:url('index/login/checkPassword')}}");
+    
     });
 </script>
 </body>

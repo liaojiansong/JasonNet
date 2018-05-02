@@ -15,7 +15,7 @@ class TriggerModel extends BaseModel
 {
     protected $table = 'triggers';
     // 可写入字段
-    protected static $fillable = ['device_id','trigger_name','target_condition', 'target_type','trigger_value','phone_check', 'phone','email_check','email','report_msg',];
+    protected static $fillable = ['device_id','trigger_name','target_condition', 'target_type','target_value','phone_check', 'phone','email_check','email','report_msg',];
 
     public static function newCreate($param, $fillable = null)
     {

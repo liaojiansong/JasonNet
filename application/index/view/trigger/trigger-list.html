@@ -63,7 +63,7 @@
 										<p>数据模板:temp</p>
 										<p>创建时间:{{$value.create_time ?? nul}}</p>
 									</td>
-									<td>{{$value.target_condition ?? nul}}</td>
+									<td>{{$value.target_condition ?? nul}}{{$value.target_value ?? null}}</td>
 									<td>
                                         <p>设备名称:{{$value.device.device_name ?? nul}}</p>
                                         <p>设备ID:{{$value.device.id ?? null}}</p>

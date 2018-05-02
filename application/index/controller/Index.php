@@ -13,6 +13,7 @@ use app\common\BaseController;
 use app\index\model\ProductIndustryModel;
 use app\index\model\ProductModel;
 use function dump;
+use think\Session;
 
 class Index extends BaseController
 {
@@ -39,10 +40,12 @@ class Index extends BaseController
 
     public function store()
     {
-        $flag = $this->validate($this->request->param(), 'CommonValidate.add_product');
+        $param = $this->request->param();
+        $flag = $this->validate($param, 'CommonValidate.add_product');
         // 验证成功
         if ($flag === true) {
-            $res = ProductModel::newCreate($this->request->param());
+            $param['user_id'] = Session::get('user_info')['id'];
+            $res = ProductModel::newCreate($param);
             if ($res) {
                 $this->redirect('index', ['flag' => 'create_success']);
             } else {

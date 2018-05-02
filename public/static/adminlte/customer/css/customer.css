@@ -40,5 +40,15 @@
 }
 
 /**
+首页
+ */
+.special {
+    height: 160px;
+    width: 160px;
+    text-align: center;
+    font-size: 85px;
+}
+
+/**
 全局
  */

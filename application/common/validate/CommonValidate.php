@@ -40,7 +40,7 @@ class CommonValidate extends Validate
         'device_id' => 'require',
         'trigger_name' => 'require',
         'target_condition' => 'require',
-        'trigger_value' => 'require',
+        'target_value' => 'require',
 
         /**
          * 数据流模板添加
@@ -83,7 +83,7 @@ class CommonValidate extends Validate
         'device_id.require' => '关联设备出错',
         'trigger_name.require' => '触发器名称必须',
         'target_condition.require' => '触发条件必须',
-        'trigger_value.require' => '阈值必须',
+        'target_value.require' => '阈值必须',
         /**
          * 数据流模板添加
          */
