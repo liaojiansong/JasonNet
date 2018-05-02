@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Jasonnet| 产品列表</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="__STATIC__/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="__STATIC__/bower_components/font-awesome/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="__STATIC__/bower_components/Ionicons/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="__STATIC__/dist/css/AdminLTE.min.css">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="__STATIC__/plugins/iCheck/square/blue.css">
+</head>
+<body>
+<div class="row ">
+	<div class="col-xs-12">
+		<div class="box" style="padding: 1% 10% 10% 10%;background-color:#d2d6de">
+			<div class="box-body">
+				<div class="box box-warning">
+					<div class="box-header with-border">
+						<h3 class="box-title">产品添加</h3>
+					</div>
+					<!-- /.box-header -->
+					<div class="box-body">
+						<div class="col-lg-2">
+						</div>
+						<div class="col-lg-8">
+							<form role="form" id="form" method="post" action="{{:url('store')}}">
+							<input type="hidden" class="form-control" name="id">
+							<div class="form-group">
+								<label>产品名称：</label>
+								<input type="text" class="form-control" name="product_name" placeholder="请输入产品名称" data-rule="required">
+							</div>
+							<div class="form-group">
+								<label>产品行业</label>
+								<select class="form-control select2 select2-hidden-accessible" name="product_industry_id" style="width: 100%;" tabindex="-1" aria-hidden="true" data-rule="required">
+									{{volist name='options' id='op'}}
+								<option value="{{$op.id}}">{{$op.name}}</option>
+								{{/volist}}
+								</select>
+							</div>
+							<div class="form-group">
+								<label>产品描述</label> <textarea class="form-control" name="product_description" rows="3" placeholder="Enter ..." data-rule="required"></textarea>
+							</div>
+								<div class="box-footer text-center">
+									<button type="reset" class="btn btn-info">取消</button>
+									<button type="submit" class="btn btn-success">提交</button>
+								</div>
+							</form>
+						</div>
+						<div class="col-lg-2">
+						</div>
+					</div>
+					<!-- /.box-body -->
+				</div>
+			</div>
+		</div>
+	</div>
+{{include file="public/body-footer" /}}
+
+<!-- jQuery 3 -->
+<script src="__STATIC__/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="__STATIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="__STATIC__/plugins/iCheck/icheck.min.js"></script>
+<!--甜心提示-->
+<script src="__STATIC__/plugins/sweetalter/sweetalert.min.js"></script>
+<!--奈斯验证-->
+<script src="__STATIC__/plugins/nice-validator/src/jquery.validator.js"></script>
+<!--奈斯验证中文-->
+<!--<script src="__STATIC__/plugins/nice-validator/dist/local/zh-CN.js"></script>-->
+<!--用户自定义js-->
+<script src="__STATIC__/customer/js/customer.js"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+        validateLogin("{{:url('index/login/checkPassword')}}");
+    });
+</script>
+</body>
+</html>

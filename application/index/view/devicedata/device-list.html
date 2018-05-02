@@ -1,0 +1,197 @@
+{{extend name="public:base" /}}
+<!--标题-->
+{{block name="title"}}
+
+{{/block}}
+
+<!--主体-->
+{{block name="main"}}
+<!-- 内容墙,包含顶部面板 -->
+<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            设备列表
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#">Examples</a></li>
+            <li class="active">404 error</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!--<div class="row">-->
+            <!--<div class="text-center">-->
+                <!--<h3>接入设备</h3>-->
+                <!--<p>在接入设备时，请将以下注册码写入到设备中，只用于设备注册</p>-->
+                <!--<p><span class="text-primary">jg58145hgfh5445h4tdr515</span></p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                            <form class="navbar-form navbar-left">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="请输入设备的ID或名称">
+                                </div>
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </form>
+                            <div class="navbar-right">
+                                <p class="navbar-text pull-left" style="cursor:pointer" data-toggle="modal" data-target="#add-mac"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加设备</p>
+                                <p class="navbar-text pull-left" style="cursor:pointer"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>设备信息</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-hover">
+                            <colgroup>
+                                <col class="col-md-1">
+                                <col class="col-md-5">
+                                <col class="col-md-2">
+                                <col class="col-md-4">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th class="text-center">设备ID</th>
+                                    <th class="text-center">设备信息</th>
+                                    <th class="text-center">在线状态</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">
+                                        <p>34656514514</p>
+                                    </td>
+                                    <td>
+                                        <span class="info-box-icon bg-aqua"><i class="fa fa-camera"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">设备名称：酷狗摄像机</span>
+                                            <span class="info-box-text">设备ID：34656514514</span>
+                                            <span class="info-box-text">创建时间：20181212</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <p>在线</p>
+                                    </td>
+                                    <td>
+                                        <div class="text-center">
+                                            <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="编辑" href="{{:url('edit')}}"><i class="glyphicon glyphicon-edit"></i></a>
+                                            <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="详情" href="{{:url('detail')}}"><i class="glyphicon glyphicon-info-sign"></i></a>
+                                            <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="添加触发器" href="{{:url('addTrigger')}}"><i class="glyphicon glyphicon-inbox"></i></a>
+                                            <a class="btn btn-social-icon btn-default" data-toggle="modal" data-placement="top" data-target="#send-order" title="下发命令"><i class="glyphicon glyphicon-send"></i></a>
+                                            <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteAlert('http://net.com/index/index/edit.html',1,$(this))"><i class="glyphicon glyphicon-trash"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<div class="modal fade" id="add-mac" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">添加设备</h4>
+            </div>
+            <form action="{{:url('store')}}" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">设备名称:</label>
+                        <input type="text" class="form-control" id="recipient-name" name="device_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">鉴权信息:</label>
+                        <input type="text" class="form-control" id="message-text" name="device_auth">
+                    </div>
+                    <div class="form-group">
+                        <label>数据类型:</label>
+                        <select class="form-control" name="data_type">
+                            <option>温度</option>
+                            <option>湿度</option>
+                            <option>电流</option>
+                            <option>电压</option>
+                            <option>磁场</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label">描述:</label>
+                        <input type="text" class="form-control" id="description" name="device_description">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary"> 接入设备</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="send-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">发送命令</h4>
+			</div>
+			<form action="{{:url('store')}}" method="post">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="order-text" class="control-label">命令内容:</label>
+						<textarea class="form-control" id="order-text"  name="order_text" rows="5" placeholder="请输入字符串或数字"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="submit" class="btn btn-primary">发送</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script type="text/javascript">
+$(document).ready(function () {
+    $(document).on('dblclick',function () {
+        deleteAlert();
+    })
+});
+let DeviceList = {
+    ajaxRequest : function () {
+        $.ajax({
+            url: '',
+            data: {},
+            type: 'post',
+            dataType: 'json',
+            success: function (data) {
+
+            },
+            error: function () {
+
+            }
+        });
+    },
+    del : function ($the) {
+        $the.closest('tr').remove();
+    }
+}
+</script>
+
+{{/block}}
+

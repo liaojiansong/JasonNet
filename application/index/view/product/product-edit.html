@@ -1,0 +1,79 @@
+{{extend name="public:base" /}}
+<!--标题-->
+{{block name="title"}}
+设备列表
+{{/block}}
+<!--主体-->
+{{block name="main"}}
+<!-- 内容墙,包含顶部面板 -->
+<div class="content-wrapper">
+	<!-- Content Header (Page header) -->
+
+	
+	<!-- Main content -->
+	<section class="content">
+		<div class="box-body">
+			<div class="box box-warning">
+				<div class="box-header with-border">
+					<h3 class="box-title">产品编辑</h3>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<div class="col-lg-2">
+					</div>
+					<div class="col-lg-8">
+                        {{include file="public/form-header" /}}
+								<input type="hidden" class="form-control" name="id">
+							<div class="form-group">
+								<label>产品名称：</label>
+								<input type="text" class="form-control" name="product_name" placeholder="请输入产品名称" data-rule="required">
+							</div>
+							<div class="form-group">
+								<label>产品行业</label>
+								<select class="form-control select2 select2-hidden-accessible"  name="product_industry_id" style="width: 100%;" tabindex="-1" aria-hidden="true" data-rule="required">
+                                    {{volist name='options' id='op'}}
+                                    <option value="{{$op.id}}">{{$op.name}}</option>
+                                    {{/volist}}
+								</select>
+							</div>
+							<div class="form-group">
+								<label>产品描述</label>
+								<textarea class="form-control" name="product_description" rows="3" placeholder="Enter ..." data-rule="required"></textarea>
+							</div>
+							<!--&lt;!&ndash; input states &ndash;&gt;-->
+							<!--<div class="form-group has-success">-->
+								<!--<label class="control-label" for="inputSuccess"><i class="fa fa-check"></i> Input with success</label> <input type="text" class="form-control" id="inputSuccess" placeholder="Enter ..."> <span class="help-block">Help block with success</span>-->
+							<!--</div>-->
+							<!--<div class="form-group has-warning">-->
+								<!--<label class="control-label" for="inputWarning"><i class="fa fa-bell-o"></i> Input with warning</label> <input type="text" class="form-control" id="inputWarning" placeholder="Enter ..."> <span class="help-block">Help block with warning</span>-->
+							<!--</div>-->
+							<!--<div class="form-group has-error">-->
+								<!--<label class="control-label" for="inputError"><i class="fa fa-times-circle-o"></i> Input with error</label>-->
+								<!--<input type="text" class="form-control" id="inputError" placeholder="Enter ..."> <span class="help-block">Help block with error</span>-->
+							<!--</div>-->
+							<div class="text-center">
+								<button type="reset" class="btn btn-default">取消</button>
+								<button type="submit" class="btn btn-info ">保存</button>
+							</div>
+						</form>
+					</div>
+					<div class="col-lg-2">
+					</div>
+				</div>
+				<!-- /.box-body -->
+			</div>
+		</div>
+	</section>
+	<!-- /.content -->
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script>
+    $(function () {
+        popInput('{{$one ?? false}}');
+    });
+</script>
+
+{{/block}}
+

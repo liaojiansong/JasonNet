@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{block name="title"}}标题{{/block}}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="" rel="stylesheet">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="__STATIC__/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="__STATIC__/dist/css/skins/_all-skins.min.css">
+    <!--吐司提示插件-->
+    <link rel="stylesheet" href="__STATIC__/plugins/toastr/toastr.css">
+	<!--网页加载进度条插件-->
+	<link rel="stylesheet" href="__STATIC__/plugins/pace/pace.css">
+	<link rel="stylesheet" href="__STATIC__/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="__STATIC__/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="__STATIC__/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="__STATIC__/bower_components/morris.js/morris.css">
+    <!-- jvectormap -->
+    <link rel="stylesheet" href="__STATIC__/bower_components/jvectormap/jquery-jvectormap.css">
+    <!-- Date Picker -->
+    <link rel="stylesheet" href="__STATIC__/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="__STATIC__/bower_components/bootstrap-daterangepicker/daterangepicker.css">
+	<!-- iCheck for checkboxes and radio inputs -->
+	<link rel="stylesheet" href="__STATIC__/plugins/iCheck/all.css">
+	<link rel="stylesheet" href="__STATIC__/customer/css/customer.css">
+    <link rel="stylesheet" href="__STATIC__/plugins/bootstrap-switch-3.3.4/dist/css/bootstrap3/bootstrap-switch.css">
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <!--头部,蓝色那一条-->
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="__STATIC__/index.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>J</b>N</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Jason</b>Net</span>
+        </a>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown user user-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="__STATIC__/dist/img/jason.jpg" class="user-image" alt="User Image"> <span class="hidden-xs">{{$username}}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+	                        <!-- UserModel image -->
+                            <li class="user-header">
+                                <img src="__STATIC__/dist/img/jason.jpg" class="img-circle" alt="User Image">
+    
+                                <p>
+                                    物联网开发者
+                                    <small>从横物联网界20年</small>
+                                </p>
+                            </li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+	                                <a href="{{:url('index/user/index')}}" class="btn btn-info btn-flat">个人资料</a>
+                                </div>
+                                <div class="pull-right">
+	                                <a href="{{:url('index/login/loginOut')}}" class="btn btn-warning btn-flat">退出登录</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- 左边栏,包括logo -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-briefcase"></i> <span>产品概况</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{:url('product/index')}}"><i class="fa fa-circle-o"></i> 产品详情</a></li>
+                        <li><a href="{{:url('index/index/index')}}"><i class="fa fa-circle-o"></i> 产品首页</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-gears"></i> <span>设备管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{:url('devices/index')}}"><i class="fa fa-circle-o"></i> 设备列表</a></li>
+                        <li><a href="__STATIC__/pages/forms/advanced.html"><i class="fa fa-circle-o"></i> 添加设备</a></li>
+                        <li><a href="__STATIC__/pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-paw"></i> <span>触发器管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{:url('index/trigger/index')}}"><i class="fa fa-circle-o"></i> 触发器列表</a>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-reorder"></i> <span>数据管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{:url('DataTemplate/index')}}"><i class="fa fa-circle-o"></i> 数据流模板列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-wrench"></i> <span>API管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li>
+                            <a href="__STATIC__/pages/examples/setting_list.html"><i class="fa fa-circle-o"></i> API列表</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-comments"></i> <span>平台管理</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{:url('index/platform_manage/user_list')}}"><i class="fa fa-circle-o"></i> 用户列表</a>
+                        </li>
+                        <li><a href="{{:url('index/platform_manage/product_list')}}"><i class="fa fa-circle-o"></i> 产品列表</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+    {{block name="main"}}主内容{{/block}}
+    <!--网页底部-->
+	{{include file="public/body-footer" /}}
+</div>
+<!-- jQuery 3 -->
+<script src="__STATIC__/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="__STATIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--吐司提示插件-->
+<script src="__STATIC__/plugins/toastr/toastr.js"></script>
+<!--网页加载进度条插件-->
+<script src="__STATIC__/plugins/pace/pace.js"></script>
+<!-- SlimScroll -->
+<script src="__STATIC__/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="__STATIC__/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="__STATIC__/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="__STATIC__/dist/js/demo.js"></script>
+<!--HighChart-->
+<script src="__STATIC__//plugins/highchart/highcharts.js"></script>
+
+<!-- iCheck 1.0.1 -->
+<script src="__STATIC__/plugins/iCheck/icheck.min.js"></script>
+<!--甜心提示-->
+<script src="__STATIC__/plugins/sweetalter/sweetalert.min.js"></script>
+<!--奈斯验证-->
+<script src="__STATIC__/plugins/nice-validator/src/jquery.validator.js"></script>
+<!--奈斯验证中文-->
+<script src="__STATIC__/plugins/nice-validator/dist/local/zh-CN.js"></script>
+<!--pjax 部分加载-->
+<!--<script src="__STATIC__/plugins/pjax/jquery.pjax.js"></script>-->
+<!--用户自定义js-->
+<script src="__STATIC__/customer/js/customer.js"></script>
+<script src="__STATIC__/plugins/bootstrap-switch-3.3.4/dist/js/bootstrap-switch.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.sidebar-menu').tree();
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+    })
+</script>
+{{block name="js"}} {{/block}}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

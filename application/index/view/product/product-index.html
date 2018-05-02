@@ -1,0 +1,160 @@
+{{extend name="public:base" /}}
+<!--标题-->
+{{block name="title"}}
+设备列表
+{{/block}}
+
+<!--主体-->
+{{block name="main"}}
+<!-- 内容墙,包含顶部面板 -->
+<div class="content-wrapper">
+	<section class="content">
+		<div class="callout callout-info">
+			<div class="pull-right">
+				<a href="{{:url('edit')}}"></a><button type="button" class="btn btn-block bg-orange-active btn-sm">编辑</button>
+			</div>
+			<h4>Jason智能家居</h4>
+			<h5>利用云平台控制家中空调实现室内温度远程可控</h5>
+			<p>产品ID:20181115 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span> 接入协议 : <span>MQTT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户ID: <span>195458415</span></p>
+			<p>家用电器>大家电>空调</p>
+		</div>
+		<div class="row">
+			<section class="content-header">
+			<h4>产品概况</h4>
+			</section>
+			
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-aqua">
+					<div class="inner">
+						<h3>150</h3>
+						
+						<p>设备总数</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-bag"></i>
+					</div>
+					<a href="#" class="small-box-footer">更多信息<i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-green">
+					<div class="inner">
+						<h3>53</h3>
+						
+						<p>数据条数</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-stats-bars"></i>
+					</div>
+					<a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-yellow">
+					<div class="inner">
+						<h3>44</h3>
+						
+						<p>触发器</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-person-add"></i>
+					</div>
+					<a href="#" class="small-box-footer">更多信息<i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<!-- small box -->
+				<div class="small-box bg-red">
+					<div class="inner">
+						<h3>65</h3>
+						
+						<p>APIKEY数</p>
+					</div>
+					<div class="icon">
+						<i class="ion ion-pie-graph"></i>
+					</div>
+					<a href="#" class="small-box-footer">更多信息<i class="fa fa-arrow-circle-right"></i></a>
+				</div>
+			</div>
+			<!-- ./col -->
+		</div>
+	</section>
+</div>
+<div class="modal fade" id="add-device" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="exampleModalLabel">添加设备</h4>
+			</div>
+			<form id="add_device_form">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="recipient-name" class="control-label">设备名称:</label> <input type="text" class="form-control" id="recipient-name" name="device_name">
+					</div>
+					<div class="form-group">
+						<label for="message-text" class="control-label">鉴权信息:</label> <input type="text" class="form-control" id="message-text" name="device_auth">
+					</div>
+					<div class="form-group">
+						<label>数据类型:</label> <select class="form-control" name="data_type">
+						<option>温度</option>
+						<option>湿度</option>
+						<option>电流</option>
+						<option>电压</option>
+						<option>磁场</option>
+					</select>
+					</div>
+					<div class="form-group">
+						<label for="description" class="control-label">描述:</label> <input type="text" class="form-control" id="description" name="device_description">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" id="add_device_btn"> 接入设备</button>
+					</div>
+				</div>
+			</form>
+		
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="send-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+				</button>
+				<h4 class="modal-title">发送命令</h4>
+			</div>
+			<form>
+				<input type="hidden" name="device_id" id="device_id">
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="order-text" class="control-label">命令内容:</label> <textarea class="form-control" id="order-text" name="order_text" rows="5" placeholder="请输入字符串或数字"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+					<button type="button" class="btn btn-primary" onclick="DeviceList.sendOrder($(this))">发送</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script>
+    $(function () {
+        info('{{$flag ?? 1}}');
+    });
+</script>
+
+{{/block}}
+

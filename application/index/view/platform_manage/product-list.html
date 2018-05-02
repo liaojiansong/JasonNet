@@ -1,0 +1,65 @@
+{{extend name="public:base" /}}
+<!--标题-->
+{{block name="title"}}
+产品列表
+{{/block}}
+
+<!--主体-->
+{{block name="main"}}
+<!-- 内容墙,包含顶部面板 -->
+<div class="content-wrapper">
+	<section class="content">
+		<div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">产品列表</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered table-hover table-responsive text-center">
+                            <!--<thead>-->
+                                <tr>
+                                    <th>产品ID</th>
+                                    <th>产品名称</th>
+                                    <th>行业类型</th>
+                                    <th>创建时间</th>
+                                    <th>所属用户名</th>
+                                    <th>所有设备数量数</th>
+                                </tr>
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            {{volist name='list' id='value'}}
+                                <tr>
+                                    <td>{{$value.id}}</td>
+                                    <td>{{$value.product_name}}</td>
+                                    <td>{{$value.product_industry.name ?? null}}</td>
+                                    <td>{{$value.create_time}}</td>
+                                    <td>{{$value.user.username ?? null}}</td>
+                                    <td>{{$value.devices_count}}</td>
+                                </tr>
+                            {{/volist}}
+                            <!--</tbody>-->
+                        </table>
+                        <div class="pull-right">
+                            {{$list->render()}}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+		</div>
+	</section>
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[name='my-checkbox']").bootstrapSwitch();
+    });
+</script>
+
+{{/block}}
+
