@@ -79,8 +79,8 @@
 									<div class="col-md-6">
 										<ul class="chart-legend clearfix">
 											<li title="设备数量"><i class="fa fa-cogs text-red"></i> 设备总数：{{$value.devices_count}}</li>
-											<li><i class="fa fa-database text-yellow"></i> 数据条数：{{$value.devices_count}}</li>
-											<li><i class="fa fa-hourglass-start text-green"></i> 触发器数量：{{$value.devices_count}}</li>
+											<li><i class="fa fa-database text-yellow"></i> 数据条数：{{$value.data_total ?? null}}</li>
+											<li><i class="fa fa-hourglass-start text-green"></i> 触发器数量：{{$value.triggers_count ?? null}}</li>
 											<li><i class="fa fa-clock-o text-aqua"></i> {{$value.create_time}}</li>
 										
 										</ul>

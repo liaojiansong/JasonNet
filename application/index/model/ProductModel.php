@@ -48,4 +48,35 @@ class ProductModel extends BaseModel
         return $this->belongsTo('ProductIndustryModel', 'product_industry_id');
     }
 
+    public function triggers()
+    {
+        return $this->hasMany('TriggerModel', 'product_id');
+    }
+
+    public static function getList($product_id=null)
+    {
+        // 获取当前用户下的产品
+        $user_info = session('user_info');
+        $list = ProductModel::withCount(['devices', 'triggers'])->with(['product_industry'])->with([
+            'devices' => function ($query) {
+                $query->field('product_id,id');
+            }
+        ])->where('user_id', $user_info['id'])->select($product_id);
+
+        foreach ($list as &$value) {
+            $device = $value->devices ?? null;
+            $data_total = 0;
+            foreach ($device as $val) {
+                if ($val !== null) {
+                    $device_id = $val->id;
+                    $temp = DeviceDataMode::getTotal($device_id);
+                    $data_total += $temp;
+                }
+            }
+            $value->data_total = $data_total;
+
+        }
+        return $list;
+    }
+
 }

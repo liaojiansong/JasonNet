@@ -27,6 +27,7 @@ class Report extends Base
 
     /**
      * 报告发送邮件的结果(写进数据表)
+     * TODO 删除这个报警信息
      */
     public function responseEmailResult()
     {

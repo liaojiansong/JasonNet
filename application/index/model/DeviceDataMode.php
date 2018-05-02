@@ -37,4 +37,17 @@ class DeviceDataMode extends BaseModel
             'yesterday' => $yesterday,
         ];
     }
+
+    /**
+     * 获取当前设备的数据总数
+     * @param $device_id
+     * 设备id
+     * @return int|string
+     */
+    public static function getTotal($device_id)
+    {
+        $total  = self::where('devices_id', $device_id)->count();
+        return $total;
+    }
+
 }

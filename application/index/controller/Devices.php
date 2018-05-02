@@ -17,6 +17,7 @@ class Devices extends BaseController
      */
     public function index()
     {
+
         request()->has('product_id') ? Session::set('product_id',request()->param('product_id')) : null;
         $devices_list = DevicesModel::where('product_id',Session::get('product_id'))->paginate(5);
         $this->assign([

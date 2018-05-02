@@ -13,10 +13,10 @@
 			<div class="pull-right">
 				<a href="{{:url('edit')}}"></a><button type="button" class="btn btn-block bg-orange-active btn-sm">编辑</button>
 			</div>
-			<h4>Jason智能家居</h4>
-			<h5>利用云平台控制家中空调实现室内温度远程可控</h5>
-			<p>产品ID:20181115 <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span> 接入协议 : <span>MQTT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户ID: <span>195458415</span></p>
-			<p>家用电器>大家电>空调</p>
+			<h4>{{$one.product_name}}</h4>
+			<h5>{{$one.product_description}}</h5>
+			<p>产品ID：{{$one.id}} <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|</span> 接入协议 : <span>MQTT</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户ID: <span>{{$one.user_id}}</span></p>
+			<p>所处行业：{{$one.product_industry.name ?? null}}</p>
 		</div>
 		<div class="row">
 			<section class="content-header">
@@ -27,14 +27,14 @@
 				<!-- small box -->
 				<div class="small-box bg-aqua">
 					<div class="inner">
-						<h3>150</h3>
+						<h3>{{$one.devices_count}}</h3>
 						
 						<p>设备总数</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-bag"></i>
+						<i class="fa fa-gears"></i>
 					</div>
-					<a href="#" class="small-box-footer">更多信息<i class="fa fa-arrow-circle-right"></i></a>
+					<a href="{{:url('devices/index')}}" class="small-box-footer">更多信息<i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -42,14 +42,14 @@
 				<!-- small box -->
 				<div class="small-box bg-green">
 					<div class="inner">
-						<h3>53</h3>
+						<h3>{{$one.data_total}}</h3>
 						
 						<p>数据条数</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-stats-bars"></i>
+						<i class="fa fa-database"></i>
 					</div>
-					<a href="#" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
+					<a href="{{:url('devices/index')}}" class="small-box-footer">更多信息 <i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -57,14 +57,14 @@
 				<!-- small box -->
 				<div class="small-box bg-yellow">
 					<div class="inner">
-						<h3>44</h3>
+						<h3>{{$one.triggers_count}}</h3>
 						
 						<p>触发器</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-person-add"></i>
+						<i class="fa fa-hourglass-start"></i>
 					</div>
-					<a href="#" class="small-box-footer">更多信息<i class="fa fa-arrow-circle-right"></i></a>
+					<a href="{{:url('trigger/index')}}" class="small-box-footer">更多信息<i class="fa fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->

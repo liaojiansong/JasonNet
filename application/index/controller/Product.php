@@ -13,6 +13,7 @@ use app\common\BaseController;
 use app\index\model\DevicesModel;
 use app\index\model\ProductIndustryModel;
 use app\index\model\ProductModel;
+use function dump;
 use think\Db;
 use think\Session;
 
@@ -20,8 +21,11 @@ class Product extends BaseController
 {
     public function index()
     {
+        $product_id = Session::get('product_id');
+        $one = ProductModel::getList($product_id);
         $this->assign([
             'flag' => $this->request->param('flag') ?? null,
+            'one' => $one[0] ?? null,
         ]);
         return $this->fetch('product-index');
     }

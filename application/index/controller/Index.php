@@ -12,16 +12,13 @@ namespace app\index\controller;
 use app\common\BaseController;
 use app\index\model\ProductIndustryModel;
 use app\index\model\ProductModel;
-use function dump;
 use think\Session;
 
 class Index extends BaseController
 {
     public function index()
     {
-        // 获取当前用户下的产品
-        $user_info = session('user_info');
-        $list = ProductModel::withCount(['devices'])->with(['product_industry'])->where('user_id', $user_info['id'])->select();
+        $list = ProductModel::getList();
         $this->assign([
             'list' => $list,
         ]);
