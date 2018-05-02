@@ -22,7 +22,7 @@ class Report extends Base
      */
     public function sendEmail($target_info)
     {
-        dump($target_info);
+        var_dump($target_info);
     }
 
     /**
