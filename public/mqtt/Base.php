@@ -10,7 +10,14 @@ class Base
     protected $mysql = null;
     protected $redis = null;
     protected $mqtt = null;
+    // 白名单前缀
     const DEVICE_WHITE_LIST = 'device_white_list_';
+    // 报警列表
+    const REPORT_LIST = 'report_list';
+    // 设备数据栈前缀
+    const DATA_LIST = "data_list_";
+    // 触发器名称前缀
+    const TARGET = 'target_';
 
 
     const expire_time = 600;

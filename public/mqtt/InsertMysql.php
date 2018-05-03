@@ -78,10 +78,11 @@ class InsertMysql extends Base
     public function insertData()
     {
         while (true) {
+            echo '开始执行';
             $data_box = $this->getDeviceDataBox();
             $this->insetIntoTable($data_box);
             unset($data_box);
-            sleep(30);
+            sleep(15);
         }
     }
 
@@ -95,7 +96,7 @@ class InsertMysql extends Base
      */
     public function checkTouchOff($device_id,$need_check)
     {
-        $target_name = 'target_' . $device_id;
+        $target_name = self::TARGET . $device_id;
         $flag= $this->redis->exists($target_name);
         $is_report = false;
         if ($flag) {
@@ -105,7 +106,6 @@ class InsertMysql extends Base
             $target_condition = $target_info['target_condition'];
             // 阈值
             $target_value = $target_info['target_value'];
-            var_dump($target_value);
             // 数字才判断
             if (is_numeric($need_check) && is_numeric($target_value)) {
                 switch ($target_condition) {
@@ -144,9 +144,13 @@ class InsertMysql extends Base
         }
 
         if ($is_report) {
-            // 将发送的值写进$target_name
+            echo '-----------------------被触发的触发器-------------------------------------';
+            echo "\n";
+            var_dump($target_name);
+            echo "\n";
+            // 将发送过来比较的值追加到$target_name
             $this->redis->hSet($target_name, 'send_value', $need_check);
-            $this->redis->lPush('report_list', $target_name);
+            $this->redis->lPush(self::REPORT_LIST, $target_name);
             return true;
         } else {
             return false;

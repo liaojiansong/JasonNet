@@ -46,7 +46,7 @@ class DeviceDataMode extends BaseModel
      */
     public static function getTotal($device_id)
     {
-        $total  = self::where('devices_id', $device_id)->count();
+        $total  = self::where('device_id', $device_id)->count();
         return $total;
     }
 

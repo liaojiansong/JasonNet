@@ -37,11 +37,10 @@ class Report extends Base
     public function getReportInfo()
     {
         // todo 每一个target_device 包含完成的报警信息
-        $report_key = 'report_list';
-        $len = $this->redis->lLen($report_key);
+        $len = $this->redis->lLen(self::REPORT_LIST);
         if ($len > 1) {
             for ($i = 0; $i < $len; $i++) {
-                $one_target_device = $this->redis->rPop($report_key) ?? null;
+                $one_target_device = $this->redis->rPop(self::REPORT_LIST) ?? null;
                 if ($one_target_device != null) {
                     if ($this->redis->exists($one_target_device))
                     $target_info = $this->redis->hGetAll($one_target_device);
