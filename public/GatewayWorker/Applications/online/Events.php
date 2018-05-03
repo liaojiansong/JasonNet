@@ -28,6 +28,19 @@ use \GatewayWorker\Lib\Gateway;
  */
 class Events
 {
+    public static $redis=null;
+    public static function getRedis()
+    {
+        $redis = new Redis();
+        $redis->connect('127.0.0.1');
+        self::$redis = $redis;
+
+    }
+
+    public static function onWorkerStart()
+    {
+        self::getRedis();
+    }
     /**
      * 当客户端连接时触发
      * 如果业务不需此回调可以删除onConnect
