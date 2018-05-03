@@ -9,19 +9,30 @@ namespace app\index\model;
 
 
 use app\common\BaseModel;
+use app\index\model\DeviceLogModel;
 use Redis;
 
 class TriggerModel extends BaseModel
 {
     protected $table = 'triggers';
     // 可写入字段
-    protected static $fillable = ['device_id','trigger_name','target_condition', 'target_type','target_value','phone_check', 'phone','email_check','email','report_msg',];
+    protected static $fillable = ['product_id','device_id','trigger_name','target_condition', 'target_type','target_value','phone_check', 'phone','email_check','email','report_msg',];
 
-    public static function newCreate($param, $fillable = null)
+    public static function CreateWithID($param)
     {
-        return parent::newCreate($param, self::$fillable);
+        $obj = new self();
+        foreach (self::$fillable as $value) {
+            $obj->$value = $param[$value] ?? null;
+        }
+        $obj->save();
+        // 获取自增ID
+        return $obj->id;
     }
 
+    /**
+     * @param $id
+     * @param $param
+     */
     public function newUpdate($id, $param)
     {
         $instance = new self();
@@ -30,19 +41,14 @@ class TriggerModel extends BaseModel
 
     public function deviceData()
     {
-        return $this->hasMany('DeviceDataMode', 'devices_id');
+        return $this->hasMany('DeviceDataMode', 'device_id');
     }
 
     public function device()
     {
         return $this->belongsTo('DevicesModel', 'device_id');
     }
-    public static function getRedis($host = '127.0.0.1')
-    {
-        $redis = new Redis();
-        $redis->connect($host);
-        return $redis;
-    }
+
 
     /**
      * 将报警信息写入redis
@@ -56,7 +62,7 @@ class TriggerModel extends BaseModel
      * 阈值
      * @return bool
      */
-    // TODO 新增一条触发器以后将其写入redis
+    // TODO 新增一条触发器以后将其写入redis 没有ID ？
     public static function addTargetIntoRedis($device_id, $trigger_info)
     {
         $redis = self::getRedis();

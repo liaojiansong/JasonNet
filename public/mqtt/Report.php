@@ -22,16 +22,33 @@ class Report extends Base
      */
     public function sendEmail($target_info)
     {
-        var_dump($target_info);
+        $subject = "您的ID为{$target_info['device_id']}的设备的{$target_info['trigger_name']}被触发，详情请打开邮件";
+        $body = "<h3>触发器信息</h3>
+                <br/>
+                <p>触发器ID：{$target_info['id']}</p>
+                <p>触发器名称：{$target_info['trigger_name']}</p>
+                <p>触发类型：{$target_info['target_condition']}</p>
+                <p>触发条件：{$target_info['target_value']}</p>
+                <br/>
+                <br/>
+                <h3>触发信息</h3>
+                <br/>
+                <p>设备ID：{$target_info['device_id']}</p>
+                <p>触发的值：{$target_info['send_value']}</p>
+                <p>触发时间：{$target_info['target_time']}</p>";
+        $file = fopen('report.log', 'a+');
+        $flag = fwrite($file, $subject . "\n" . $body . "\n");
+        fclose($file);
+        return $flag;
     }
 
     /**
      * 报告发送邮件的结果(写进数据表)
      * TODO 删除这个报警信息
      */
-    public function responseEmailResult()
+    public function insertIntoLog($target_info)
     {
-
+        $this->Log($target_info['device_id'], 'report', '触发器' . $target_info['trigger_name'] . '被触发');
     }
 
     public function getReportInfo()
@@ -40,11 +57,19 @@ class Report extends Base
         $len = $this->redis->lLen(self::REPORT_LIST);
         if ($len > 1) {
             for ($i = 0; $i < $len; $i++) {
-                $one_target_device = $this->redis->rPop(self::REPORT_LIST) ?? null;
-                if ($one_target_device != null) {
-                    if ($this->redis->exists($one_target_device))
-                    $target_info = $this->redis->hGetAll($one_target_device);
-                    $this->sendEmail($target_info);
+                // 报警列表存的是需要报警的target_name
+                $one_target_name = $this->redis->rPop(self::REPORT_LIST) ?? null;
+                if ($one_target_name != null) {
+                    if ($this->redis->exists($one_target_name))
+                    $target_info = $this->redis->hGetAll($one_target_name);
+                    // TODO 返回标志位，是否报警成功 不成功再压回去
+                    $flag = $this->sendEmail($target_info);
+                    if ($flag) {
+                        $this->insertIntoLog($target_info);
+                    }
+//                    if ($flag == false) {
+//                        $this->redis->lPush(self::REPORT_LIST,$one_target_name);
+//                    }
                 }
             }
         }

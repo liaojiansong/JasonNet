@@ -77,6 +77,7 @@ class SubAuthTopic extends Base
                 // 通过权限检测的设备id
                 $device_id = $this->checkAuth($payload->device_id, $payload->data_content);
                 $this->insertIntoWhiteList($device_id);
+                $this->Log($device_id, 'in', '设备上线');
             }
         });
         $this->mqtt->loopForever();

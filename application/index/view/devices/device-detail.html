@@ -112,29 +112,45 @@
 					</div>
 					<div class="tab-pane" id="tab_3">
 						<table id="example1" class="table table-bordered table-hover text-center">
-							<colgroup>
-								<col class="col-md-1">
-								<col class="col-md-5">
-								<col class="col-md-2">
-								<col class="col-md-4">
-							</colgroup>
-							<thead>
+							<!--<colgroup>-->
+								<!--<col class="col-md-1">-->
+								<!--<col class="col-md-2">-->
+								<!--<col class="col-md-3">-->
+								<!--<col class="col-md-4">-->
+								<!--<col class="col-md-4">-->
+							<!--</colgroup>-->
+
 							<tr>
 								<th>序号</th>
 								<th>设备id</th>
+								<th>设备名称</th>
 								<th>类型</th>
+								<th>内容</th>
 								<th>时间</th>
 							</tr>
-							</thead>
-							<tbody>
+                            {{volist name='logs' id='value'}}
 							<tr>
-								<td>1</td>
-								<td>1231454</td>
-								<td>开机</td>
-								<td>2018-04-29 15:32:42</td>
+								<td>{{$value.id}}</td>
+								<td>{{$value.device_id}}</td>
+								<td>{{$value.device.device_name ?? null}}</td>
+								<td> {{switch name="$value.record_type"}}
+                                        {{case value="in"}}登入{{/case}}
+                                        {{case value="out"}} 注销{{/case}}
+                                        {{case value="send_order"}}发送命令{{/case}}
+                                        {{case value="add_trigger"}}添加触发器{{/case}}
+                                        {{case value="update_trigger"}}编辑触发器{{/case}}
+                                        {{case value="del_trigger"}}删除触发器{{/case}}
+                                        {{case value="report"}}事件触发{{/case}}
+                                    {{/switch}}
+                                </td>
+								<td>{{$value.content}}</td>
+								<td>{{$value.create_time}}</td>
 							</tr>
-							</tbody>
+                            {{/volist}}
 						</table>
+                        <div class="pull-right">
+                            {{$logs->render()}}
+                        </div>
 					</div>
 				</div>
 			</div>

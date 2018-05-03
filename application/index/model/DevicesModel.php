@@ -30,7 +30,7 @@ class DevicesModel extends BaseModel
 
     public function deviceData()
     {
-        return $this->hasMany('DeviceDataMode','devices_id');
+        return $this->hasMany('DeviceDataMode','device_id');
     }
 
 

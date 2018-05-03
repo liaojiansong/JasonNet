@@ -3,8 +3,12 @@
 namespace app\index\controller;
 
 use app\common\BaseController;
+use app\common\BaseModel;
 use app\index\model\DeviceDataMode;
+use app\index\model\DeviceLogModel;
 use app\index\model\DevicesModel;
+use function dump;
+use function idate;
 use think\Session;
 use function request;
 
@@ -87,6 +91,7 @@ class Devices extends BaseController
     {
         $id = $this->request->param('id');
         $one = DevicesModel::get($id)->hidden(['create_time', 'update_time']);
+        $logs = DeviceLogModel::where('device_id',$id)->with('device')->paginate(15);
         $items = $one->deviceData()->limit(15)->select();
         $all_count = DeviceDataMode::getCount($id);
 
@@ -100,6 +105,7 @@ class Devices extends BaseController
             'item' =>$items,
             'info' =>json_encode($info),
             'all_count' => $all_count,
+            'logs' => $logs,
         ]);
         return $this->fetch('device-detail');
     }
@@ -123,8 +129,32 @@ class Devices extends BaseController
     public static function sendOrder()
     {
         $order_info = request()->param();
-        $msg = "向设备ID:{$order_info['device_id']}发送命令成功";
-        return self::ajaxMsg(true, $msg);
+        $mqtt = BaseModel::getMqtt();
+        $mqtt->loop();
+        $payload = [
+            'device_id' => $order_info['device_id'] ?? null,
+            'data_type' => 'order',
+            'data_content' => $order_info['order_text'] ?? null,
+            'create_time' => time(),
+            'update_time' => time(),
+        ];
+        $mid = $mqtt->publish('order', json_encode($payload), 1, 0);
+        $mqtt->loop();
+
+        if ($mid) {
+            $msg = "向设备ID:{$order_info['device_id']}发送命令成功";
+            DeviceLogModel::Log($order_info['device_id'] ?? null, 'send_order', '发送命令：'. $order_info['order_text']);
+            return self::ajaxMsg(true, $msg);
+        }else{
+
+            return self::ajaxMsg(false, '发送失败，请重试');
+        }
+        $mqtt->disconnect();
+        unset($mqtt);
+
+
+
     }
+
 
 }

@@ -26,11 +26,11 @@ class DeviceDataMode extends BaseModel
     {
         // TODO 虚拟机时间不对
         // 总数
-        $total = self::where('devices_id', $id)->count();
+        $total = self::where('device_id', $id)->count();
         // 近7天
-        $last_week = self::where('devices_id', $id)->whereTime('create_time', 'week')->count() ;
+        $last_week = self::where('device_id', $id)->whereTime('create_time', 'week')->count() ;
         // 昨天
-        $yesterday = self::where('devices_id', $id)->whereTime('create_time', 'yesterday')->count();
+        $yesterday = self::where('device_id', $id)->whereTime('create_time', 'yesterday')->count();
         return [
             'total' => $total,
             'last_week' => $last_week,

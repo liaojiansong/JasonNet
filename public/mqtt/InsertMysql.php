@@ -96,6 +96,7 @@ class InsertMysql extends Base
      */
     public function checkTouchOff($device_id,$need_check)
     {
+        // TODO 一个设备对应多个触发器，怎么办？
         $target_name = self::TARGET . $device_id;
         $flag= $this->redis->exists($target_name);
         $is_report = false;
@@ -149,7 +150,10 @@ class InsertMysql extends Base
             var_dump($target_name);
             echo "\n";
             // 将发送过来比较的值追加到$target_name
-            $this->redis->hSet($target_name, 'send_value', $need_check);
+            $this->redis->hMset($target_name, [
+                'target_time'=> date('Y-m-d H:i:s'),
+                'send_value'=> $need_check,
+            ]);
             $this->redis->lPush(self::REPORT_LIST, $target_name);
             return true;
         } else {

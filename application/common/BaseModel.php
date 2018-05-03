@@ -9,6 +9,7 @@
 namespace app\common;
 
 
+use Redis;
 use think\Model;
 
 class BaseModel extends Model
@@ -29,6 +30,20 @@ class BaseModel extends Model
         } else {
             return false;
         }
+    }
+
+    public static function getRedis($host = '127.0.0.1')
+    {
+        $redis = new Redis();
+        $redis->connect($host);
+        return $redis;
+    }
+
+    public static function getMqtt()
+    {
+        $mqtt = new \Mosquitto\Client();
+        $mqtt->connect('127.0.0.1', 1883, 50);
+        return $mqtt;
     }
 
 
