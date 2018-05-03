@@ -8,7 +8,7 @@
 ignore_user_abort(); // 后台运行
 set_time_limit(0); // 取消脚本运行时间的超时上限
 require_once('Base.php');
-class DealDataAndInsert extends Base
+class InsertMysql extends Base
 {
     /**
      * 获取设备数据
@@ -54,18 +54,18 @@ class DealDataAndInsert extends Base
                 $payload = json_decode($msg->payload ?? null);
                 var_dump($payload);
                 if ($payload !== null) {
-                    $devices_id = $payload->devices_id ?? null;
+                    $device_id = $payload->device_id ?? null;
                     $data_content = $payload->data_content ?? null;
-                    $this->checkTouchOff($devices_id, $data_content);
+                    $this->checkTouchOff($device_id, $data_content);
                     $insertData = [
                         'topic' => $msg->topic ?? null,
-                        'devices_id' => $devices_id ,
+                        'device_id' => $device_id ,
                         'data_type' => $payload->data_type ?? null,
                         'data_content' => $payload->data_content,
                         'create_time' => $payload->create_time ?? null,
                         'update_time' => $payload->update_time ?? null,
                     ];
-                    $this->mysql->insert(self::table, $insertData);
+                    $this->mysql->insert(self::device_data_table, $insertData);
                 }
 
             }
@@ -81,7 +81,7 @@ class DealDataAndInsert extends Base
             $data_box = $this->getDeviceDataBox();
             $this->insetIntoTable($data_box);
             unset($data_box);
-            sleep(58);
+            sleep(30);
         }
     }
 
@@ -155,5 +155,5 @@ class DealDataAndInsert extends Base
 
 }
 
-$obj = new DealDataAndInsert();
+$obj = new InsertMysql();
 $obj->insertData();
