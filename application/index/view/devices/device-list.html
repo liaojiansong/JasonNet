@@ -8,155 +8,194 @@
 {{block name="main"}}
 <!-- 内容墙,包含顶部面板 -->
 <div class="content-wrapper">
-	<section class="content-header">
-		<h1>
-			设备列表
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-			<li><a href="#">设备管理</a></li>
-			<li class="active">设备列表</li>
-		</ol>
-	</section>
-	
-	<!-- Main content -->
-	<section class="content">
-		<!--<div class="row">-->
-		<!--<div class="text-center">-->
-		<!--<h3>接入设备</h3>-->
-		<!--<p>在接入设备时，请将以下注册码写入到设备中，只用于设备注册</p>-->
-		<!--<p><span class="text-primary">jg58145hgfh5445h4tdr515</span></p>-->
-		<!--</div>-->
-		<!--</div>-->
-		<div class="row">
-			<div class="col-xs-12">
-				<div class="box">
-					<div class="box-header">
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<form class="navbar-form navbar-left">
-								<div class="form-group">
-									<input type="text" class="form-control" placeholder="请输入设备的ID或名称">
-								</div>
-								<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-							</form>
-							<div class="navbar-right">
-								<p class="navbar-text pull-left" style="cursor:pointer" onclick="{$('#add-device').modal('show')}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加设备</p>
-								<p class="navbar-text pull-left" style="cursor:pointer"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>设备信息</p>
-							</div>
-						</div>
-					</div>
-					<!-- /.box-header -->
-					<div class="box-body">
-						<table id="example1" class="table table-bordered table-hover">
-							<colgroup>
-								<col class="col-md-1">
-								<col class="col-md-3">
-								<col class="col-md-3">
-								<col class="col-md-2">
-								<col class="col-md-3">
-							</colgroup>
-							<thead>
-							<tr>
-								<th class="text-center">设备ID</th>
-								<th class="text-center">设备信息</th>
-								<th class="text-center">鉴权信息</th>
-								<th class="text-center">在线状态</th>
-								<th class="text-center">操作</th>
-							</tr>
-							</thead>
-							<tbody>
-							{{volist name='devices_list' id='value'}}
-							<tr>
-								<td class="td-status">
-									<input type="text" readonly name="device_id" value="{{$value.id}}" class="form-control" style="display: none">
-									<p class="text-center">{{$value.id}}</p>
-								</td>
-								<td>
-									<span class="info-box-icon bg-primary"><i class="fa {{$value.icon}}"></i></span>
-									<div class="info-box-content">
-										<span class="info-box-text span-info">设备名称：{{$value.device_name}}</span><span class="info-box-text span-info">创建时间：{{$value.create_time}}</span><span class="info-box-text span-info">设备描述：{{$value.device_description}}</span>
-									</div>
-								</td>
+    <section class="content-header">
+        <h1>
+            设备列表
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">设备管理</a></li>
+            <li class="active">设备列表</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <!--<div class="row">-->
+        <!--<div class="text-center">-->
+        <!--<h3>接入设备</h3>-->
+        <!--<p>在接入设备时，请将以下注册码写入到设备中，只用于设备注册</p>-->
+        <!--<p><span class="text-primary">jg58145hgfh5445h4tdr515</span></p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box">
+                    <div class="box-header">
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                            <form class="navbar-form navbar-left">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="请输入设备的ID或名称">
+                                </div>
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </form>
+                            <div class="navbar-right">
+                                <p class="navbar-text pull-left" style="cursor:pointer"
+                                   onclick="{$('#add-device').modal('show')}"><span class="glyphicon glyphicon-plus"
+                                                                                    aria-hidden="true"></span>添加设备</p>
+                                <p class="navbar-text pull-left" style="cursor:pointer"><span
+                                        class="glyphicon glyphicon-new-window" aria-hidden="true"></span>设备信息</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table id="main" class="table table-bordered table-hover">
+                            <colgroup>
+                                <col class="col-md-1">
+                                <col class="col-md-3">
+                                <col class="col-md-3">
+                                <col class="col-md-2">
+                                <col class="col-md-3">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th class="text-center">设备ID</th>
+                                <th class="text-center">设备信息</th>
+                                <th class="text-center">鉴权信息</th>
+                                <th class="text-center">在线状态</th>
+                                <th class="text-center">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {{volist name='devices_list' id='value'}}
+                            <tr class="record">
+                                <td class="td-status">
+                                    <input type="text" readonly name="device_id" value="{{$value.id}}"
+                                           class="form-control device_id" style="display: none">
+                                    <p class="text-center">{{$value.id}}</p>
+                                </td>
+                                <td>
+                                    <span class="info-box-icon bg-primary"><i class="fa {{$value.icon}}"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text span-info">设备名称：{{$value.device_name}}</span><span
+                                            class="info-box-text span-info">创建时间：{{$value.create_time}}</span><span
+                                            class="info-box-text span-info">设备描述：{{$value.device_description}}</span>
+                                    </div>
+                                </td>
                                 <td class="td-status">
                                     <p>{{$value.device_auth}}</p>
                                 </td>
-								<td class="td-status">
-									{{switch name="$value.status"}} {{case value="0"}}<p><i class="fa fa-circle text-gray"></i> &nbsp;离线</p>{{/case}} {{case value="1"}}<p><i class="fa fa-circle text-green"></i> &nbsp;在线</p>{{/case}} {{case value="2"}}value2{{/case}} {{case value="3"}}value2{{/case}} {{/switch}}
-								</td>
-								<td class="td-icon">
-									<div class="text-center">
-										<a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="编辑" href="{{:url('edit',['id'=>$value.id])}}"><i class="glyphicon glyphicon-edit"></i></a>
-										<a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="详情" href="{{:url('detail',['id'=>$value.id])}}"><i class="glyphicon glyphicon-info-sign"></i></a>
-										<a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="添加触发器" href="{{:url('trigger/create',['device_id'=>$value.id])}}"><i class="glyphicon glyphicon-inbox"></i></a>
-										<a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="下发命令" onclick="DeviceList.showOrderModal($(this))"><i class="glyphicon glyphicon-send"></i></a>
-										<a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteAlert(`{{:url('delete')}}`,'{{$value.id}}',$(this))"><i class="glyphicon glyphicon-trash"></i></a>
-									</div>
-								</td>
-							</tr>
-							{{/volist}}
-							</tbody>
-						</table>
-						<div class="pull-right">
-							{{$devices_list->render()}}
-						</div>
-					</div>
-					<!-- /.box-body -->
-				</div>
-			</div>
-		</div>
-	</section>
+                                <td class="td-status status">
+                                    {{switch name="$value.status"}}
+                                    {{case value="0"}}
+                                    <p><i class="fa fa-circle text-gray"></i> &nbsp;离线</p>
+                                    {{/case}}
+                                    {{case value="1"}}
+                                    <p><i class="fa fa-circle text-green"></i> &nbsp;在线</p>
+                                    {{/case}}
+                                    {{/switch}}
+                                </td>
+                                <td class="td-icon">
+                                    <div class="text-center">
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
+                                           data-placement="top" title="编辑" href="{{:url('edit',['id'=>$value.id])}}"><i
+                                                class="glyphicon glyphicon-edit"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
+                                           data-placement="top" title="详情"
+                                           href="{{:url('detail',['id'=>$value.id])}}"><i
+                                                class="glyphicon glyphicon-info-sign"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
+                                           data-placement="top" title="添加触发器"
+                                           href="{{:url('trigger/create',['device_id'=>$value.id])}}"><i
+                                                class="glyphicon glyphicon-inbox"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
+                                           data-placement="top" title="下发命令"
+                                           onclick="DeviceList.showOrderModal($(this))"><i
+                                                class="glyphicon glyphicon-send"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
+                                           data-placement="top" title="删除"
+                                           onclick="deleteAlert(`{{:url('delete')}}`,'{{$value.id}}',$(this))"><i
+                                                class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {{/volist}}
+                            </tbody>
+                        </table>
+                        <div class="pull-right">
+                            {{$devices_list->render()}}
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 <div class="modal fade" id="add-device" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-						aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="exampleModalLabel">添加设备</h4>
-			</div>
-			<form id="add_device_form">
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="recipient-name" class="control-label">设备名称:</label> <input type="text" class="form-control" id="recipient-name" name="device_name">
-					</div>
-					<div class="form-group">
-						<label for="message-text" class="control-label">鉴权信息:</label> <input type="text" class="form-control" id="message-text" name="device_auth">
-					</div>
-					<div class="form-group">
-						<label for="description" class="control-label">描述:</label> <input type="text" class="form-control" id="description" name="device_description">
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary" id="add_device_btn"> 接入设备</button>
-					</div>
-				</div>
-			</form>
-		
-		</div>
-	</div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">添加设备</h4>
+            </div>
+            <form id="add_device_form">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="recipient-name" class="control-label">设备名称:</label> <input type="text"
+                                                                                               class="form-control"
+                                                                                               id="recipient-name"
+                                                                                               name="device_name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="control-label">鉴权信息:</label> <input type="text"
+                                                                                             class="form-control"
+                                                                                             id="message-text"
+                                                                                             name="device_auth">
+                    </div>
+                    <div class="form-group">
+                        <label for="description" class="control-label">描述:</label> <input type="text"
+                                                                                          class="form-control"
+                                                                                          id="description"
+                                                                                          name="device_description">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary" id="add_device_btn"> 接入设备</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
 </div>
 <div class="modal fade" id="send-order" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
-				</button>
-				<h4 class="modal-title">发送命令</h4>
-			</div>
-			<form>
-				<input type="hidden" name="device_id" id="device_id">
-				<div class="modal-body">
-					<div class="form-group">
-						<label for="order-text" class="control-label">命令内容:</label> <textarea class="form-control" id="order-text" name="order_text" rows="5" placeholder="请输入字符串或数字"></textarea>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary" onclick="DeviceList.sendOrder($(this))">发送</button>
-				</div>
-			</form>
-		</div>
-	</div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">发送命令</h4>
+            </div>
+            <form>
+                <input type="hidden" name="device_id" id="device_id">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="order-text" class="control-label">命令内容:</label> <textarea class="form-control"
+                                                                                              id="order-text"
+                                                                                              name="order_text" rows="5"
+                                                                                              placeholder="请输入字符串或数字"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" onclick="DeviceList.sendOrder($(this))">发送</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 {{/block}}
 
@@ -164,10 +203,62 @@
 <script>
     $(function () {
         DeviceList.addDevice("{{:url('create')}}");
+        DeviceList.showDeviceStatus();
     });
     let DeviceList = {
         showDeviceStatus() {
+            let ws = new WebSocket('ws://192.168.1.108:8282');
+            ws.onopen = function (evt) {
+                console.log("Connection open ...");
+                ws.send(DeviceList.getDeviceIDs());
+            };
 
+            ws.onmessage = function (evt) {
+                let data = $.parseJSON(evt.data);
+                switch (data.type) {
+                    case 'online_info':
+                        DeviceList.changeStatus(data.content);
+                        console.log(data.content);
+                        break;
+                }
+            };
+
+            ws.onclose = function (evt) {
+                console.log("Connection closed.");
+            };
+            setInterval(function () {
+                ws.send(DeviceList.getDeviceIDs());
+            }, 5000);
+        },
+        getDeviceIDs() {
+            let ids = [];
+            $('#main').find('input[name="device_id"]').each(function () {
+                let temp = parseInt($(this).val());
+                if (!isNaN(temp)) {
+                    ids.push(temp)
+                }
+            });
+            let info = {'type':'send_ids','content':ids};
+            return JSON.stringify(info);
+        },
+        changeStatus(info) {
+            $('.device_id').each(function () {
+                let device_id = parseInt($(this).val());
+                let td = $(this).closest('tr').find('.status');
+                let online = `<i class="fa fa-circle text-green"></i> &nbsp;在线`;
+                let outline = `<i class="fa fa-circle text-gray"></i> &nbsp;离线`;
+                $.each(info, function (index, value) {
+                    if (parseInt(index) === device_id) {
+                        let p = td.find('p').first();
+                        if (value === 'online') {
+                            p.html(online);
+                        }else {
+                            p.html(outline);
+                        }
+                    }
+                });
+
+            });
         },
         addDevice(url) {
             $("#add-device").validator({

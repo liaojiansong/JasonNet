@@ -11,14 +11,12 @@
  * @link http://www.workerman.net/
  * @license http://www.opensource.org/licenses/mit-license.php MIT License
  */
-use \Workerman\Worker;
-use \Workerman\WebServer;
-use \GatewayWorker\Gateway;
-use \GatewayWorker\BusinessWorker;
-use \Workerman\Autoloader;
+
+use GatewayWorker\Gateway;
+use Workerman\Worker;
 
 // gateway 进程，这里使用Text协议，可以用telnet测试
-$gateway = new Gateway("tcp://0.0.0.0:8282");
+$gateway = new Gateway("Websocket://0.0.0.0:8282");
 // gateway名称，status方便查看
 $gateway->name = 'YourAppGateway';
 // gateway进程数

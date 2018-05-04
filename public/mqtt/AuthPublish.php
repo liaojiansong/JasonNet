@@ -28,7 +28,7 @@ class AuthPublish extends Base
             $mid = $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
             echo "当前发送鉴权信息 ID: {$mid}\n";
             $this->mqtt->loop();
-            sleep(10);
+            sleep(30);
         }
         $this->mqtt->disconnect();
 

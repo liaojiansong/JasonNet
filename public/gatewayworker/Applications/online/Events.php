@@ -19,7 +19,7 @@
  */
 //declare(ticks=1);
 
-use \GatewayWorker\Lib\Gateway;
+use GatewayWorker\Lib\Gateway;
 
 /**
  * 主逻辑
@@ -37,10 +37,6 @@ class Events
 
     }
 
-    public static function onWorkerStart()
-    {
-        self::getRedis();
-    }
     /**
      * 当客户端连接时触发
      * 如果业务不需此回调可以删除onConnect
@@ -48,10 +44,9 @@ class Events
      * @param int $client_id 连接id
      */
     public static function onConnect($client_id) {
-        // 向当前client_id发送数据 
-        Gateway::sendToClient($client_id, "Hello $client_id\n");
-        // 向所有人发送
-        Gateway::sendToAll("$client_id login\n");
+        if (!(self::$redis instanceof Redis)) {
+            self::getRedis();
+        }
     }
     
    /**
@@ -60,9 +55,43 @@ class Events
     * @param mixed $message 具体消息
     */
    public static function onMessage($client_id, $message) {
-        // 向所有人发送 
-        Gateway::sendToAll("$client_id said $message");
+       $json_obj = json_decode($message);
+       $type =  $json_obj->type ?? null;
+       print_r($json_obj->content);
+       if (!empty($type)) {
+           switch ($type) {
+               case 'send_ids':
+                   $info = self::getOnlineInfo($json_obj->content);
+                   self::buildMsg($client_id, 'online_info', $info);
+                   break;
+           }
+       }
+
    }
+
+    public static function buildMsg($client_id, $type,$message)
+    {
+        $body = [
+            'type' => $type,
+            'content' => $message,
+        ];
+        Gateway::sendToClient($client_id, json_encode($body));
+    }
+
+    public static function getOnlineInfo($ids)
+    {
+        $info = [];
+        $redis = self::$redis;
+        $redis->connect('127.0.0.1');
+        foreach ($ids as $value) {
+            if ($redis->exists('device_white_list_' . $value)) {
+                $info[$value] = 'online';
+            } else {
+                $info[$value] = 'outline';
+            }
+        }
+        return $info;
+    }
    
    /**
     * 当用户断开连接时触发
