@@ -207,7 +207,7 @@
     });
     let DeviceList = {
         showDeviceStatus() {
-            let ws = new WebSocket('ws://192.168.1.108:8282');
+            let ws = new WebSocket('ws://120.78.78.42:8282');
             ws.onopen = function (evt) {
                 console.log("Connection open ...");
                 ws.send(DeviceList.getDeviceIDs());
