@@ -25,7 +25,7 @@ class Report extends Base
         $subject = "您的ID为{$target_info['device_id']}的设备的{$target_info['trigger_name']}被触发，详情请打开邮件";
         $body = "<h3>触发器信息</h3>
                 <br/>
-                <p>触发器ID：{$target_info['id']}</p>
+                <p>触发器ID：{$target_info['trigger_id']}</p>
                 <p>触发器名称：{$target_info['trigger_name']}</p>
                 <p>触发类型：{$target_info['target_condition']}</p>
                 <p>触发条件：{$target_info['target_value']}</p>
@@ -37,7 +37,7 @@ class Report extends Base
                 <p>触发的值：{$target_info['send_value']}</p>
                 <p>触发时间：{$target_info['target_time']}</p>";
         $file = fopen('report.log', 'a+');
-        $flag = fwrite($file, $subject . "\n" . $body . "\n");
+        $flag = fwrite($file, $subject . "\n\n\n" . $body . "\n\n\n");
         fclose($file);
         return $flag;
     }

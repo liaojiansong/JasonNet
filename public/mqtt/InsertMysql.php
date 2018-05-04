@@ -56,7 +56,7 @@ class InsertMysql extends Base
                 if ($payload !== null) {
                     $device_id = $payload->device_id ?? null;
                     $data_content = $payload->data_content ?? null;
-                    $this->checkTouchOff($device_id, $data_content);
+                    $this->checkALL($device_id, $data_content);
                     $insertData = [
                         'topic' => $msg->topic ?? null,
                         'device_id' => $device_id ,
@@ -94,10 +94,8 @@ class InsertMysql extends Base
      * 检测的值
      * @return bool
      */
-    public function checkTouchOff($device_id,$need_check)
+    public function checkTouchOff($target_name,$need_check)
     {
-        // TODO 一个设备对应多个触发器，怎么办？
-        $target_name = self::TARGET . $device_id;
         $flag= $this->redis->exists($target_name);
         $is_report = false;
         if ($flag) {
@@ -161,7 +159,21 @@ class InsertMysql extends Base
         }
     }
 
+    public function checkALL($device_id, $need_check)
+    {
+        $target_names = self::TARGET . $device_id;
+        $list_keys = $this->redis->keys($target_names.'*');
+        if (!empty($list_keys)) {
+            foreach ($list_keys as $name) {
+                $this->checkTouchOff($name, $need_check);
+            }
+        }
+    }
+
+
 }
+
+
 
 $obj = new InsertMysql();
 $obj->insertData();

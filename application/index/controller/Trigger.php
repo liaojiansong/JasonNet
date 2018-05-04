@@ -12,6 +12,7 @@ namespace app\index\controller;
 use app\common\BaseController;
 use app\index\model\DeviceLogModel;
 use app\index\model\TriggerModel;
+use function dump;
 use think\Db;
 use think\Session;
 use function request;
@@ -73,7 +74,7 @@ class Trigger extends BaseController
     public function edit()
     {
         $id = $this->request->param('id');
-        $one = TriggerModel::get($id)->hidden(['create_time', 'update_time'])->toJson();
+        $one = TriggerModel::get($id)->hidden(['update_time'])->toJson();
         $this->assign([
             'one' => $one,
             'action' => $this->request->action(),
@@ -87,10 +88,11 @@ class Trigger extends BaseController
         $flag = $this->validate($param, 'CommonValidate.add_trigger');
         if ($flag === true) {
             Db::transaction(function () use ($param) {
-                TriggerModel::addTargetIntoRedis($param['device_id'], $param);
-                DeviceLogModel::Log($param['device_id'], 'update_trigger', '更新触发器：' . $param['trigger_name'] ?? null);
+                $param['trigger_id'] = $param['id'];
                 $device = new TriggerModel();
+                TriggerModel::addTargetIntoRedis($param['device_id'], $param);
                 $device->newUpdate($param['id'], $param);
+                DeviceLogModel::Log($param['device_id'], 'update_trigger', '更新触发器：' . $param['trigger_name'] ?? null);
             });
             $this->redirect('index', ['flag' => 'update_success']);
         } else {

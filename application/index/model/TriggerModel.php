@@ -9,8 +9,9 @@ namespace app\index\model;
 
 
 use app\common\BaseModel;
-use app\index\model\DeviceLogModel;
-use Redis;
+use function dump;
+use function strtotime;
+use function time;
 
 class TriggerModel extends BaseModel
 {
@@ -62,11 +63,17 @@ class TriggerModel extends BaseModel
      * 阈值
      * @return bool
      */
-    // TODO 新增一条触发器以后将其写入redis 没有ID ？
     public static function addTargetIntoRedis($device_id, $trigger_info)
     {
+        // 编辑时防止产生多个触发器
+        if (empty($trigger_info['create_time'])) {
+            $timestamp = time();
+        }else{
+            $timestamp = strtotime($trigger_info['create_time']);
+        }
+
         $redis = self::getRedis();
-        $res = $redis->hMset('target_' . $device_id, $trigger_info);
+        $res = $redis->hMset('target_' . $device_id.'_'. $timestamp, $trigger_info);
         $redis->close();
         if ($res) {
             return true;
