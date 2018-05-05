@@ -8,163 +8,229 @@
 {{block name="main"}}
 <!-- 内容墙,包含顶部面板 -->
 <div class="content-wrapper">
-	<!-- Content Header (Page header) -->
-	<section class="content-header">
-		<h1>
-			设备详情
-		</h1>
-		<ol class="breadcrumb">
-			<li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-			<li><a href="#">设备管理</a></li>
-			<li class="active">编辑设备</li>
-		</ol>
-	</section>
-	
-	<!-- Main content -->
-	<section class="content">
-		<div class="box-body">
-			<!-- Custom Tabs -->
-			<div class="nav-tabs-custom">
-				<ul class="nav nav-tabs">
-					<li class="active"><a href="#tab_1" data-toggle="tab">设备信息</a></li>
-					<li><a href="#tab_2" data-toggle="tab">设备数据</a></li>
-					<li><a href="#tab_3" data-toggle="tab">设备日志</a></li>
-				</ul>
-				<div class="tab-content">
-					<div class="tab-pane active" id="tab_1">
-						<div class="row detail">
-							<div class="col-md-8">
-								<h4><strong><i class="fa fa-tablet margin-r-5"></i> 设备名称</strong></h4>
-								<p class="text-muted">
-									{{$one.device_name}}
-								</p>
-								
-								<hr>
-								
-								<h4><strong><i class="fa fa-paint-brush margin-r-5"></i>鉴权信息</strong></h4>
-								
-								<p>{{$one.device_auth}}</p>
-								
-								<hr>
-								
-								<h4><strong><i class="fa fa-plus margin-r-5"></i> 创建时间</strong></h4>
-								
-								<p>
-									{{$one.create_time}}
-								</p>
-								
-								<hr>
-								
-								<h4><strong><i class="fa fa-link margin-r-5"></i>设备API地址</strong>
-								</h4>
-								
-								<p>http://api.heclouds.com/devices/24501404</p>
-								
-								<hr>
-								<h4><strong><i class="fa fa-database margin-r-5"></i>累计采集数据</strong></h4>
-								
-								<p>4955566条</p>
-								
-								<hr>
-								
-								<h4><strong><i class="fa fa-file-text-o margin-r-5"></i>详细描述</strong></h4>
-								
-								<textarea class="form-control" id="device_desc" data-parsley-maxlength="512"
-								          name="device_desc" rows="5" placeholder="设备描述"
-								          data-parsley-id="13" readonly>
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            设备详情
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
+            <li><a href="#">设备管理</a></li>
+            <li class="active">编辑设备</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="box-body">
+            <!-- Custom Tabs -->
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#tab_1" data-toggle="tab">设备信息</a></li>
+                    <li><a href="#tab_2" data-toggle="tab">设备数据</a></li>
+                    <li><a href="#tab_3" data-toggle="tab">设备日志</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab_1">
+                        <div class="row detail">
+                            <div class="col-md-8">
+                                <h4><strong><i class="fa fa-tablet margin-r-5"></i> 设备名称</strong></h4>
+                                <p class="text-muted">
+                                    {{$one.device_name}}
+                                </p>
+
+                                <hr>
+
+                                <h4><strong><i class="fa fa-paint-brush margin-r-5"></i>鉴权信息</strong></h4>
+
+                                <p>{{$one.device_auth}}</p>
+
+                                <hr>
+
+                                <h4><strong><i class="fa fa-plus margin-r-5"></i> 创建时间</strong></h4>
+
+                                <p>
+                                    {{$one.create_time}}
+                                </p>
+
+                                <hr>
+
+                                <h4><strong><i class="fa fa-link margin-r-5"></i>设备API地址</strong>
+                                </h4>
+
+                                <p>http://api.heclouds.com/devices/24501404</p>
+
+                                <hr>
+                                <h4><strong><i class="fa fa-database margin-r-5"></i>累计采集数据</strong></h4>
+
+                                <p>4955566条</p>
+
+                                <hr>
+
+                                <h4><strong><i class="fa fa-file-text-o margin-r-5"></i>详细描述</strong></h4>
+
+                                <textarea class="form-control" id="device_desc" data-parsley-maxlength="512"
+                                        name="device_desc" rows="5" placeholder="设备描述"
+                                        data-parsley-id="13" readonly>
                                         {{$one.device_description}}
                                     </textarea>
-							
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane" id="tab_2">
-						<div class="row">
-							<div class="col-sm-4 border-right">
-								<div class="description-block">
-									<h5 class="description-header"><span class="data-value" id="totalData">{{$all_count.total}}</span>条
-									</h5>
-									<span class="description-text">设备数据总数</span>
-								</div>
-							</div>
-							<div class="col-sm-4 border-right">
-								<div class="description-block">
-									<h5 class="description-header"><span class="data-value">{{$all_count.yesterday}}</span>条</h5>
-									<span class="description-text">昨日新增</span>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="description-block">
-									<h5 class="description-header"><span class="data-value" id="new_last7day">{{$all_count.last_week}}</span>条</h5>
-									<span class="description-text">最近7日新增</span>
-								</div>
-							</div>
-						</div>
-						<hr>
-						<div class="row">
-							<div class="col-md-12" id="container">
-							
-							</div>
-							<div class="col-md-12">
-								<button id="btn">点我</button>
-							</div>
-						</div>
-					</div>
-					<div class="tab-pane" id="tab_3">
-						<table id="example1" class="table table-bordered table-hover text-center">
-							<!--<colgroup>-->
-								<!--<col class="col-md-1">-->
-								<!--<col class="col-md-2">-->
-								<!--<col class="col-md-3">-->
-								<!--<col class="col-md-4">-->
-								<!--<col class="col-md-4">-->
-							<!--</colgroup>-->
 
-							<tr>
-								<th>序号</th>
-								<th>设备id</th>
-								<th>设备名称</th>
-								<th>类型</th>
-								<th>内容</th>
-								<th>时间</th>
-							</tr>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_2">
+                        <div class="row">
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">
+                                        <span class="data-value" id="totalData">{{$all_count.total}}</span>条
+                                    </h5>
+                                    <span class="description-text">设备数据总数</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4 border-right">
+                                <div class="description-block">
+                                    <h5 class="description-header">
+                                        <span class="data-value">{{$all_count.yesterday}}</span>条</h5>
+                                    <span class="description-text">昨日新增</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="description-block">
+                                    <h5 class="description-header">
+                                        <span class="data-value" id="new_last7day">{{$all_count.last_week}}</span>条</h5>
+                                    <span class="description-text">最近7日新增</span>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12" id="container">
+
+                            </div>
+                            <div class="col-md-12">
+                                <button id="btn">点我</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="tab_3">
+                        <table id="example1" class="table table-bordered table-hover text-center">
+                            <!--<colgroup>-->
+                            <!--<col class="col-md-1">-->
+                            <!--<col class="col-md-2">-->
+                            <!--<col class="col-md-3">-->
+                            <!--<col class="col-md-4">-->
+                            <!--<col class="col-md-4">-->
+                            <!--</colgroup>-->
+
+                            <tr>
+                                <th>序号</th>
+                                <th>设备id</th>
+                                <th>设备名称</th>
+                                <th>类型</th>
+                                <th>内容</th>
+                                <th>时间</th>
+                            </tr>
                             {{volist name='logs' id='value'}}
-							<tr>
-								<td>{{$value.id}}</td>
-								<td>{{$value.device_id}}</td>
-								<td>{{$value.device.device_name ?? null}}</td>
-								<td> {{switch name="$value.record_type"}}
-                                        {{case value="in"}}登入{{/case}}
-                                        {{case value="out"}} 注销{{/case}}
-                                        {{case value="send_order"}}发送命令{{/case}}
-                                        {{case value="add_trigger"}}添加触发器{{/case}}
-                                        {{case value="update_trigger"}}编辑触发器{{/case}}
-                                        {{case value="del_trigger"}}删除触发器{{/case}}
-                                        {{case value="report"}}事件触发{{/case}}
+                            <tr>
+                                <td>{{$value.id}}</td>
+                                <td>{{$value.device_id}}</td>
+                                <td>{{$value.device.device_name ?? null}}</td>
+                                <td> {{switch name="$value.record_type"}}
+                                    {{case value="in"}}登入{{/case}}
+                                    {{case value="out"}} 注销{{/case}}
+                                    {{case value="send_order"}}发送命令{{/case}}
+                                    {{case value="add_trigger"}}添加触发器{{/case}}
+                                    {{case value="update_trigger"}}编辑触发器{{/case}}
+                                    {{case value="del_trigger"}}删除触发器{{/case}}
+                                    {{case value="report"}}事件触发{{/case}}
                                     {{/switch}}
                                 </td>
-								<td>{{$value.content}}</td>
-								<td>{{$value.create_time}}</td>
-							</tr>
+                                <td>{{$value.content}}</td>
+                                <td>{{$value.create_time}}</td>
+                            </tr>
                             {{/volist}}
-						</table>
+                        </table>
                         <div class="pull-right">
                             {{$logs->render()}}
                         </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!-- /.content -->
 </div>
 {{/block}}
 
 {{block name="js"}}
 <script>
-    // const ws = new WebSocket('');
-	
+    $(function () {
+        Main.get_ws();
+        Main.send_data();
+
+    });
+
+    // let chart = Highcharts.chart('container', {
+    //     title: {
+    //         text: '{{$one.device_name}}数据报表'
+    //     },
+    //     subtitle: {
+    //         text: '数据来源：JasonNet.com'
+    //     },
+    //     yAxis: {
+    //         allowDecimals : true,
+    //         title: {
+    //             text: '{{$template.unit_name ?? "value"}}（{{$template.unit_symbol ?? null}}）'
+    //         }
+    //     },
+    //     xAxis: {
+    //         type: 'datetime',
+    //         dateTimeLabelFormats: {
+    //             second: '%H:%M:%S',
+    //             minute: '%H:%M',
+    //             hour: '%H:%M',
+    //             day: '%m-%d',
+    //             week: '%m-%d',
+    //             month: '%Y-%m',
+    //             year: '%Y'
+    //         }
+    //     },
+    //     plotOptions: {
+    //         series: {
+    //             label: {
+    //                 connectorAllowed: false
+    //             },
+    //             pointStart: 2018
+    //         }
+    //     },
+    //     series: [{
+    //         name :'{{$one.device_name}}',
+    //         data: [],
+    //        // 起始点
+    //         pointStart: Date.UTC(2018, 3, 19, 12, 36),
+    //        // 点间隔
+    //         pointInterval: 15 * 1000
+    //     }],
+    //     responsive: {
+    //         rules: [{
+    //             condition: {
+    //                 maxWidth: 500
+    //             },
+    //             chartOptions: {
+    //                 legend: {
+    //                     layout: 'horizontal',
+    //                     align: 'center',
+    //                     verticalAlign: 'bottom'
+    //                 }
+    //             }
+    //         }]
+    //     }
+    // });
     let chart = Highcharts.chart('container', {
+        chart: {
+            type: 'spline'
+        },
         title: {
             text: '{{$one.device_name}}数据报表'
         },
@@ -172,9 +238,9 @@
             text: '数据来源：JasonNet.com'
         },
         yAxis: {
-            allowDecimals : true,
+            allowDecimals: true,
             title: {
-                text: 'value'
+                text: '{{$template.unit_name ?? "value"}}（{{$template.unit_symbol ?? null}}）'
             }
         },
         xAxis: {
@@ -189,22 +255,23 @@
                 year: '%Y'
             }
         },
+        // tooltip: {
+        //     headerFormat: '<b>{series.name}</b><br>',
+        //     pointFormat: '{point.x:%e. %b}: {point.y:.2f} m'
+        // },
         plotOptions: {
+            spline: {
+                marker: {
+                    enabled: true
+                }
+            },
             series: {
                 label: {
                     connectorAllowed: false
                 },
-                pointStart: 2018
+                pointStart: Date.UTC(2018,4,15,12,18,16)
             }
         },
-        series: [{
-            name :'{{$one.device_name}}',
-            data: [],
-	        // 起始点
-            pointStart: Date.UTC(2018, 3, 19, 12, 36),
-	        // 点间隔
-            pointInterval: 15 * 1000
-        }],
         responsive: {
             rules: [{
                 condition: {
@@ -218,17 +285,51 @@
                     }
                 }
             }]
-        }
+        },
+        series: [{
+            name: '{{$one.device_name}}',
+            data: $.parseJSON('{{$info}}'),
+            pointInterval: 10 * 1000,
+        },]
     });
-    setTimeout(function () {
-        const data = $.parseJSON('{{$info}}');
-        ser = [];
-        $.map(data, function (value) {
-            ser.push(parseInt(value))
-        });
-        chart.series[0].setData(ser);
-    },600);
+console.log('{{$info}}');
+    let Main = {
+        get_ws() {
+            web_socket(function (data) {
+                switch (data.type) {
+                    case 'new_device_data':
+                        let point = Main.dealData(data.content);
+                        console.log(data.content);
+                        chart.series[0].addPoint(point, true, true);
+                        break;
+                }
+            })
+        },
+        send_data() {
+            setInterval(function () {
+                let info = {
+                    'type': 'get_device_data',
+                    'content': {'device_id': '{{$one.id}}', 'timestamp': 1525493820}
+                };
+                let last = JSON.stringify(info);
+                window.ws.send(last);
+                console.log('done');
+            }, 10000);
+        },
+        dealData(data_content) {
+            let points = [];
+            $.each(data_content, function (index, value) {
+                let number = parseFloat(value.data_content);
+                let timestamp = parseFloat(value.create_time);
+                if (!isNaN(number)) {
+                    points.push(number)
+                }
+            });
+            return points;
+        },
 
-    
+
+    };
+
 </script>
 {{/block}}

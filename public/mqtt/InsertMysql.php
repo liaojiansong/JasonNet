@@ -52,7 +52,7 @@ class InsertMysql extends Base
             foreach ($val as $msg) {
                 $msg = json_decode($msg);
                 $payload = json_decode($msg->payload ?? null);
-                var_dump($payload);
+//                var_dump($payload);
                 if ($payload !== null) {
                     $device_id = $payload->device_id ?? null;
                     $data_content = $payload->data_content ?? null;
@@ -143,10 +143,10 @@ class InsertMysql extends Base
         }
 
         if ($is_report) {
-            echo '-----------------------被触发的触发器-------------------------------------';
-            echo "\n";
-            var_dump($target_name);
-            echo "\n";
+//            echo '-----------------------被触发的触发器-------------------------------------';
+//            echo "\n";
+//            var_dump($target_name);
+//            echo "\n";
             // 将发送过来比较的值追加到$target_name
             $this->redis->hMset($target_name, [
                 'target_time'=> date('Y-m-d H:i:s'),

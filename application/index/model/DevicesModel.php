@@ -15,7 +15,7 @@ class DevicesModel extends BaseModel
 {
     protected $table = 'devices';
     // 可写入字段
-    protected static $fillable = ['device_name', 'device_description', 'device_auth', 'icon'];
+    protected static $fillable = ['device_name', 'device_description', 'device_auth', 'icon','data_template_id'];
 
     public static function newCreate($param, $fillable = null)
     {
@@ -33,6 +33,10 @@ class DevicesModel extends BaseModel
         return $this->hasMany('DeviceDataMode','device_id');
     }
 
+    public function template()
+    {
+        return $this->belongsTo('DataTemplateModel', 'data_template_id');
+    }
 
 
 

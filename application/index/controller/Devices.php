@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use app\common\BaseController;
 use app\common\BaseModel;
+use app\index\model\DataTemplateModel;
 use app\index\model\DeviceDataMode;
 use app\index\model\DeviceLogModel;
 use app\index\model\DevicesModel;
@@ -19,11 +20,13 @@ class Devices extends BaseController
      */
     public function index()
     {
-
-        request()->has('product_id') ? Session::set('product_id',request()->param('product_id')) : null;
-        $devices_list = DevicesModel::where('product_id',Session::get('product_id'))->paginate(5);
+        request()->has('product_id') ? Session::set('product_id', request()->param('product_id')) : null;
+        // 数据流模板
+        $template_options = DataTemplateModel::getTemplateOptions();
+        $devices_list = DevicesModel::where('product_id', Session::get('product_id'))->paginate(5);
         $this->assign([
             'devices_list' => $devices_list,
+            'template_options' => $template_options,
         ]);
         return $this->fetch('device-list');
     }
@@ -60,9 +63,14 @@ class Devices extends BaseController
      */
     public function edit()
     {
+        // 数据流模板
+        $template_options = DataTemplateModel::getTemplateOptions();
         $id = $this->request->param('id');
         $one = DevicesModel::get($id)->hidden(['create_time', 'update_time'])->toJson();
-        $this->assign('one', $one);
+        $this->assign([
+            'one' => $one,
+            'template_options' => $template_options,
+            ]);
         return $this->fetch('device-edit');
     }
 
@@ -89,21 +97,23 @@ class Devices extends BaseController
     {
         $id = $this->request->param('id');
         $one = DevicesModel::get($id)->hidden(['create_time', 'update_time']);
-        $logs = DeviceLogModel::where('device_id',$id)->with('device')->paginate(15);
-        $items = $one->deviceData()->limit(15)->select();
+        $logs = DeviceLogModel::where('device_id', $id)->with('device')->paginate(15);
+        $template = $one->template;
+        $items = $one->deviceData()->limit(25)->order('create_time')->select();
         $all_count = DeviceDataMode::getCount($id);
 
         $info = [];
         foreach ($items as $value) {
-            array_push($info, $value->data_content);
+//            $temp = [intval(strtotime($value->create_time)), floatval($value->data_content)];
+            $info[] = floatval($value->data_content);
         }
-
         $this->assign([
             'one' => $one,
-            'item' =>$items,
-            'info' =>json_encode($info),
+            'item' => $items,
+            'info' => json_encode($info),
             'all_count' => $all_count,
             'logs' => $logs,
+            'template' => $template,
         ]);
         return $this->fetch('device-detail');
     }
@@ -141,9 +151,9 @@ class Devices extends BaseController
 
         if ($mid) {
             $msg = "向设备ID:{$order_info['device_id']}发送命令成功";
-            DeviceLogModel::Log($order_info['device_id'] ?? null, 'send_order', '发送命令：'. $order_info['order_text']);
+            DeviceLogModel::Log($order_info['device_id'] ?? null, 'send_order', '发送命令：' . $order_info['order_text']);
             return self::ajaxMsg(true, $msg);
-        }else{
+        } else {
 
             return self::ajaxMsg(false, '发送失败，请重试');
         }

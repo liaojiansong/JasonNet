@@ -210,3 +210,55 @@ function info(flag) {
     }
 
 }
+
+/**
+ * 开启websocket
+ * @param callback
+ * 收到消息的回调
+ * @param url
+ * 连接地址
+ */
+function web_socket(callback, url = 'ws://120.78.78.42:8282') {
+    if (!("WebSocket" in window)) {
+        // 浏览器不支持 WebSocket
+        alert("您的浏览器不支持 WebSocket!,赶紧换一个谷歌吧");
+    }
+    let ws = new WebSocket(url);
+    window.ws = ws;
+
+    ws.onopen = function () {
+        console.log('正在连接服务器。。。。');
+    };
+
+    ws.onmessage = function (evt) {
+        let data = $.parseJSON(evt.data);
+        callback(data)
+    };
+
+    ws.onclose = function () {
+        console.log("连接已关闭...");
+    };
+    ws.onerror = function (evt) {
+        console.log('连接错误');
+    }
+
+}
+
+function format_timestamp(timestamp,only_time = true) {
+    let now = new Date(timestamp);
+    let year = now.getYear();
+    let month = now.getMonth() + 1;
+    let date = now.getDate();
+    let hour = now.getHours();
+    let minute = now.getMinutes();
+    let second = now.getSeconds();
+    if (only_time===true) {
+        return hour + ":" + minute + ":" + second;
+    }else {
+        return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+    }
+}
+
+
+
+

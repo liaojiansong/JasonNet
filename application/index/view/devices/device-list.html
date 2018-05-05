@@ -136,6 +136,14 @@
                         <label for="message-text" class="control-label">鉴权信息:</label> <input type="text" class="form-control" id="message-text" name="device_auth">
                     </div>
                     <div class="form-group">
+                        <label for="data_template_id" class="control-label">数据流模板:</label>
+                        <select class="form-control" name="data_template_id" id="data_template_id">
+                            {{volist name='template_options' id='val'}}
+                            <option value="{{$val.id}}">{{$val.option}}</option>
+                            {{/volist}}
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="description" class="control-label">描述:</label>
                         <input type="text" class="form-control" id="description" name="device_description">
                     </div>
@@ -186,27 +194,17 @@
     });
     let DeviceList = {
         showDeviceStatus() {
-            let ws = new WebSocket('ws://120.78.78.42:8282');
-            ws.onopen = function (evt) {
-                console.log("Connection open ...");
-                ws.send(DeviceList.getDeviceIDs());
-            };
-
-            ws.onmessage = function (evt) {
-                let data = $.parseJSON(evt.data);
+            web_socket(function (data) {
                 switch (data.type) {
                     case 'online_info':
                         DeviceList.changeStatus(data.content);
                         console.log(data.content);
                         break;
                 }
-            };
+            });
 
-            ws.onclose = function (evt) {
-                console.log("Connection closed.");
-            };
             setInterval(function () {
-                ws.send(DeviceList.getDeviceIDs());
+                window.ws.send(DeviceList.getDeviceIDs());
             }, 5000);
         },
         getDeviceIDs() {

@@ -36,7 +36,7 @@ class DataPublish extends Base
         while (true) {
             $this->mqtt->loop();
             $payload = [
-                'device_id' => rand(1, 12),
+                'device_id' => 1,
                 'data_type' => 'data',
                 'data_content' => rand(1, 66),
                 'create_time' => time(),
@@ -45,7 +45,7 @@ class DataPublish extends Base
             $mid = $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
             echo "当前发送数据消息 ID: {$mid}\n";
             $this->mqtt->loop();
-            sleep(2);
+            sleep(5);
         }
         $this->mqtt->disconnect();
 

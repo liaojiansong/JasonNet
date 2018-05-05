@@ -68,10 +68,10 @@ class SubAuthTopic extends Base
     {
         $this->mqtt->subscribe($topic, 1);
         $this->mqtt->onMessage(function ($msg) {
-            echo '-----------------------鉴权信息-------------------------------------';
-            echo "\n";
-            var_dump($msg);
-            echo "\n";
+//            echo '-----------------------鉴权信息-------------------------------------';
+//            echo "\n";
+//            var_dump($msg);
+//            echo "\n";
             $payload = json_decode($msg->payload);
             if ($payload->data_type == 'auth') {
                 // 通过权限检测的设备id

@@ -17,7 +17,8 @@ class AuthPublish extends Base
     {
         while (true) {
             $this->mqtt->loop();
-            $rand = rand(1, 12);
+//            $rand = rand(1, 12);
+            $rand = 1;
             $payload = [
                 'device_id' => $rand,
                 'data_type' => 'auth',
@@ -26,7 +27,7 @@ class AuthPublish extends Base
                 'update_time' => time(),
             ];
             $mid = $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
-            echo "当前发送鉴权信息 ID: {$mid}\n";
+//            echo "当前发送鉴权信息 ID: {$mid}\n";
             $this->mqtt->loop();
             sleep(30);
         }

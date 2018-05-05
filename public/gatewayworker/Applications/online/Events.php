@@ -18,6 +18,7 @@
  * 然后观察一段时间workerman.log看是否有process_timeout异常
  */
 //declare(ticks=1);
+require_once('MysqliDb.php');
 
 use GatewayWorker\Lib\Gateway;
 
@@ -29,12 +30,21 @@ use GatewayWorker\Lib\Gateway;
 class Events
 {
     public static $redis=null;
+    public static $mysql=null;
+    const device_data_table = 'device_data';
+
     public static function getRedis()
     {
         $redis = new Redis();
         $redis->connect('127.0.0.1');
         self::$redis = $redis;
 
+    }
+
+    public static function getMysql()
+    {
+        $db = new MysqliDb('127.0.0.1', 'root', 'liao325339', 'jasonnet');
+        self::$mysql = $db;
     }
 
     /**
@@ -47,6 +57,9 @@ class Events
         if (!(self::$redis instanceof Redis)) {
             self::getRedis();
         }
+        if (!(self::$mysql instanceof MysqliDb)) {
+            self::getMysql();
+        }
     }
     
    /**
@@ -56,15 +69,21 @@ class Events
     */
    public static function onMessage($client_id, $message) {
        $json_obj = json_decode($message);
+       echo "----------------------------------以下是发过来的信息---------------------\n";
+//       var_dump($json_obj);
        $type =  $json_obj->type ?? null;
-       print_r($json_obj->content);
+//       print_r($json_obj->content);
        if (!empty($type)) {
            switch ($type) {
                case 'send_ids':
                    $info = self::getOnlineInfo($json_obj->content);
                    self::buildMsg($client_id, 'online_info', $info);
                    break;
+               case 'get_device_data':
+                   $info = self::getNewDataInfo($json_obj->content->device_id ?? null, $json_obj->content->timestamp ?? null);
+                   self::buildMsg($client_id, 'new_device_data', $info);
            }
+
        }
 
    }
@@ -91,6 +110,18 @@ class Events
             }
         }
         return $info;
+    }
+
+    public static function getNewDataInfo($device_id,$timestamp)
+    {
+
+        $mysql = self::$mysql;
+//        $mysql = new MysqliDb('127.0.0.1', 'root', 'liao325339', 'jasonnet');
+        $mysql->where('device_id', $device_id)->orderBy('create_time');
+        $new_data = $mysql->get(self::device_data_table, 1);
+        return $new_data;
+
+
     }
    
    /**

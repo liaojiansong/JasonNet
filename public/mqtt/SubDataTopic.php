@@ -58,10 +58,10 @@ class SubDataTopic extends Base
             $device_id = $payload->device_id;
             // 如果在白名单就存入redis
             if ($this->existsWhiteList($device_id)) {
-                echo '-----------------------数据-------------------------------------';
-                echo "\n";
-                var_dump($msg);
-                echo "\n";
+//                echo '-----------------------数据-------------------------------------';
+//                echo "\n";
+//                var_dump($msg);
+//                echo "\n";
                 // 重置白名单存活时间
                 $this->resetExpire($device_id);
                 $list_name = self::DATA_LIST.$device_id;
