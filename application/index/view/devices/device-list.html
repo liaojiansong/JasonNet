@@ -41,8 +41,8 @@
                             </form>
                             <div class="navbar-right">
                                 <p class="navbar-text pull-left" style="cursor:pointer"
-                                   onclick="{$('#add-device').modal('show')}"><span class="glyphicon glyphicon-plus"
-                                                                                    aria-hidden="true"></span>添加设备</p>
+                                        onclick="{$('#add-device').modal('show')}"><span class="glyphicon glyphicon-plus"
+                                        aria-hidden="true"></span>添加设备</p>
                                 <p class="navbar-text pull-left" style="cursor:pointer"><span
                                         class="glyphicon glyphicon-new-window" aria-hidden="true"></span>设备信息</p>
                             </div>
@@ -72,7 +72,7 @@
                             <tr class="record">
                                 <td class="td-status">
                                     <input type="text" readonly name="device_id" value="{{$value.id}}"
-                                           class="form-control device_id" style="display: none">
+                                            class="form-control device_id" style="display: none">
                                     <p class="text-center">{{$value.id}}</p>
                                 </td>
                                 <td>
@@ -98,25 +98,11 @@
                                 </td>
                                 <td class="td-icon">
                                     <div class="text-center">
-                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
-                                           data-placement="top" title="编辑" href="{{:url('edit',['id'=>$value.id])}}"><i
-                                                class="glyphicon glyphicon-edit"></i></a>
-                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
-                                           data-placement="top" title="详情"
-                                           href="{{:url('detail',['id'=>$value.id])}}"><i
-                                                class="glyphicon glyphicon-info-sign"></i></a>
-                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
-                                           data-placement="top" title="添加触发器"
-                                           href="{{:url('trigger/create',['device_id'=>$value.id])}}"><i
-                                                class="glyphicon glyphicon-inbox"></i></a>
-                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
-                                           data-placement="top" title="下发命令"
-                                           onclick="DeviceList.showOrderModal($(this))"><i
-                                                class="glyphicon glyphicon-send"></i></a>
-                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip"
-                                           data-placement="top" title="删除"
-                                           onclick="deleteAlert(`{{:url('delete')}}`,'{{$value.id}}',$(this))"><i
-                                                class="glyphicon glyphicon-trash"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="编辑" href="{{:url('edit',['id'=>$value.id])}}"><i class="glyphicon glyphicon-edit"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="详情" href="{{:url('detail',['id'=>$value.id])}}"><i class="glyphicon glyphicon-info-sign"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="添加触发器" href="{{:url('trigger/create',['device_id'=>$value.id])}}"><i class="glyphicon glyphicon-inbox"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="下发命令" onclick="DeviceList.showOrderModal($(this))"><i class="glyphicon glyphicon-send"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteAlert(`{{:url('delete')}}`,'{{$value.id}}',$(this))"><i class="glyphicon glyphicon-trash"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -144,22 +130,14 @@
             <form id="add_device_form">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">设备名称:</label> <input type="text"
-                                                                                               class="form-control"
-                                                                                               id="recipient-name"
-                                                                                               name="device_name">
+                        <label for="recipient-name" class="control-label">设备名称:</label> <input type="text" class="form-control" id="recipient-name" name="device_name">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="control-label">鉴权信息:</label> <input type="text"
-                                                                                             class="form-control"
-                                                                                             id="message-text"
-                                                                                             name="device_auth">
+                        <label for="message-text" class="control-label">鉴权信息:</label> <input type="text" class="form-control" id="message-text" name="device_auth">
                     </div>
                     <div class="form-group">
-                        <label for="description" class="control-label">描述:</label> <input type="text"
-                                                                                          class="form-control"
-                                                                                          id="description"
-                                                                                          name="device_description">
+                        <label for="description" class="control-label">描述:</label>
+                        <input type="text" class="form-control" id="description" name="device_description">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -175,7 +153,8 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
                 <h4 class="modal-title">发送命令</h4>
             </div>
@@ -184,9 +163,9 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="order-text" class="control-label">命令内容:</label> <textarea class="form-control"
-                                                                                              id="order-text"
-                                                                                              name="order_text" rows="5"
-                                                                                              placeholder="请输入字符串或数字"></textarea>
+                            id="order-text"
+                            name="order_text" rows="5"
+                            placeholder="请输入字符串或数字"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -238,7 +217,7 @@
                     ids.push(temp)
                 }
             });
-            let info = {'type':'send_ids','content':ids};
+            let info = {'type': 'send_ids', 'content': ids};
             return JSON.stringify(info);
         },
         changeStatus(info) {
@@ -252,7 +231,7 @@
                         let p = td.find('p').first();
                         if (value === 'online') {
                             p.html(online);
-                        }else {
+                        } else {
                             p.html(outline);
                         }
                     }

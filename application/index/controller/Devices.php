@@ -7,8 +7,6 @@ use app\common\BaseModel;
 use app\index\model\DeviceDataMode;
 use app\index\model\DeviceLogModel;
 use app\index\model\DevicesModel;
-use function dump;
-use function idate;
 use think\Session;
 use function request;
 
@@ -151,7 +149,6 @@ class Devices extends BaseController
         }
         $mqtt->disconnect();
         unset($mqtt);
-
 
 
     }
