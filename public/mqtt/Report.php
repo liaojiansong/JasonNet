@@ -79,7 +79,7 @@ class Report extends Base
     {
         while (true) {
             $this->getReportInfo();
-            sleep(30);
+            sleep(50);
         }
 
     }

@@ -37,10 +37,12 @@ class Devices extends BaseController
      */
     public function create()
     {
-        $flag = $this->validate($this->request->param(), 'CommonValidate.add_device');
+        $param = $this->request->param();
+        $flag = $this->validate($param, 'CommonValidate.add_device');
         // 验证成功
         if ($flag === true) {
-            $res = DevicesModel::newCreate($this->request->param());
+            $param['product_id'] = Session::get('product_id');
+            $res = DevicesModel::newCreate($param);
             if ($res) {
                 $is_success = true;
                 $msg = "设备添加成功,ID为:" . $res;

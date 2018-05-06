@@ -15,7 +15,7 @@ class DevicesModel extends BaseModel
 {
     protected $table = 'devices';
     // 可写入字段
-    protected static $fillable = ['device_name', 'device_description', 'device_auth', 'icon','data_template_id'];
+    protected static $fillable = ['device_name', 'device_description', 'device_auth', 'icon','data_template_id','product_id'];
 
     public static function newCreate($param, $fillable = null)
     {

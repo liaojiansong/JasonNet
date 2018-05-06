@@ -17,8 +17,7 @@ class AuthPublish extends Base
     {
         while (true) {
             $this->mqtt->loop();
-//            $rand = rand(1, 12);
-            $rand = 1;
+            $rand = rand(1, 16);
             $payload = [
                 'device_id' => $rand,
                 'data_type' => 'auth',

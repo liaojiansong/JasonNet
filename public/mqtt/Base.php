@@ -38,6 +38,10 @@ class Base
         10=>'health',
         11=>'weigth',
         12=>'mi_6x',
+        13=>'fang',
+        14=>'hot',
+        15=>'light',
+        16=>'bed_light',
     ];
 
     /**
