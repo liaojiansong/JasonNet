@@ -38,7 +38,7 @@
     <!--头部,蓝色那一条-->
     <header class="main-header">
         <!-- Logo -->
-        <a href="__STATIC__/index.html" class="logo">
+        <a href="{{:url('index/index/index')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>J</b>N</span>
             <!-- logo for regular state and mobile devices -->
@@ -107,9 +107,6 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{:url('devices/index')}}"><i class="fa fa-circle-o"></i> 设备列表</a></li>
-                        <li><a href="__STATIC__/pages/forms/advanced.html"><i class="fa fa-circle-o"></i> 添加设备</a></li>
-                        <li><a href="__STATIC__/pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a>
-                        </li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -137,7 +134,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li>
-                            <a href="__STATIC__/pages/examples/setting_list.html"><i class="fa fa-circle-o"></i> API列表</a>
+                            <a href="{{:url('api/index')}}"><i class="fa fa-circle-o"></i> API列表</a>
                         </li>
                     </ul>
                 </li>

@@ -1,0 +1,217 @@
+
+[
+  // 查询产品下的设备列表
+  {
+    // 令牌 = api + 密码 => md5()
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "get_device_list"
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    "data": {
+      "product_id": 1,
+      "product_name": 30,
+      "device_count": 40,
+      "devices_list": [
+        {
+          "id": "3497307",
+          "product_id": 1,
+          "data_template_id": 1,
+          "device_name": "小米7",
+          "device_description": "Jason最期待的小手机",
+          "status": 1,
+          "device_auth": false,
+          "create_time": "2013-02-11 12:22:33",
+          "update_time": "2013-02-11 12:22:33"
+        },
+        {
+        }
+      ]
+    }
+  },
+
+
+
+
+
+
+
+  // 请求设备数据统计
+  {
+    // 令牌 = api + 密码 => md5()
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "get_statistical_info"
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    "data": {
+      "product_id": 1,
+      "product_name": 30,
+      "device_count": 1,
+      "trigger_count":60
+    }
+  },
+
+
+
+  // 查询设备详情和数据
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": "1",
+    // 设备id
+    "device_id": 1,
+    // 请求类型
+    "type": "single_device_info",
+    // 是否获取数据（可选）
+    "is_get_data": true,
+    // 起始查询位置（可选）
+    "offset": 0,
+    // 查询长度（可选）
+    "length": 100
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    "data": {
+      "device_info": {
+        "id": 1,
+        "product_id": 1,
+        "data_template_id": 1,
+        "device_name": "小米7",
+        "device_description": "Jason最期待的小手机",
+        "status": 1,
+        "device_auth": "mi_seven",
+        "icon": "fa-desktop",
+        "create_time": "2018-04-15 18:57:26",
+        "update_time": "2018-05-05 11:31:13"
+      },
+      "device_data": [
+        {
+          "id": 1324,
+          "topic": "data",
+          "device_id": 1,
+          "data_type": "data",
+          "data_content": "5",
+          "create_time": "2018-05-03 19:27:53",
+          "update_time": "2018-05-03 19:27:53"
+        },
+        {
+          "id": 1314,
+          "topic": "data",
+          "device_id": 1,
+          "data_type": "data",
+          "data_content": "52",
+          "create_time": "2018-05-03 19:27:31",
+          "update_time": "2018-05-03 19:27:31"
+        },
+        {
+          "id": 1306,
+          "topic": "data",
+          "device_id": 1,
+          "data_type": "data",
+          "data_content": "53",
+          "create_time": "2018-05-03 19:26:37",
+          "update_time": "2018-05-03 19:26:37"
+        }
+      ]
+    }
+  },
+
+
+
+
+  // 获取设备在线状态
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": "1",
+    "device_ids": [1, 2, 3],
+    "type": "get_devices_status"
+  },
+
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    "data": [
+      {
+        "id": 3,
+        "product_id": 1,
+        "data_template_id": 3,
+        "device_name": "米家 LED 智能台灯",
+        "device_description": " 照明之上，光的艺术品",
+        "status": 1,
+        "device_auth": "mi_seven",
+        "icon": "fa-desktop",
+        "create_time": "2018-04-15 18:57:26",
+        "update_time": "2018-05-05 11:31:13",
+        "online": 1
+      },
+      {
+
+      }
+
+    ]
+  },
+
+
+  // 获取设备日志
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": "1",
+    "device_id": 1,
+    "type": "get_devices_logs",
+    // 起始查询位置（可选,默认0）
+    "offset": 0,
+    // 查询长度（可选,默认100）
+    "length": 100
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    "data": {
+      "device_info": {
+        "id": 4,
+        "product_id": 2,
+        "data_template_id": null,
+        "device_name": "米家智能摄像机",
+        "device_description": "守护家的每一面",
+        "status": 0,
+        "device_auth": "cramarm",
+        "icon": "fa-desktop",
+        "create_time": "2018-04-15 19:37:56",
+        "update_time": "2018-04-15 19:37:56"
+      },
+      "device_logs": [
+        {
+          "id": 7,
+          "device_id": 4,
+          "record_type": "in",
+          "content": "设备上线",
+          "create_time": "2018-05-03 21:16:54",
+          "update_time": "2018-05-03 21:16:54"
+        },
+        {
+          "id": 5,
+          "device_id": 4,
+          "record_type": "in",
+          "content": "设备上线",
+          "create_time": "2018-05-03 21:16:34",
+          "update_time": "2018-05-03 21:16:34"
+        }
+      ]
+    }
+  }
+
+]

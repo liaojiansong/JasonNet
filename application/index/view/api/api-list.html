@@ -1,0 +1,509 @@
+{{extend name="public:base" /}}
+<!--标题-->
+{{block name="title"}}
+API列表
+{{/block}}
+<!--主体-->
+{{block name="main"}}
+<!-- 内容墙,包含顶部面板 -->
+<div class="content-wrapper">
+	<section class="content">
+		<div class="row">
+            <div class="col-md-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">API列表</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <table class="table table-bordered table-hover table-responsive text-center">
+                            <colgroup>
+                                <col class="col-md-2">
+                                <col class="col-md-11">
+                            </colgroup>
+                            <thead>
+                            <tr>
+                                <th>操作对象</th>
+                                <th>API名称</th>
+                            </tr>
+                            </thead>
+                                <tbody>
+                                <tr>
+                                    <td rowspan="3">产品</td>
+                                </tr>
+                                <tr>
+                                    <td ><a onclick="$('#doc-1').modal('show');">产品总数据</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a onclick="$('#doc-2').modal('show');">产品设备列表</a></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="6">设备</td>
+                                </tr>
+                                <tr>
+                                    <td>新增</td>
+                                </tr>
+                                <tr>
+                                    <td>更新</td>
+                                </tr>
+                                <tr>
+                                    <td><a onclick="$('#doc-3').modal('show');">查询设备日志</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a onclick="$('#doc-4').modal('show');">查询设备详情和数据</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a onclick="$('#doc-5').modal('show');">批量查询设备状态</a></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td rowspan="6">触发器</td>
+                                    <td>新增</td>
+                                </tr>
+                                <tr>
+                                    <td>更新</td>
+                                </tr>
+                                <tr>
+                                    <td>查询单个触发器</td>
+                                </tr>
+                                <tr>
+                                    <td>模糊查询触发器</td>
+                                </tr>
+                                <tr>
+                                    <td>删除</td>
+                                </tr>
+                                <tr>
+                                    <td>触发数据内容</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="3">命令</td>
+                                    <td>发送命令</td>
+                                </tr>
+                                <tr>
+                                    <td>查询命令响应</td>
+                                </tr>
+                                <tr>
+                                    <td>查询设备历史命令</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                    </div>
+                </div>
+
+
+            </div>
+		</div>
+	</section>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-1"  aria-labelledby="myLargeModalLabel" >
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">产品总数据api</h4>
+                </div>
+                <div class="modal-body">
+                    <table  class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>获取产品的设备,触发器,数据统计数据</td>
+                        </tr>
+                        <tr >
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/product</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <p>// 请求设备数据统计</p>
+                                <p>{</p>
+                                <p style="text-indent: 2em">  // 令牌 = api + 密码 => md5()</p>
+                                <p style="text-indent: 2em">  "api_key": "MTUyNTU3NDI3MzY2MTUw",</p>
+                                <p style="text-indent: 2em">  // 产品id</p>
+                                <p style="text-indent: 2em">  "product_id": 1,</p>
+                                <p style="text-indent: 2em">  // 请求类型</p>
+                                <p style="text-indent: 2em">  "type": "get_statistical_info"</p>
+                                <p>}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <p>// 返回示例</p>
+                                <p>{</p>
+                                <p style="text-indent: 2em">  "code": 10000,</p>
+                                <p style="text-indent: 2em">  "error": "success",</p>
+                                <p style="text-indent: 2em">  "data": {</p>
+                                <p style="text-indent: 4em">    "product_id": 1,</p>
+                                <p style="text-indent: 4em">    "product_name": 30,</p>
+                                <p style="text-indent: 4em">    "device_count": 1,</p>
+                                <p style="text-indent: 4em">    "trigger_count":60</p>
+                                <p style="text-indent: 2em">  }</p>
+                                <p>}</p>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-2" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">产品设备列表api</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+                        <tr>
+                            <td>API功能</td>
+                            <td>获取产品的所有设备</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/product</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <p>// 请求设备数据统计</p>
+                                <p>{</p>
+                                <p style="text-indent: 2em">// 令牌 = api + 密码 => md5()</p>
+                                <p style="text-indent: 2em">"api_key": "MTUyNTU3NDI3MzY2MTUw",</p>
+                                <p style="text-indent: 2em">// 产品id</p>
+                                <p style="text-indent: 2em">"product_id": 1,</p>
+                                <p style="text-indent: 2em">// 请求类型 "type": "get_statistical_info"</p>
+                                <p>}</p>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <p style="text-indent: 0em"> // 返回示例</p>
+                                <p style="text-indent: 0em"> {</p>
+                                <p style="text-indent: 2em"> "code": 10000,</p>
+                                <p style="text-indent: 2em"> "error": "success",</p>
+                                <p style="text-indent: 2em"> "data": {</p>
+                                <p style="text-indent: 4em"> "product_id": 1,</p>
+                                <p style="text-indent: 4em"> "product_name": 30,</p>
+                                <p style="text-indent: 4em"> "device_count": 40,</p>
+                                <p style="text-indent: 4em"> "devices_list": [</p>
+                                <p style="text-indent: 6em"> {</p>
+                                <p style="text-indent: 8em"> "id": "3497307",</p>
+                                <p style="text-indent: 8em"> "product_id": 1,</p>
+                                <p style="text-indent: 8em"> "data_template_id": 1,</p>
+                                <p style="text-indent: 8em"> "device_name": "小米7",</p>
+                                <p style="text-indent: 8em"> "device_description": "Jason最期待的小手机",</p>
+                                <p style="text-indent: 8em"> "status": 1,</p>
+                                <p style="text-indent: 8em"> "device_auth": false,</p>
+                                <p style="text-indent: 8em"> "create_time": "2013-02-11 12:22:33",</p>
+                                <p style="text-indent: 8em"> "update_time": "2013-02-11 12:22:33"</p>
+                                <p style="text-indent: 6em"> },</p>
+                                <p style="text-indent: 6em"> {</p>
+                                <p style="text-indent: 6em"> ....</p>
+                                <p style="text-indent: 6em"> }</p>
+                                <p style="text-indent: 4em"> ]</p>
+                                <p style="text-indent: 2em"> }</p>
+                                <p style="text-indent: 0em"> }</p>
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-3" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" >查询设备日志</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>返回查询设备的日志信息</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/device</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <p style="text-indent: 0em">// 获取设备日志</p>
+                                <p style="text-indent: 0em">{</p>
+                                <p style="text-indent: 2em">  "api_key": "MTUyNTU3NDI3MzY2MTUw",</p>
+                                <p style="text-indent: 2em">  "product_id": "1",</p>
+                                <p style="text-indent: 2em">  "device_id": 1,</p>
+                                <p style="text-indent: 2em">  "type": "get_devices_logs",</p>
+                                <p style="text-indent: 2em">  // 起始查询位置（可选,默认0）</p>
+                                <p style="text-indent: 2em">  "offset": 0,</p>
+                                <p style="text-indent: 2em">  // 查询长度（可选,默认100）</p>
+                                <p style="text-indent: 2em">  "length": 100</p>
+                                <p style="text-indent: 0em">}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <p style="text-indent: 0em">// 返回示例</p>
+                                <p style="text-indent: 0em">{</p>
+                                <p style="text-indent: 2em">  "code": 10000,</p>
+                                <p style="text-indent: 2em">  "error": "success",</p>
+                                <p style="text-indent: 2em">  "data": {</p>
+                                <p style="text-indent: 4em">    "device_info": {</p>
+                                <p style="text-indent: 4em">      "id": 4,</p>
+                                <p style="text-indent: 4em">      "product_id": 2,</p>
+                                <p style="text-indent: 4em">      "data_template_id": null,</p>
+                                <p style="text-indent: 4em">      "device_name": "米家智能摄像机",</p>
+                                <p style="text-indent: 4em">      "device_description": "守护家的每一面",</p>
+                                <p style="text-indent: 4em">      "status": 0,</p>
+                                <p style="text-indent: 4em">      "device_auth": "cramarm",</p>
+                                <p style="text-indent: 4em">      "icon": "fa-desktop",</p>
+                                <p style="text-indent: 4em">      "create_time": "2018-04-15 19:37:56",</p>
+                                <p style="text-indent: 4em">      "update_time": "2018-04-15 19:37:56"</p>
+                                <p style="text-indent: 2em">    },</p>
+                                <p style="text-indent: 2em">    "device_logs": [</p>
+                                <p style="text-indent: 4em">      {</p>
+                                <p style="text-indent: 6em">        "id": 7,</p>
+                                <p style="text-indent: 6em">        "device_id": 4,</p>
+                                <p style="text-indent: 6em">        "record_type": "in",</p>
+                                <p style="text-indent: 6em">        "content": "设备上线",</p>
+                                <p style="text-indent: 6em">        "create_time": "2018-05-03 21:16:54",</p>
+                                <p style="text-indent: 6em">        "update_time": "2018-05-03 21:16:54"</p>
+                                <p style="text-indent: 4em">      },</p>
+                                <p style="text-indent: 4em">      {</p>
+                                <p style="text-indent: 6em">        "id": 5,</p>
+                                <p style="text-indent: 6em">        "device_id": 4,</p>
+                                <p style="text-indent: 6em">        "record_type": "in",</p>
+                                <p style="text-indent: 6em">        "content": "设备上线",</p>
+                                <p style="text-indent: 6em">        "create_time": "2018-05-03 21:16:34",</p>
+                                <p style="text-indent: 6em">        "update_time": "2018-05-03 21:16:34"</p>
+                                <p style="text-indent: 4em">      }</p>
+                                <p style="text-indent: 4em">    ]</p>
+                                <p style="text-indent: 2em">  }</p>
+                                <p style="text-indent: 0em">}</p>
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-4" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">查询设备详情和数据</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>返回查询设备的详情和数据</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/device</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <p style="text-indent: 0em">// 查询设备详情和数据</p>
+                                <p style="text-indent: 0em">{</p>
+                                <p style="text-indent: 2em">  "api_key": "MTUyNTU3NDI3MzY2MTUw",</p>
+                                <p style="text-indent: 2em">  "product_id": "1",</p>
+                                <p style="text-indent: 2em">  // 设备id</p>
+                                <p style="text-indent: 2em">  "device_id": 1,</p>
+                                <p style="text-indent: 2em">  // 请求类型</p>
+                                <p style="text-indent: 2em">  "type": "single_device_info",</p>
+                                <p style="text-indent: 2em">  // 是否获取数据（可选）</p>
+                                <p style="text-indent: 2em">  "is_get_data": true,</p>
+                                <p style="text-indent: 2em">  // 起始查询位置（可选）</p>
+                                <p style="text-indent: 2em">  "offset": 0,</p>
+                                <p style="text-indent: 2em">  // 查询长度（可选）</p>
+                                <p style="text-indent: 2em">  "length": 100</p>
+                                <p style="text-indent: 0em">}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <p style="text-indent: 0em">// 返回示例</p>
+                                <p style="text-indent: 0em">{</p>
+                                <p style="text-indent: 2em"> "code": 10000,</p>
+                                <p style="text-indent: 2em"> "error": "success",</p>
+                                <p style="text-indent: 2em"> "data": {</p>
+                                <p style="text-indent: 4em"> "device_info": {</p>
+                                <p style="text-indent: 6em"> "id": 1,</p>
+                                <p style="text-indent: 6em"> "product_id": 1,</p>
+                                <p style="text-indent: 6em"> "data_template_id": 1,</p>
+                                <p style="text-indent: 6em"> "device_name": "小米7",</p>
+                                <p style="text-indent: 6em"> "device_description": "Jason最期待的小手机",</p>
+                                <p style="text-indent: 6em"> "status": 1,</p>
+                                <p style="text-indent: 6em"> "device_auth": "mi_seven",</p>
+                                <p style="text-indent: 6em"> "icon": "fa-desktop",</p>
+                                <p style="text-indent: 6em"> "create_time": "2018-04-15 18:57:26",</p>
+                                <p style="text-indent: 6em"> "update_time": "2018-05-05 11:31:13"</p>
+                                <p style="text-indent: 4em"> },</p>
+                                <p style="text-indent: 4em"> "device_data": [</p>
+                                <p style="text-indent: 6em"> {</p>
+                                <p style="text-indent: 8em"> "id": 1324,</p>
+                                <p style="text-indent: 8em"> "topic": "data",</p>
+                                <p style="text-indent: 8em"> "device_id": 1,</p>
+                                <p style="text-indent: 8em"> "data_type": "data",</p>
+                                <p style="text-indent: 8em"> "data_content": "5",</p>
+                                <p style="text-indent: 8em"> "create_time": "2018-05-03 19:27:53",</p>
+                                <p style="text-indent: 8em"> "update_time": "2018-05-03 19:27:53"</p>
+                                <p style="text-indent: 6em"> },</p>
+                                <p style="text-indent: 6em"> {</p>
+                                <p style="text-indent: 8em"> "id": 1314,</p>
+                                <p style="text-indent: 8em"> "topic": "data",</p>
+                                <p style="text-indent: 8em"> "device_id": 1,</p>
+                                <p style="text-indent: 8em"> "data_type": "data",</p>
+                                <p style="text-indent: 8em"> "data_content": "52",</p>
+                                <p style="text-indent: 8em"> "create_time": "2018-05-03 19:27:31",</p>
+                                <p style="text-indent: 8em"> "update_time": "2018-05-03 19:27:31"</p>
+                                <p style="text-indent: 6em"> },</p>
+                                <p style="text-indent: 6em"> {</p>
+                                <p style="text-indent: 8em"> "id": 1306,</p>
+                                <p style="text-indent: 8em"> "topic": "data",</p>
+                                <p style="text-indent: 8em"> "device_id": 1,</p>
+                                <p style="text-indent: 8em"> "data_type": "data",</p>
+                                <p style="text-indent: 8em"> "data_content": "53",</p>
+                                <p style="text-indent: 8em"> "create_time": "2018-05-03 19:26:37",</p>
+                                <p style="text-indent: 8em"> "update_time": "2018-05-03 19:26:37"</p>
+                                <p style="text-indent: 6em"> }</p>
+                                <p style="text-indent: 4em"> ]</p>
+                                <p style="text-indent: 2em"> }</p>
+                                <p style="text-indent: 0em">}</p>
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-5" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">批量查询设备状态</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>返回设备的在线状态</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/device</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <p style="text-indent: 0em">// 获取设备在线状态</p>
+                                <p style="text-indent: 0em">{</p>
+                                <p style="text-indent: 2em">  "api_key": "MTUyNTU3NDI3MzY2MTUw",</p>
+                                <p style="text-indent: 2em">  "product_id": "1",</p>
+                                <p style="text-indent: 2em">  "device_ids": [1, 2, 3],</p>
+                                <p style="text-indent: 2em">  "type": "get_devices_status"</p>
+                                <p style="text-indent: 0em">},</p>
+                                <p style="text-indent: 0em">// 返回示例</p>
+                                <p style="text-indent: 0em">{</p>
+                                <p style="text-indent: 2em">  "code": 10000,</p>
+                                <p style="text-indent: 2em">  "error": "success",</p>
+                                <p style="text-indent: 2em">  "data": [</p>
+                                <p style="text-indent: 4em">    {</p>
+                                <p style="text-indent: 6em">      "id": 3,</p>
+                                <p style="text-indent: 6em">      "product_id": 1,</p>
+                                <p style="text-indent: 6em">      "data_template_id": 3,</p>
+                                <p style="text-indent: 6em">      "device_name": "米家 LED 智能台灯",</p>
+                                <p style="text-indent: 6em">      "device_description": " 照明之上，光的艺术品",</p>
+                                <p style="text-indent: 6em">      "status": 1,</p>
+                                <p style="text-indent: 6em">      "device_auth": "mi_seven",</p>
+                                <p style="text-indent: 6em">      "icon": "fa-desktop",</p>
+                                <p style="text-indent: 6em">      "create_time": "2018-04-15 18:57:26",</p>
+                                <p style="text-indent: 6em">      "update_time": "2018-05-05 11:31:13",</p>
+                                <p style="text-indent: 6em">      "online": 1</p>
+                                <p style="text-indent: 4em">    },</p>
+                                <p style="text-indent: 4em">    {</p>
+                                <p style="text-indent: 4em">    ...</p>
+                                <p style="text-indent: 4em">    }</p>
+                                <p style="text-indent: 2em">  ]</p>
+                                <p style="text-indent: 0em">}</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+{{/block}}
+
+{{block name="js"}}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("[name='my-checkbox']").bootstrapSwitch();
+    });
+</script>
+
+{{/block}}
+

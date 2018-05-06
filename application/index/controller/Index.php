@@ -42,6 +42,7 @@ class Index extends BaseController
         // 验证成功
         if ($flag === true) {
             $param['user_id'] = Session::get('user_info')['id'];
+            $param['api_key'] = ProductModel::makeApiKey();
             $res = ProductModel::newCreate($param);
             if ($res) {
                 $this->redirect('index', ['flag' => 'create_success']);

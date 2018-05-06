@@ -13,7 +13,6 @@ use app\common\BaseController;
 use app\index\model\DevicesModel;
 use app\index\model\ProductIndustryModel;
 use app\index\model\ProductModel;
-use function dump;
 use think\Db;
 use think\Session;
 
@@ -29,36 +28,6 @@ class Product extends BaseController
         ]);
         return $this->fetch('product-index');
     }
-
-
-
-    public function create()
-    {
-        $options = ProductIndustryModel::select_option();
-        $this->assign([
-            'action' => $this->request->action(),
-            'options' => $options,
-        ]);
-        return $this->fetch('product-edit');
-    }
-
-    public function store()
-    {
-        $flag = $this->validate($this->request->param(), 'CommonValidate.add_product');
-        // 验证成功
-        if ($flag === true) {
-            $res = ProductModel::newCreate($this->request->param());
-            if ($res) {
-                $this->redirect('index',['flag'  => 'create_success']);
-            } else {
-                $this->error('添加产品失败');
-            }
-            // 验证失败
-        } else {
-            $this->error($flag);
-        }
-    }
-
     /**
      * @return mixed
      * @throws \think\exception\DbException
