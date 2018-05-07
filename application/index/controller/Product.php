@@ -20,6 +20,7 @@ class Product extends BaseController
 {
     public function index()
     {
+        request()->has('product_id') ? Session::set('product_id', request()->param('product_id')) : null;
         $product_id = Session::get('product_id');
         $one = ProductModel::getList($product_id);
         $this->assign([
