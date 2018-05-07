@@ -20,9 +20,8 @@ class Product extends BaseController
 {
     public function index()
     {
-//        request()->has('product_id') ? Session::set('product_id', request()->param('product_id')) : null;
-        $product_id = Session::get('product_id');
-        $one = ProductModel::getList($product_id);
+
+        $one = ProductModel::getList(self::getProductId());
         $this->assign([
             'flag' => $this->request->param('flag') ?? null,
             'one' => $one[0] ?? null,
@@ -35,9 +34,7 @@ class Product extends BaseController
      */
     public function edit()
     {
-        $product_id = $this->request->param('product_id');
-        request()->has('product_id') ? Session::set('product_id', request()->param('product_id')) : null;
-        $one = ProductModel::get($product_id)->hidden(['create_time', 'update_time'])->toJson();
+        $one = ProductModel::get(self::getProductId())->hidden(['create_time', 'update_time'])->toJson();
         $options = ProductIndustryModel::select_option();
         $this->assign([
             'one'     => $one,
@@ -68,6 +65,17 @@ class Product extends BaseController
             DevicesModel::destroy(['product_id' => $id]);
         });
         return self::ajaxMsg();
+    }
+
+    public static function getProductId()
+    {
+        if (request()->has('product_id')) {
+            $product_id = request()->param('product_id');
+            Session::set('product_id', $product_id);
+        } else {
+            $product_id = Session::get('product_id');
+        }
+        return $product_id;
     }
 
 
