@@ -99,7 +99,7 @@ class Devices extends BaseController
     {
         $id = $this->request->param('id');
         $one = DevicesModel::get($id)->hidden(['create_time', 'update_time']);
-        $logs = DeviceLogModel::where('device_id', $id)->with('device')->paginate(15);
+        $logs = DeviceLogModel::where('device_id', $id)->with('device')->order('create_time','DESC')->paginate(15);
         $template = $one->template;
         $items = $one->deviceData()->limit(25)->order('create_time')->select();
         $all_count = DeviceDataMode::getCount($id);

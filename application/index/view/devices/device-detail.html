@@ -26,12 +26,12 @@
             <!-- Custom Tabs -->
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="#tab_1" data-toggle="tab">设备信息</a></li>
-                    <li><a href="#tab_2" data-toggle="tab">设备数据</a></li>
+                    <li class="active"><a href="#tab_2" data-toggle="tab">设备数据</a></li>
+                    <li ><a href="#tab_1" data-toggle="tab">设备信息</a></li>
                     <li><a href="#tab_3" data-toggle="tab">设备日志</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="tab_1">
+                    <div class="tab-pane " id="tab_1">
                         <div class="row detail">
                             <div class="col-md-8">
                                 <h4><strong><i class="fa fa-tablet margin-r-5"></i> 设备名称</strong></h4>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane" id="tab_2">
+                    <div class="tab-pane active" id="tab_2">
                         <div class="row">
                             <div class="col-sm-4 border-right">
                                 <div class="description-block">
@@ -109,7 +109,7 @@
 
                             </div>
                             <div class="col-md-12">
-                                <button id="btn">点我</button>
+                                <!--<button id="btn">点我</button>-->
                             </div>
                         </div>
                     </div>
@@ -144,6 +144,7 @@
                                     {{case value="update_trigger"}}编辑触发器{{/case}}
                                     {{case value="del_trigger"}}删除触发器{{/case}}
                                     {{case value="report"}}事件触发{{/case}}
+                                    {{case value="response_order"}}响应命令{{/case}}
                                     {{/switch}}
                                 </td>
                                 <td>{{$value.content}}</td>

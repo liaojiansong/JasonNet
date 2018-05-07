@@ -52,7 +52,7 @@
 						<div class="col-md-4 one-product">
 						<div class="box box-default">
 							<div class="box-header with-border">
-								<a href="{{:url('index/devices/index',['product_id'=>$value.id])}}">
+								<a href="{{:url('index/product/index',['product_id'=>$value.id])}}">
 									<h3 class="box-title">{{$value.product_name}}</h3>
 								</a>
 								<div class="box-tools pull-right">
@@ -71,7 +71,9 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="chart-responsive" >
+                                            <a href="{{:url('index/product/index',['product_id'=>$value.id])}}">
 											<span class="info-box-icon special {{$value.product_industry.bg}}" ><i class="fa {{$value.product_industry.fa}}"></i></span>
+                                            </a>
 										</div>
 										<!-- ./chart-responsive -->
 									</div>

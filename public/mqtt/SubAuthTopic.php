@@ -48,6 +48,7 @@ class SubAuthTopic extends Base
         $white_list_name = self::DEVICE_WHITE_LIST . $device_id;
         if (!$this->existsWhiteList($device_id)) {
             $this->redis->set($white_list_name, true);
+            $this->Log($device_id, 'in', '设备上线');
         }
         $this->redis->expire($white_list_name, self::expire_time);
     }
@@ -77,7 +78,6 @@ class SubAuthTopic extends Base
                 // 通过权限检测的设备id
                 $device_id = $this->checkAuth($payload->device_id, $payload->data_content);
                 $this->insertIntoWhiteList($device_id);
-                $this->Log($device_id, 'in', '设备上线');
             }
         });
         $this->mqtt->loopForever();
