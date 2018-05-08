@@ -9,7 +9,10 @@ use app\index\model\DeviceDataMode;
 use app\index\model\DeviceLogModel;
 use app\index\model\DevicesModel;
 use think\Session;
+use function explode;
 use function request;
+use function strtotime;
+use function trim;
 
 class Devices extends BaseController
 {
@@ -119,10 +122,23 @@ class Devices extends BaseController
         return $this->fetch('device-detail');
     }
 
+
     public static function export()
     {
-        $data = DeviceDataMode::order('create_time', 'DESC')->limit(100)->select()->toArray();
-        DeviceDataMode::excelBasic($data, '小米7数据报表');
+        $param =  request()->param();
+        if (empty($param['device_id']) || empty($param['time_range'])) {
+            return '数据有误,无法导出';
+        }else{
+            $time_range = explode('~', trim($param['time_range']));
+            $start = strtotime($time_range[0]);
+            $end = strtotime($time_range[1]);
+            $data = DeviceDataMode::order('create_time', 'DESC')
+                ->where('device_id', $param['device_id'])
+                ->whereTime('create_time', 'between', [$start, $end])
+                ->select()
+                ->toArray();
+            DeviceDataMode::excelBasic($data, '小米7数据报表');
+        }
     }
 
 

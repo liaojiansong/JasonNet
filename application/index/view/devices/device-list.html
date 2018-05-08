@@ -33,19 +33,15 @@
                 <div class="box">
                     <div class="box-header">
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                            <form class="navbar-form navbar-left">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="请输入设备的ID或名称">
-                                </div>
-                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                            </form>
+                            <!--<form class="navbar-form navbar-left">-->
+                                <!--<div class="form-group">-->
+                                    <!--<input type="text" class="form-control" placeholder="请输入设备的ID或名称">-->
+                                <!--</div>-->
+                                <!--<button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>-->
+                            <!--</form>-->
                             <div class="navbar-right">
-                                <p class="navbar-text pull-left" style="cursor:pointer"
-                                        onclick="{$('#add-device').modal('show')}"><span class="glyphicon glyphicon-plus"
-                                        aria-hidden="true"></span>添加设备</p>
-                                <a href="{{:url('index/devices/export')}}">
-                                    <p class="navbar-text pull-left" style="cursor:pointer">
-                                        <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>数据导出</p></a>
+                                <p class="navbar-text pull-left" style="cursor:pointer" onclick="{$('#add-device').modal('show')}">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加设备</p>
                             </div>
                         </div>
                     </div>
@@ -103,6 +99,7 @@
                                         <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="详情" href="{{:url('detail',['id'=>$value.id])}}"><i class="glyphicon glyphicon-info-sign"></i></a>
                                         <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="添加触发器" href="{{:url('trigger/create',['device_id'=>$value.id])}}"><i class="glyphicon glyphicon-inbox"></i></a>
                                         <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="下发命令" onclick="DeviceList.showOrderModal($(this))"><i class="glyphicon glyphicon-send"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="导出数据" onclick="DeviceList.showExportModel('{{$value.id}}','{{$value.device_name}}')"><i class="glyphicon glyphicon-export"></i></a>
                                         <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="删除" onclick="deleteAlert(`{{:url('delete')}}`,'{{$value.id}}',$(this))"><i class="glyphicon glyphicon-trash"></i></a>
                                     </div>
                                 </td>
@@ -183,6 +180,48 @@
                 </div>
             </form>
         </div>
+
+    </div>
+</div>
+<div class="modal fade " tabindex="-1" role="dialog" id="export-data" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">数据导出</h4>
+            </div>
+            <form id="export-form" action="{{:url('export')}}" method="post">
+                <input type="hidden" name="device_id" >
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="device_id_2" class="control-label">设备ID:</label>
+                        <input type="text" class="form-control"  name="device_id" id="device_id_2" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="device_name_2" class="control-label">设备名称:</label>
+                        <input type="text" class="form-control" name="device_name" id="device_name_2" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="reservationtime" class="control-label">时间选择:</label>
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-clock-o"></i>
+                            </div>
+                            <input type="text" name="time_range" class="form-control pull-right" id="reservationtime"  >
+                        </div>
+                        <p id="time_range_msg" class="text-red"></p>
+
+                        <!-- /.input group -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary" onclick="DeviceList.checkExport()">导出</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 {{/block}}
@@ -191,9 +230,37 @@
 <script>
     $(function () {
         DeviceList.addDevice("{{:url('create')}}");
+        DeviceList.initDatePicker();
         DeviceList.showDeviceStatus();
+        DeviceList.validateExport();
     });
     let DeviceList = {
+        initDatePicker:function () {
+            let beginTimeStore = '';
+            let endTimeStore = '';
+            $('#reservationtime').daterangepicker({
+                "timePicker": true,
+                "timePicker24Hour": true,
+                "linkedCalendars": false,
+                "autoUpdateInput": false,
+                "maxDate": new Date(),
+                "locale": {
+                    format: 'YYYY-MM-DD HH:mm:ss',
+                    separator: ' ~ ',
+                    applyLabel: "确定",
+                    cancelLabel: "取消",
+                    resetLabel: "重置",
+                }
+            }, function (start, end, label) {
+                beginTimeStore = start;
+                endTimeStore = end;
+                if (!this.startDate) {
+                    this.element.val('');
+                } else {
+                    this.element.val(this.startDate.format(this.locale.format) + this.locale.separator + this.endDate.format(this.locale.format));
+                }
+            });
+        },
         showDeviceStatus() {
             web_socket(function (data) {
                 switch (data.type) {
@@ -219,6 +286,7 @@
             let info = {'type': 'send_ids', 'content': ids};
             return JSON.stringify(info);
         },
+        // TODO 增加上线提示弹出框
         changeStatus(info) {
             $('.device_id').each(function () {
                 let device_id = parseInt($(this).val());
@@ -266,6 +334,35 @@
                     });
                 }
             });
+        },
+        /**
+         * 显示导出模态框
+         */
+        showExportModel: function (device_id, device_name) {
+            $('#export-data').modal('show');
+            // 找到当前设备id
+            $('#device_id_2').val(device_id);
+            $('#device_name_2').val(device_name);
+        },
+        validateExport : function () {
+            $("#export-form").validator({
+                timely: 0,
+                fields: {
+                    //name 字段使用对象传参
+                    time_range: {
+                        rule: "时间范围: required;",
+                        msg: {
+                            required: "亲,这个框框是必填的哦",
+                        },
+                        target: "#time_range_msg",
+                    },
+                },
+            });
+        },
+        checkExport : function () {
+          if ($('#reservationtime').val() !== '') {
+              $('#export-data').modal('hide');
+          }
         },
         /**
          * 显示发送命令模态框
