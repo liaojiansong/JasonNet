@@ -43,8 +43,9 @@
                                 <p class="navbar-text pull-left" style="cursor:pointer"
                                         onclick="{$('#add-device').modal('show')}"><span class="glyphicon glyphicon-plus"
                                         aria-hidden="true"></span>添加设备</p>
-                                <p class="navbar-text pull-left" style="cursor:pointer"><span
-                                        class="glyphicon glyphicon-new-window" aria-hidden="true"></span>设备信息</p>
+                                <a href="{{:url('index/devices/export')}}">
+                                    <p class="navbar-text pull-left" style="cursor:pointer">
+                                        <span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>数据导出</p></a>
                             </div>
                         </div>
                     </div>
