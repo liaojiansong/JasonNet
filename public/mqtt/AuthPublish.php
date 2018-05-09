@@ -31,19 +31,27 @@ class AuthPublish extends Base
          */
         while (true) {
             $this->mqtt->loop();
-            $rand = rand(1, 16);
+            $product_id = rand(1, 3);
+            $auth_box = self::device_info[$product_id];
+            $device_id = array_rand($auth_box);
+
             $payload = [
-                'api_key'=>'MTUyNTU3NDI3MzY2MTUw',
-                'product_id'=>1,
-                'device_id' => $rand,
+                'api_key'=>self::api_key[$product_id],
+                'product_id'=> $product_id,
+                'device_id' => $device_id,
                 'data_type' => 'auth',
-                'device_auth' => self::device_info[$rand],
-                'response_topic' => self::device_info[$rand],
+                'device_auth' => $auth_box[$device_id],
+                'response_topic' => 'response_1',
             ];
             $mid = $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
-//            echo "当前发送鉴权信息 ID: {$mid}\n";
+            echo "当前发送鉴权信息 ID: {$mid}\n";
+            echo '-----------------------发送的消息为-------------------------------------';
+            echo "\n";
+            var_dump($payload);
+            echo "\n";
+
             $this->mqtt->loop();
-            sleep(30);
+            sleep(10);
         }
         $this->mqtt->disconnect();
 

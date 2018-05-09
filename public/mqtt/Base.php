@@ -27,24 +27,36 @@ class Base
     const device_log = 'device_log';
     const product_table = 'products';
     const device_info = [
-        1=>'mi_seven',
-        2=>'dianfanbao',
-        3=>'ledlight',
-        4=>'cramarm',
-        5=>'water',
-        6=>'car',
-        7=>'nicvre',
-        8=>'water',
-        9=>'fresh',
-        10=>'health',
-        11=>'weigth',
-        12=>'mi_6x',
-        13=>'fang',
-        14=>'hot',
-        15=>'light',
-        16=>'bed_light',
-    ];
+        1 => [
+            1 => 'mi_seven',
+            2 => 'dianfanbao',
+            3 => 'ledlight',
+        ],
+        2 => [
+            4 => 'cramarm',
+            5 => 'water',
+            6 => 'car',
+            7 => 'nicvre',
+            12 => 'mi_6x',
+            13 => 'fang',
+            14 => 'hot',
+            15 => 'light',
+            16 => 'bed_light',
+        ],
+        3 => [
+            8 => 'water',
+            9 => 'fresh',
+            10 => 'health',
+        ],
 
+    ];
+    const api_key = [
+        0 => 666,
+
+        1 => 'MTUyNTU3NDI3MzY2MTUw',
+        2 => 'MTUyNTU3NDMyODg5NjYw',
+        3 => 'MTUyNTU3NDM1OTcyOTk5',
+    ];
     /**
      * 初始化连接
      * Base constructor.
@@ -129,7 +141,7 @@ class Base
      * @param $result
      * 返回的信息
      */
-    public function tryToResponse(object $payload, $result)
+    public function tryToResponse(stdClass $payload, $result)
     {
         $device_id = $payload->device_id ?? false;
         $response_topic = $payload->response_topic ?? false;

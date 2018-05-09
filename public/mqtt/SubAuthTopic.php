@@ -23,7 +23,7 @@ class SubAuthTopic extends Base
      * @param object $payload
      * @return bool|object
      */
-    public function checkPayloadIsComplete(object $payload)
+    public function checkPayloadIsComplete(stdClass $payload)
     {
         /**
          * // api_key(必填)
@@ -69,7 +69,7 @@ class SubAuthTopic extends Base
      * 解码后的消息体
      * @return mixed
      */
-    public function checkAuth(object $payload)
+    public function checkAuth(stdClass $payload)
     {
         // 先鉴定product_id 和 api_key是否对应()
         $this->mysql->where('id', $payload->product_id);
@@ -82,15 +82,18 @@ class SubAuthTopic extends Base
         }
 
         // 再鉴定product_id 和 device 和 device_auth是否匹配
-        $this->mysql->where('id', $payload->devcie_id);
+        $this->mysql->where('id', $payload->device_id);
         $this->mysql->where('product_id', $payload->product_id);
         $this->mysql->where('device_auth', $payload->device_auth);
         $res_device = $this->mysql->get(self::device_table);
+        var_dump($res_device);
+        var_dump(empty($res_device));
+
         if (empty($res_device)) {
             $this->publishResponse($payload->response_topic, $payload->device_id, self::ERROR[2]);
             return false;
         }else{
-            return $payload->devcie_id;
+            return $payload->device_id;
         }
     }
 
@@ -116,15 +119,16 @@ class SubAuthTopic extends Base
     {
         $this->mqtt->subscribe($topic, 1);
         $this->mqtt->onMessage(function ($msg) {
-//            echo '-----------------------鉴权信息-------------------------------------';
-//            echo "\n";
-//            var_dump($msg);
-//            echo "\n";
             $payload = json_decode($msg->payload);
+            echo '-----------------------鉴权信息-------------------------------------';
+            echo "\n";
+            var_dump($payload);
+            echo "\n";
             if ($this->beforeCheckAuth($payload)) {
                 $device_id = $this->checkAuth($payload);
                 if ($device_id != false) {
                     $this->insertIntoWhiteList($device_id);
+                    $this->publishResponse($payload->response_topic, $payload->device_id, 'pass');
                 }
             }
         });
