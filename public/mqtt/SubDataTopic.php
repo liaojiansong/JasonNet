@@ -16,18 +16,6 @@ class SubDataTopic extends Base
 
     }
 
-    /**
-     * 检测设备是否在白名单
-     * @param $device_id
-     * @return bool
-     */
-    public function existsWhiteList($device_id)
-    {
-        $white_list_name = self::DEVICE_WHITE_LIST . $device_id;
-        $flag = $this->redis->exists($white_list_name);
-        return $flag;
-    }
-
     public function resetExpire($device_id)
     {
         $white_list_name = self::DEVICE_WHITE_LIST . $device_id;
@@ -67,6 +55,11 @@ class SubDataTopic extends Base
                 $list_name = self::DATA_LIST.$device_id;
                 $this->redis->lPush($list_name, json_encode($msg));
                 $this->redis->expire($list_name, 600);
+                // 响应已经成功接收信息
+                $this->tryToResponse($payload, $payload->create_time ?? time());
+
+            }else{
+                $this->tryToResponse($payload, 'need_auth');
             }
         });
         $this->mqtt->loopForever();

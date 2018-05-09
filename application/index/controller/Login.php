@@ -73,7 +73,12 @@ class Login extends Controller
         $password = request()->param('password');
         $res = $this->checkPassword($phone, $password);
         if ($res['flag'] === true) {
-            $this->redirect('index/index');
+            $user_info = Session::get('user_info');
+            if ($user_info['role']=='root'){
+                $this->redirect('index/platform_manage/product_list');
+            }else {
+                $this->redirect('index/index');
+            }
         } else {
             $this->redirect('login/index');
         }
@@ -93,9 +98,15 @@ class Login extends Controller
         if ($user) {
             if ($user['phone'] == $phone && $user['password'] == $password) {
                 // TODO 拉取权限,session
+                if ($user['id'] == 4) {
+                    $role = 'root';
+                }else{
+                    $role = 'customer';
+                }
                 $user_info = [
                     'id' => $user['id'],
                     'username' => $user['username'],
+                    'role' => $role,
                 ];
                 Session::set('user_info', $user_info);
                 return [

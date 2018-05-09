@@ -52,7 +52,7 @@ class DeviceDataMode extends BaseModel
         return $total;
     }
 
-    public static function excelBasic(array $data, $file_name, $time_range = '2018')
+    public static function excelBasic(array $data, $file_name, $title = '2018')
     {
         // Create new Spreadsheet object
         $spreadsheet = new Spreadsheet();
@@ -78,7 +78,7 @@ class DeviceDataMode extends BaseModel
             ->fromArray($data, '无', 'A2');
 
         // Rename worksheet
-        $spreadsheet->getActiveSheet()->setTitle($time_range);
+        $spreadsheet->getActiveSheet()->setTitle($title);
 
         // Set active sheet index to the first sheet, so Excel opens this as the first sheet
         $spreadsheet->setActiveSheetIndex(0);

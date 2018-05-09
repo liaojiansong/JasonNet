@@ -30,7 +30,7 @@ class BaseController extends Controller
     public function shareUserInfo()
     {
         $user_info = Session::get('user_info');
-        View::share(['id' => $user_info['id'], 'username' => $user_info['username']]);
+        View::share(['id' => $user_info['id'], 'username' => $user_info['username'],'role'=> $user_info['role']]);
     }
 
     /**

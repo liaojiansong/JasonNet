@@ -40,14 +40,17 @@ class Api extends BaseController
     ];
     private static $redis = null;
     protected $beforeActionList = [
-        'checkAuthFirst' => ['except' => 'index'],
+        'checkAuthFirst' => ['except' => 'index,guide'],
     ];
 
     public function index()
     {
-
-
         return $this->fetch('api-list');
+    }
+
+    public function guide()
+    {
+        return $this->fetch('api-guide');
     }
 
 

@@ -25,6 +25,7 @@ class Base
     const device_data_table = 'device_data';
     const device_table = 'devices';
     const device_log = 'device_log';
+    const product_table = 'products';
     const device_info = [
         1=>'mi_seven',
         2=>'dianfanbao',
@@ -89,6 +90,52 @@ class Base
             'update_time'=> time(),
         ];
         $this->mysql->insert(self::device_log, $data);
+    }
+
+    /**
+     * 发送响应信息
+     * @param $pub_topic
+     * 主题
+     * @param $device_id
+     * 设备id
+     * @param string $result
+     * 信息
+     */
+    public function publishResponse($pub_topic, $device_id, $result = 'failure')
+    {
+        $payload = [
+            'device_id' => $device_id,
+            'result' => $result,
+        ];
+        $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
+    }
+
+    /**
+     * 检测设备是否在白名单
+     * @param $device_id
+     * @return bool
+     */
+    public function existsWhiteList($device_id)
+    {
+        $white_list_name = self::DEVICE_WHITE_LIST . $device_id;
+        $flag = $this->redis->exists($white_list_name);
+        return $flag;
+    }
+
+    /**
+     * 尝试着响应
+     * @param object $payload
+     * 解码后的消息体
+     * @param $result
+     * 返回的信息
+     */
+    public function tryToResponse(object $payload, $result)
+    {
+        $device_id = $payload->device_id ?? false;
+        $response_topic = $payload->response_topic ?? false;
+        if ($device_id && $response_topic) {
+            $this->publishResponse($response_topic, $device_id, $result);
+        }
     }
 
 }

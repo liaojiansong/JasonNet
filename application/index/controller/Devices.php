@@ -137,7 +137,8 @@ class Devices extends BaseController
                 ->whereTime('create_time', 'between', [$start, $end])
                 ->select()
                 ->toArray();
-            DeviceDataMode::excelBasic($data, '小米7数据报表');
+            $filename = ($param['device_name'] ?? null) . '数据报表' . "({$param['time_range']})";
+            DeviceDataMode::excelBasic($data, $filename,'数据详情');
         }
     }
 

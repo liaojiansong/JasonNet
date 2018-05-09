@@ -88,6 +88,7 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
+                {{if condition="$role == 'customer'"}}
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-briefcase"></i> <span>产品概况</span>
@@ -136,8 +137,12 @@
                         <li>
                             <a href="{{:url('api/index')}}"><i class="fa fa-circle-o"></i> API列表</a>
                         </li>
+                        <li>
+                            <a href="{{:url('api/guide')}}"><i class="fa fa-circle-o"></i> 设备接入指南</a>
+                        </li>
                     </ul>
                 </li>
+                {{else /}}
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-comments"></i> <span>平台管理</span>
@@ -149,6 +154,7 @@
                         <li><a href="{{:url('index/platform_manage/product_list')}}"><i class="fa fa-circle-o"></i> 产品列表</a></li>
                     </ul>
                 </li>
+                {{/if}}
             </ul>
         </section>
         <!-- /.sidebar -->

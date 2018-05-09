@@ -1,5 +1,56 @@
 
 [
+  // 设备接入示例
+  {
+    // api_key(必填)
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id(必填)
+    "product_id": 1,
+    // 设备id(必填)
+    "device_id": "20181516",
+    // 消息类型
+    "data_type": "auth",
+    // 鉴权信息(必填)
+    "device_auth": "device_mi7",
+    // 接收鉴权的主题(必填)
+    "response_topic":"response_1"
+  },
+  // 服务器返回信息
+  {
+    // 设备id
+    "device_id": 20181516,
+    // 鉴权结果,成功返回'pass',失败返回'failure'
+    "result": "pass"
+  },
+
+
+  // 数据上报
+  {
+    // 设备ID(必填)
+    "device_id":"20181516",
+    // 接收响应的主题(自定义)
+    "response_topic": "response_1",
+    // 数据类型(必填)
+    "data_type":"data",
+    // 数据内容(必填)
+    "data_content": 68,
+    // 创建时间(必填)
+    "create_time":"1524905493",
+    // 更新时间(必填)
+    "update_time":"1524905493"
+  },
+
+  // 服务器返回消失示例
+  {
+    // 设备id
+    "device_id": 20181516,
+    // 返回接收到数据的create_time
+    // 若是设备不在白名单,将返回'failure',需要设备再次发送鉴权信息
+    "result": "1524905493"
+  },
+
+
+
   // 查询产品下的设备列表
   {
     // 令牌 = api + 密码 => md5()

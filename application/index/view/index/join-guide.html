@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Jasonnet| 产品列表</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="__STATIC__/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="__STATIC__/bower_components/font-awesome/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="__STATIC__/bower_components/Ionicons/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="__STATIC__/dist/css/AdminLTE.min.css">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="__STATIC__/plugins/iCheck/square/blue.css">
+	<style>
+		.special {
+			height: 140px;
+			width: 150px;
+			text-align: center;
+			font-size: 90px;
+		}
+		.special i{
+			margin-top: 20px;
+		}
+		.chart-legend li{
+			margin-bottom: 10px;
+			font-size: 1.2em;
+		}
+        body li img{
+            width: 750px;
+            height: 400px; ;
+        }
+	</style>
+</head>
+<body>
+<div class="row ">
+	<div class="col-xs-12">
+		<div class="box" style="padding: 1% 10% 10% 10%;background-color:#d2d6de">
+			<div style="background-color: whitesmoke">
+				<div class="box-header">
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <h2 style="text-align: center"><strong>JasonNet物联网连接管理云平台使用指南</strong></h2>
+					</div>
+				</div>
+				<!-- /.box-header -->
+				<div class="box-body">
+					<section class="content">
+						<!-- row -->
+						<div class="row">
+							<div class="col-md-12">
+								<!-- The time line -->
+								<ul class="timeline">
+									<!-- timeline time label -->
+									<li class="time-label">
+										<span class="bg-red">第一步</span>
+									</li>
+									<!-- /.timeline-label -->
+									<!-- timeline item -->
+									<li>
+										<i class="fa fa-envelope bg-blue"></i>
+
+										<div class="timeline-item">
+
+											<h3 class="timeline-header"><a href="#">用户注册</a></h3>
+
+											<div class="timeline-body">
+												<h4>用户打开连接
+													<a href="http://jasonnet.com/index/login/register.html">JasonNet物联网连接管理云平台</a>,填入基础信息后点击注册按钮.如下图所示
+												</h4>
+												<img src="__STATIC__/customer/img/resiger.jpg" class="margin" />
+											</div>
+
+										</div>
+									</li>
+									<li class="time-label">
+										<span class="bg-red">第二步</span>
+									</li>
+									<li>
+										<i class="fa fa-user bg-aqua"></i>
+										<div class="timeline-item">
+											<h3 class="timeline-header no-border">
+												<a href="#">创建产品</a></h3>
+											<div class="timeline-body">
+												<h4>用户打开连接
+													首次注册登入的用户会看到以下页面
+												</h4>
+												<img src="__STATIC__/customer/img/create_product.jpg" class="margin" />
+												<h4>点击添加产品按钮后来到以下界面,输入产品信息后点击保存</h4>
+												<img src="__STATIC__/customer/img/product_add.jpg" class="margin" />
+												<h4>点击保存以后,系统会自动跳转到产品列表页,点击你刚刚创建的产品</h4>
+												<img src="__STATIC__/customer/img/product_list.jpg" class="margin" />
+											</div>
+										</div>
+									</li>
+									<li class="time-label">
+										<span class="bg-red">第三步</span>
+									</li>
+									<li>
+										<i class="fa fa-user bg-aqua"></i>
+										<div class="timeline-item">
+											<h3 class="timeline-header no-border">
+												<a href="#">添加数据流模板</a></h3>
+											<div class="timeline-body">
+												<h4>点击数据管理,接着点击数据流模板列表,如图所示</h4>
+												<img src="__STATIC__/customer/img/template_list.jpg" class="margin" />
+												<h4>点击页面右上角的添加数据流模板,出现以下界面,输入数据流模板信息后点击保存</h4>
+												<img src="__STATIC__/customer/img/template_add.jpg" class="margin" />
+											</div>
+										</div>
+									</li>
+									<li class="time-label">
+										<span class="bg-red">第四步</span>
+									</li>
+									<li>
+										<i class="fa fa-user bg-aqua"></i>
+										<div class="timeline-item">
+											<h3 class="timeline-header no-border">
+												<a href="#">添加设备</a></h3>
+											<div class="timeline-body">
+												<h4>点击设备管理,接着点击设备列表,如图所示</h4>
+												<img src="__STATIC__/customer/img/device_list.jpg" class="margin" />
+												<h4>点击页面右上角的添加设备按钮,出现以下界面,输入设备信息后点击保存</h4>
+												<img src="__STATIC__/customer/img/device_add.jpg" class="margin" />
+											</div>
+										</div>
+									</li>
+									<li class="time-label">
+										<span class="bg-red">第五步</span>
+									</li>
+									<li>
+										<i class="fa fa-user bg-aqua"></i>
+										<div class="timeline-item">
+											<h3 class="timeline-header no-border">
+												<a href="#">设备接入指南--鉴权</a></h3>
+											<div class="timeline-body">
+												<h4>
+													接入JasonNet的设备必须能正常接入互联网且必须使用MQTT协议并以JSON的格式向平台发起接入请求,详细步骤如下:
+												</h4>
+												<br>
+												<strong>a.首先用户需要拿到要接入设备的ID和鉴权信息</strong>
+												<img src="__STATIC__/customer/img/device_info.jpg" class="margin" />
+												<br>
+												<strong>b.待接入的设备向服务器发送鉴权信息,具体接口调用如下表所示</strong>
+												<table class="table table-bordered table-hover">
+													<tr>
+														<td>接入地址</td>
+														<td>http://120.78.78.42</td>
+													</tr>
+
+													<tr>
+														<td>Port</td>
+														<td>1883</td>
+													</tr>
+													<tr>
+														<td>Topic</td>
+														<td>auth</td>
+													</tr>
+													<tr>
+														<td style="vertical-align: middle">Payload</td>
+														<td>
+
+                                            <pre>
+  // 设备接入示例
+  {
+    // api_key(必填)
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id(必填)
+    "product_id": 1,
+    // 设备id(必填)
+    "device_id": "20181516",
+    // 鉴权信息(必填)
+    "device_auth": "device_mi7",
+    // 接收鉴权的主题(必填)
+    "response_topic":"response_1"
+
+  },
+                                            </pre>
+														</td>
+													</tr>
+												</table>
+												<strong>c.设备发送鉴权信息后,需订阅自己预设的接收反馈信息的主题.服务器返回信息如下</strong>
+												<table class="table table-bordered table-hover">
+
+													<tr>
+														<td>Topic</td>
+														<td>自定义(如:response_topic)</td>
+													</tr>
+													<tr>
+														<td style="vertical-align: middle">Payload</td>
+														<td>
+                                            <pre>
+// 服务器返回信息
+  {
+    // 设备id
+    "device_id": 20181516,
+    // 鉴权结果,成功返回'pass',失败返回'failure'
+    "result": "pass"
+  },
+                                            </pre>
+														</td>
+													</tr>
+												</table>
+												<p>Tip:如果设备鉴权结果返回'pass'就可以进行数据上报的操作,否则请检查所填写信息是否正确,直到鉴权通过为止</p>
+											</div>
+										</div>
+									</li>
+									<!-- END timeline item -->
+									<!-- timeline item -->
+									<li>
+										<i class="fa fa-comments bg-yellow"></i>
+
+										<div class="timeline-item">
+
+											<h3 class="timeline-header"><a href="#">设备接入指南--数据上报</a></h3>
+
+											<div class="timeline-body">
+												<h4>设备数据上报流程如下(设备需要向指定的主题发布消息,并自定义接收响应的主题):</h4>
+												<table class="table table-bordered table-hover">
+													<tr>
+														<td>接入地址</td>
+														<td>http://120.78.78.42</td>
+													</tr>
+													<tr>
+														<td>Port</td>
+														<td>1883</td>
+													</tr>
+													<tr>
+														<td>Topic</td>
+														<td>data</td>
+													</tr>
+													<tr >
+														<td style="vertical-align: middle">Payload</td>
+														<td>
+                                            <pre>
+  // 数据上报
+  {
+    // 设备ID(必填)
+    "device_id":"20181516",
+    // 接收响应的主题(自定义,必填)
+    "response_topic": "response_1",
+    // 数据类型(必填)
+    "data_type":"data",
+    // 数据内容(必填)
+    "data_content": 68,
+    // 创建时间(必填)
+    "create_time":"1524905493",
+    // 更新时间(必填)
+    "update_time":"1524905493"
+  },
+                                            </pre>
+														</td>
+													</tr>
+												</table>
+                                                <p>Tip:强烈建议设置响应数据上报的主题与响应鉴权信息的主题保持一致,这将有效节省接入设备的资源开销</p>
+												<br>
+												<h4>设备上报数据后,服务器会在5秒内做出响应,用户根据返回的时间戳判断是否发送成功.服务器返回信息如下</h4>
+												<table class="table table-bordered table-hover">
+
+													<tr>
+														<td>Topic</td>
+														<td>自定义(如:response_1)</td>
+													</tr>
+													<tr>
+														<td style="vertical-align: middle">Payload</td>
+														<td>
+                                            <pre>
+  // 服务器返回消失示例
+  {
+    // 设备id
+    "device_id": 20181516,
+    // 返回接收到数据的create_time
+    // 若是设备不在白名单,将返回'failure',需要设备再次发送鉴权信息
+    "result": "1524905493"
+  },
+                                            </pre>
+														</td>
+													</tr>
+												</table>
+                                                <p>鉴权通过的设备会被加入白名单,需要注意的是白名单有限期为600秒,若是设备在600秒内没有发送任何数据,
+                                                    将会被踢出白名单.再次上报数据时需要再次进行鉴权.若是设备在600秒上,报了数据,系统将重置当前设备的白名单时间为600秒,无需鉴权!</p>
+											</div>
+
+										</div>
+									</li>
+                                    <li class="time-label">
+                                        <span class="bg-red">欢迎探索JasonNet更多的功能......</span>
+                                    </li>
+								</ul>
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /.row -->
+
+
+					</section>
+				</div>
+			</div>
+			<!-- /.box-body -->
+		</div>
+	</div>
+</div>
+{{include file="public/body-footer" /}}
+
+<!-- jQuery 3 -->
+<script src="__STATIC__/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="__STATIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="__STATIC__/plugins/iCheck/icheck.min.js"></script>
+<!--甜心提示-->
+<script src="__STATIC__/plugins/sweetalter/sweetalert.min.js"></script>
+<!--奈斯验证-->
+<script src="__STATIC__/plugins/nice-validator/src/jquery.validator.js"></script>
+<!--奈斯验证中文-->
+<script src="__STATIC__/plugins/nice-validator/dist/local/zh-CN.js"></script>
+<!--用户自定义js-->
+<script src="__STATIC__/customer/js/customer.js"></script>
+<script>
+    $(function () {
+	   
+    });
+
+</script>
+</body>
+</html>

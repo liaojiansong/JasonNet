@@ -25,6 +25,11 @@ class Index extends BaseController
         return $this->fetch('product-index');
     }
 
+    public function guide()
+    {
+        return $this->fetch('join-guide');
+    }
+
     public function create_product()
     {
         $options = ProductIndustryModel::select_option();
