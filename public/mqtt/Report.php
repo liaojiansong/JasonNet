@@ -36,6 +36,7 @@ class Report extends Base
                 <p>设备ID：{$target_info['device_id']}</p>
                 <p>触发的值：{$target_info['send_value']}</p>
                 <p>触发时间：{$target_info['target_time']}</p>";
+        // 写进报警日志
         $file = fopen('report.log', 'a+');
         $flag = fwrite($file, $subject . "\n\n\n" . $body . "\n\n\n");
         fclose($file);
@@ -44,7 +45,7 @@ class Report extends Base
 
     /**
      * 报告发送邮件的结果(写进数据表)
-     * TODO 删除这个报警信息
+     *
      */
     public function insertIntoLog($target_info)
     {

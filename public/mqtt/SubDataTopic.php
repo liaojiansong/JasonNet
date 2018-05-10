@@ -16,6 +16,10 @@ class SubDataTopic extends Base
 
     }
 
+    /**
+     * 重置设备白名单时间
+     * @param $device_id
+     */
     public function resetExpire($device_id)
     {
         $white_list_name = self::DEVICE_WHITE_LIST . $device_id;
@@ -46,19 +50,33 @@ class SubDataTopic extends Base
             $device_id = $payload->device_id;
             // 如果在白名单就存入redis
             if ($this->existsWhiteList($device_id)) {
-//                echo '-----------------------数据-------------------------------------';
-//                echo "\n";
-//                var_dump($msg);
-//                echo "\n";
+
+
+
+                echo '-----------------------接收到的设备数据-------------------------------------';
+                echo "\n";
+                var_dump($msg);
+                echo "\n";
+
+
+
                 // 重置白名单存活时间
                 $this->resetExpire($device_id);
+
+                // 找到用于存储当前设备信息的list(list存的是json格式的字符串)
                 $list_name = self::DATA_LIST.$device_id;
+
+                // 压入list中
                 $this->redis->lPush($list_name, json_encode($msg));
+
+                // 设置这个list的时间为600秒
                 $this->redis->expire($list_name, 600);
-                // 响应已经成功接收信息
+
+                // 响应设备说我已经成功接收信息
                 $this->tryToResponse($payload, $payload->create_time ?? time());
 
             }else{
+                // 告诉设备你不在白名单中,请发送鉴权信息
                 $this->tryToResponse($payload, 'need_auth');
             }
         });

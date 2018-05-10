@@ -24,7 +24,7 @@ class ResponseOrder extends Base
             echo "\n";
             $payload = json_decode($msg->payload);
             if ($payload->data_type == 'order') {
-                // TODO 做相应的判断
+                // TODO 设备做相应的判断
                 $device_id = $payload->device_id;
                 $this->Log($device_id, 'response_order',  '响应命令'.$payload->data_content ?? null.'  成功');
             }

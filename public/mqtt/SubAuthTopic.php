@@ -18,6 +18,12 @@ class SubAuthTopic extends Base
         parent::__construct(true,true,true);
     }
 
+    // TODO 流程分析
+    // TODO 1 收到设备发来的信息后,首先调用this->checkPayloadIsComplete()判断信息是否完整
+    // TODO 2 如果信息不完整,调用$this->tryToResponse()尝试去回应设备,告诉设备说你给的信息不完整
+    // TODO 3 如果信息完整,则可以进行鉴权操作$this->checkAuth(),鉴权不通过会响应相应的错误信息到设备
+    // TODO 4 鉴权通过后,将设备名称加入白名单并设置过期时间为600秒
+
     /**
      * 检验信息是否完整
      * @param object $payload
@@ -86,9 +92,6 @@ class SubAuthTopic extends Base
         $this->mysql->where('product_id', $payload->product_id);
         $this->mysql->where('device_auth', $payload->device_auth);
         $res_device = $this->mysql->get(self::device_table);
-        var_dump($res_device);
-        var_dump(empty($res_device));
-
         if (empty($res_device)) {
             $this->publishResponse($payload->response_topic, $payload->device_id, self::ERROR[2]);
             return false;
@@ -115,12 +118,16 @@ class SubAuthTopic extends Base
     }
 
 
+    /**
+     * 订阅鉴权主题
+     * @param string $topic
+     */
     public function sub($topic = 'auth')
     {
         $this->mqtt->subscribe($topic, 1);
         $this->mqtt->onMessage(function ($msg) {
             $payload = json_decode($msg->payload);
-            echo '-----------------------鉴权信息-------------------------------------';
+            echo '-----------------------接收到的鉴权信息-------------------------------------';
             echo "\n";
             var_dump($payload);
             echo "\n";
