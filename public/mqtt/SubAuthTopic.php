@@ -127,10 +127,10 @@ class SubAuthTopic extends Base
         $this->mqtt->subscribe($topic, 1);
         $this->mqtt->onMessage(function ($msg) {
             $payload = json_decode($msg->payload);
-            echo '-----------------------接收到的鉴权信息-------------------------------------';
-            echo "\n";
-            var_dump($payload);
-            echo "\n";
+//            echo '-----------------------接收到的鉴权信息-------------------------------------';
+//            echo "\n";
+//            var_dump($payload);
+//            echo "\n";
             if ($this->beforeCheckAuth($payload)) {
                 $device_id = $this->checkAuth($payload);
                 if ($device_id != false) {

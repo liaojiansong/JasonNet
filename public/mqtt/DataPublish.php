@@ -43,7 +43,7 @@ class DataPublish extends Base
                 'update_time' => time(),
             ];
             $mid = $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
-            echo "当前发送数据消息 ID: {$mid}\n";
+//            echo "当前发送数据消息 ID: {$mid}\n";
             $this->mqtt->loop();
             sleep(6);
         }
