@@ -97,7 +97,6 @@ class Login extends Controller
         $user = UserModel::where('phone', $phone)->find();
         if ($user) {
             if ($user['phone'] == $phone && $user['password'] == $password) {
-                // TODO 拉取权限,session
                 if ($user['id'] == 4) {
                     $role = 'root';
                 }else{

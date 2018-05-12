@@ -37,31 +37,41 @@ class ProductModel extends BaseModel
         $instance->allowField(self::$fillable)->save($param, ['id' => $id]);
     }
 
+    // 设备
     public function devices()
     {
         return $this->hasMany('DevicesModel', 'product_id');
     }
 
+    //用户
     public function user()
     {
         return $this->belongsTo('UserModel', 'user_id');
     }
 
+    // 产品行业
     public function productIndustry()
     {
         return $this->belongsTo('ProductIndustryModel', 'product_industry_id');
     }
 
+    // 触发器
     public function triggers()
     {
         return $this->hasMany('TriggerModel', 'product_id');
+    }
+
+    // 数据流模板
+    public function template()
+    {
+        return $this->hasMany('DataTemplateModel','product_id');
     }
 
     public static function getList($product_id=null)
     {
         // 获取当前用户下的产品
         $user_info = session('user_info');
-        $list = ProductModel::withCount(['devices', 'triggers'])->with(['product_industry'])->with([
+        $list = ProductModel::withCount(['devices', 'triggers','template'])->with(['product_industry'])->with([
             'devices' => function ($query) {
                 $query->field('product_id,id');
             }

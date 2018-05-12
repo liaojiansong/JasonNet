@@ -14,9 +14,6 @@ class SubResponseTopic extends Base
         parent::__construct(false, true, true);
 
     }
-
-
-
     /**
      * 订阅并写入redis
      */

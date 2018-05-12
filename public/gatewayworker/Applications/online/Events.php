@@ -80,7 +80,7 @@ class Events
                    self::buildMsg($client_id, 'online_info', $info);
                    break;
                case 'get_device_data':
-                   $info = self::getNewDataInfo($json_obj->content->device_id ?? null, $json_obj->content->timestamp ?? null);
+                   $info = self::getNewDataInfo($json_obj->content->device_id ?? null);
                    self::buildMsg($client_id, 'new_device_data', $info);
            }
 
@@ -112,11 +112,10 @@ class Events
         return $info;
     }
 
-    public static function getNewDataInfo($device_id,$timestamp)
+    public static function getNewDataInfo($device_id)
     {
 
         $mysql = self::$mysql;
-//        $mysql = new MysqliDb('127.0.0.1', 'root', 'liao325339', 'jasonnet');
         $mysql->where('device_id', $device_id)->orderBy('create_time');
         $new_data = $mysql->get(self::device_data_table, 1);
         return $new_data;

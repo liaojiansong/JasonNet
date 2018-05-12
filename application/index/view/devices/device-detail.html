@@ -55,15 +55,9 @@
 
                                 <hr>
 
-                                <h4><strong><i class="fa fa-link margin-r-5"></i>设备API地址</strong>
-                                </h4>
-
-                                <p>http://api.heclouds.com/devices/24501404</p>
-
-                                <hr>
                                 <h4><strong><i class="fa fa-database margin-r-5"></i>累计采集数据</strong></h4>
 
-                                <p>4955566条</p>
+                                <p>{{$all_count.total}}条</p>
 
                                 <hr>
 
@@ -107,9 +101,6 @@
                         <div class="row">
                             <div class="col-md-12" id="container">
 
-                            </div>
-                            <div class="col-md-12">
-                                <!--<button id="btn">点我</button>-->
                             </div>
                         </div>
                     </div>
@@ -167,67 +158,12 @@
 {{block name="js"}}
 <script>
     $(function () {
+        window.last_point = null;
         Main.get_ws();
         Main.send_data();
 
     });
 
-    // let chart = Highcharts.chart('container', {
-    //     title: {
-    //         text: '{{$one.device_name}}数据报表'
-    //     },
-    //     subtitle: {
-    //         text: '数据来源：JasonNet.com'
-    //     },
-    //     yAxis: {
-    //         allowDecimals : true,
-    //         title: {
-    //             text: '{{$template.unit_name ?? "value"}}（{{$template.unit_symbol ?? null}}）'
-    //         }
-    //     },
-    //     xAxis: {
-    //         type: 'datetime',
-    //         dateTimeLabelFormats: {
-    //             second: '%H:%M:%S',
-    //             minute: '%H:%M',
-    //             hour: '%H:%M',
-    //             day: '%m-%d',
-    //             week: '%m-%d',
-    //             month: '%Y-%m',
-    //             year: '%Y'
-    //         }
-    //     },
-    //     plotOptions: {
-    //         series: {
-    //             label: {
-    //                 connectorAllowed: false
-    //             },
-    //             pointStart: 2018
-    //         }
-    //     },
-    //     series: [{
-    //         name :'{{$one.device_name}}',
-    //         data: [],
-    //        // 起始点
-    //         pointStart: Date.UTC(2018, 3, 19, 12, 36),
-    //        // 点间隔
-    //         pointInterval: 15 * 1000
-    //     }],
-    //     responsive: {
-    //         rules: [{
-    //             condition: {
-    //                 maxWidth: 500
-    //             },
-    //             chartOptions: {
-    //                 legend: {
-    //                     layout: 'horizontal',
-    //                     align: 'center',
-    //                     verticalAlign: 'bottom'
-    //                 }
-    //             }
-    //         }]
-    //     }
-    // });
     let chart = Highcharts.chart('container', {
         chart: {
             type: 'spline'
@@ -270,6 +206,7 @@
                 label: {
                     connectorAllowed: false
                 },
+                // TODO 起始时间？
                 pointStart: Date.UTC(2018,4,15,12,18,16)
             }
         },
@@ -293,15 +230,17 @@
             pointInterval: 10 * 1000,
         },]
     });
-console.log('{{$info}}');
     let Main = {
         get_ws() {
             web_socket(function (data) {
                 switch (data.type) {
                     case 'new_device_data':
                         let point = Main.dealData(data.content);
-                        console.log(data.content);
+                        // if (window.last_point === data.content[0].create_time) {
+                        //     point = null;
+                        // }
                         chart.series[0].addPoint(point, true, true);
+                        // window.last_point = data.content[0].create_time;
                         break;
                 }
             })
@@ -310,12 +249,12 @@ console.log('{{$info}}');
             setInterval(function () {
                 let info = {
                     'type': 'get_device_data',
-                    'content': {'device_id': '{{$one.id}}', 'timestamp': 1525493820}
+                    'content': {'device_id': '{{$one.id}}'}
                 };
                 let last = JSON.stringify(info);
                 window.ws.send(last);
                 console.log('done');
-            }, 10000);
+            }, 15000);
         },
         dealData(data_content) {
             let points = [];

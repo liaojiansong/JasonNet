@@ -84,18 +84,12 @@
                                     <p>{{$value.device_auth}}</p>
                                 </td>
                                 <td class="td-status status">
-                                    {{switch name="$value.status"}}
-                                    {{case value="0"}}
+                                    <input type="hidden" name="status" value="outline">
                                     <p><i class="fa fa-circle text-gray"></i> &nbsp;离线</p>
-                                    {{/case}}
-                                    {{case value="1"}}
-                                    <p><i class="fa fa-circle text-green"></i> &nbsp;在线</p>
-                                    {{/case}}
-                                    {{/switch}}
                                 </td>
                                 <td class="td-icon">
                                     <div class="text-center">
-                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="编辑" href="{{:url('edit',['id'=>$value.id])}}"><i class="glyphicon glyphicon-edit"></i></a>
+                                        <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="编辑" href="{{:url('edit',['id'=>$value.id])}}"><i class="glyphicon glyphicon-edit "></i></a>
                                         <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="详情" href="{{:url('detail',['id'=>$value.id])}}"><i class="glyphicon glyphicon-info-sign"></i></a>
                                         <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="添加触发器" href="{{:url('trigger/create',['device_id'=>$value.id])}}"><i class="glyphicon glyphicon-inbox"></i></a>
                                         <a class="btn btn-social-icon btn-default" data-toggle="tooltip" data-placement="top" title="下发命令" onclick="DeviceList.showOrderModal($(this))"><i class="glyphicon glyphicon-send"></i></a>
@@ -270,6 +264,9 @@
                         break;
                 }
             });
+            window.ws.onopen = function () {
+                window.ws.send(DeviceList.getDeviceIDs());
+            };
 
             setInterval(function () {
                 window.ws.send(DeviceList.getDeviceIDs());
@@ -286,7 +283,6 @@
             let info = {'type': 'send_ids', 'content': ids};
             return JSON.stringify(info);
         },
-        // TODO 增加上线提示弹出框
         changeStatus(info) {
             $('.device_id').each(function () {
                 let device_id = parseInt($(this).val());
@@ -296,10 +292,16 @@
                 $.each(info, function (index, value) {
                     if (parseInt(index) === device_id) {
                         let p = td.find('p').first();
-                        if (value === 'online') {
+                        let status = td.find('[name="status"]');
+                        if (status.val() === 'outline' && value === 'online') {
                             p.html(online);
-                        } else {
+                            // toastr.info('ID为：' + index + '的设备上线了');
+                            status.val(value)
+                        }
+                        if (status.val() === 'online' && value === 'outline') {
                             p.html(outline);
+                            toastr.warning('ID为：' + index + '的设备下线了');
+                            status.val(value)
                         }
                     }
                 });

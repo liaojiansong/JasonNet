@@ -207,12 +207,18 @@
 <script src="__STATIC__/plugins/bootstrap-switch-3.3.4/dist/js/bootstrap-switch.min.js"></script>
 
 <script>
+    // 插件配置
     $(document).ready(function () {
         $('.sidebar-menu').tree();
         $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
             checkboxClass: 'icheckbox_flat-green',
             radioClass: 'iradio_flat-green'
         });
+        toastr.options.closeButton = true;
+        toastr.options.showEasing = 'swing';
+        toastr.options.hideEasing = 'linear';
+        toastr.options.closeEasing = 'linear';
+        toastr.options.progressBar = true;
     })
 </script>
 {{block name="js"}} {{/block}}

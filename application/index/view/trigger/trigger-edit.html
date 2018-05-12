@@ -61,15 +61,14 @@
 									<label>报警方式:</label>
 									<div class="form-group">
 										<label>
-											<input type="checkbox" class="flat-red" name="email_check"> <span style="margin-left: 1.5em">邮件</span>
+											<input type="checkbox" class="flat-red" name="email_check" checked> <span style="margin-left: 1.5em">邮件</span>
 										</label>
-										<span style="margin-left: 2em"></span>
-										<label>
-										<input type="checkbox" class="flat-red" name="phone_check"> <span style="margin-left: 1.5em">短信</span>
-										</label>
+										<!--<span style="margin-left: 2em"></span>-->
+										<!--<label>-->
+										<!--<input type="checkbox" class="flat-red" name="phone_check"> <span style="margin-left: 1.5em">短信</span>-->
+										<!--</label>-->
 									</div>
 								</div>
-								<!--todo CheckBox填充-->
 								<div class="form-group email">
 									<label for="email">邮箱</label>
                                     <input type="email" class="form-control" id="email" name="email" data-rule="required;email">
@@ -103,33 +102,33 @@
     // });
     $(function () {
        popInput('{{$one ?? false}}');
-        $('.email,.phone').hide();
-        $('input').on('ifChecked', function (event) {
-            let check_name = event.target.name;
-            if (check_name === 'phone_check') {
-                $('.phone').show();
-            }
-
-            if (check_name === 'email_check') {
-                {
-                    $('.email').show();
-                }
-
-            }
-        });
-        $('input').on('ifUnchecked', function (event) {
-            let check_name = event.target.name;
-            if (check_name === 'phone_check') {
-                $('.phone').hide();
-            }
-
-            if (check_name === 'email_check') {
-                {
-                    $('.email').hide();
-                }
-
-            }
-        });
+        // $('.email,.phone').hide();
+        // $('input').on('ifChecked', function (event) {
+        //     let check_name = event.target.name;
+        //     if (check_name === 'phone_check') {
+        //         $('.phone').show();
+        //     }
+        //
+        //     if (check_name === 'email_check') {
+        //         {
+        //             $('.email').show();
+        //         }
+        //
+        //     }
+        // });
+        // $('input').on('ifUnchecked', function (event) {
+        //     let check_name = event.target.name;
+        //     if (check_name === 'phone_check') {
+        //         $('.phone').hide();
+        //     }
+        //
+        //     if (check_name === 'email_check') {
+        //         {
+        //             $('.email').hide();
+        //         }
+        //
+        //     }
+        // });
     });
 
 </script>
