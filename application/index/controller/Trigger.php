@@ -52,7 +52,7 @@ class Trigger extends BaseController
                 if ($trigger_id) {
                     $param['trigger_id'] = $trigger_id;
                     TriggerModel::addTargetIntoRedis($param['device_id'], $param);
-                    DeviceLogModel::Log($param['device_id'], 'add_trigger', '添加触发器：' . $param['trigger_name'] ?? null);
+                    DeviceLogModel::Log($param['device_id'], 'add_trigger', '添加触发器：“' . ($param['trigger_name'] ?? null).'”');
                     Db::commit();
                     $this->redirect('index', ['flag' => 'create_success']);
                 } else {
@@ -93,7 +93,7 @@ class Trigger extends BaseController
                 $device = new TriggerModel();
                 TriggerModel::addTargetIntoRedis($param['device_id'], $param);
                 $device->newUpdate($param['id'], $param);
-                DeviceLogModel::Log($param['device_id'], 'update_trigger', '更新触发器："' . $param['trigger_name'] ?? null.'"');
+                DeviceLogModel::Log($param['device_id'], 'update_trigger', '更新触发器：“' . ($param['trigger_name'] ?? null).'”');
             });
             $this->redirect('index', ['flag' => 'update_success']);
         } else {

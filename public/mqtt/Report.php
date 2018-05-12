@@ -49,7 +49,7 @@ class Report extends Base
      */
     public function insertIntoLog($target_info)
     {
-        $this->Log($target_info['device_id'], 'report', '触发器' . $target_info['trigger_name'] . '被触发');
+        $this->Log($target_info['device_id'], 'report', '触发器：“' . $target_info['trigger_name'] . '”被触发');
     }
 
     public function getReportInfo()
