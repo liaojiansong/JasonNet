@@ -33,7 +33,7 @@
                         {{include file="public/form-header" /}}
 							<div class="box-body">
                                 <input type="hidden" name="id">
-                                <input type="hidden" name="create_time">
+                                <input type="hidden" name="alias" value="{{$alias ?? null}}">
                                 <div class="form-group">
                                     <label for="device_id">设备id</label>
                                     <input type="text" class="form-control" name="device_id" id="device_id" value="{{$device_id ?? null}}" readonly>
@@ -101,7 +101,7 @@
     //     alert('Well done, Sir');
     // });
     $(function () {
-       popInput('{{$one ?? false}}');
+       popInput('{{$one ?? 0}}');
         // $('.email,.phone').hide();
         // $('input').on('ifChecked', function (event) {
         //     let check_name = event.target.name;

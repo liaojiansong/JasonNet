@@ -12,10 +12,10 @@ namespace app\index\controller;
 use app\common\BaseController;
 use app\index\model\DeviceLogModel;
 use app\index\model\TriggerModel;
-use function dump;
 use think\Db;
 use think\Session;
 use function request;
+use function time;
 
 class Trigger extends BaseController
 {
@@ -34,6 +34,7 @@ class Trigger extends BaseController
         $param = $this->request->param();
         $this->assign([
             'device_id' => $param['device_id'] ?? null,
+            'alias' => time(),
         ]);
         return $this->fetch('trigger-edit');
     }
@@ -92,7 +93,7 @@ class Trigger extends BaseController
                 $device = new TriggerModel();
                 TriggerModel::addTargetIntoRedis($param['device_id'], $param);
                 $device->newUpdate($param['id'], $param);
-                DeviceLogModel::Log($param['device_id'], 'update_trigger', '更新触发器：' . $param['trigger_name'] ?? null);
+                DeviceLogModel::Log($param['device_id'], 'update_trigger', '更新触发器："' . $param['trigger_name'] ?? null.'"');
             });
             $this->redirect('index', ['flag' => 'update_success']);
         } else {

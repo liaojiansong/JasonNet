@@ -9,15 +9,12 @@ namespace app\index\model;
 
 
 use app\common\BaseModel;
-use function dump;
-use function strtotime;
-use function time;
 
 class TriggerModel extends BaseModel
 {
     protected $table = 'triggers';
     // 可写入字段
-    protected static $fillable = ['product_id','device_id','trigger_name','target_condition', 'target_type','target_value','phone_check', 'phone','email_check','email','report_msg',];
+    protected static $fillable = ['product_id','alias','device_id','trigger_name','target_condition', 'target_type','target_value','phone_check', 'phone','email_check','email','report_msg',];
 
     public static function CreateWithID($param)
     {
@@ -65,13 +62,8 @@ class TriggerModel extends BaseModel
      */
     public static function addTargetIntoRedis($device_id, $trigger_info)
     {
-        // 编辑时防止产生多个触发器
-        if (empty($trigger_info['create_time'])) {
-            $timestamp = time();
-        }else{
-            $timestamp = strtotime($trigger_info['create_time']);
-        }
-
+        // 别名
+        $timestamp = $trigger_info['alias'];
         $redis = self::getRedis();
         $res = $redis->hMset('target_' . $device_id.'_'. $timestamp, $trigger_info);
         $redis->close();

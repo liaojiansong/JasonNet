@@ -63,6 +63,7 @@ class InsertMysql extends Base
      */
     public function insetIntoTable($device_data_box)
     {
+        // TODO 报警器有问题
         foreach ($device_data_box as $val) {
             foreach ($val as $msg) {
                 $msg = json_decode($msg);
@@ -186,7 +187,7 @@ class InsertMysql extends Base
     public function checkALL($device_id, $need_check)
     {
         // 拼装触发器前缀 如:target_+设备id
-        $target_names = self::TARGET . $device_id;
+        $target_names = self::TARGET . $device_id.'_';
 
         // 获取这个设备的所有触发器
         $list_keys = $this->redis->keys($target_names.'*');

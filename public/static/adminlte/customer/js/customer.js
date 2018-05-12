@@ -183,20 +183,18 @@ function validateRegister(url, url_for_phone) {
  * 需要填充的数据(json格式)
  */
 function popInput(data) {
-    if (data=== false) {
-        return;
-    }
-    // TODO 还要兼容多种情况
-    const target = $('body').find('input,select,textarea');
-    const info = $.parseJSON(data);
-    $.each(info, function (index, value) {
-        target.each(function () {
-            let temp = $(this);
-            if (index === temp.attr('name')) {
-                temp.val(value).trigger('change');
-            }
+    if (data!== 0) {
+        const target = $('body').find('input,select,textarea');
+        const info = $.parseJSON(data);
+        $.each(info, function (index, value) {
+            target.each(function () {
+                let temp = $(this);
+                if (index === temp.attr('name')) {
+                    temp.val(value).trigger('change');
+                }
+            })
         })
-    })
+    }
 }
 
 /**

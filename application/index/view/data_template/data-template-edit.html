@@ -71,7 +71,7 @@
 {{block name="js"}}
 <script>
     $(document).ready(function () {
-        popInput('{{$one}}');
+        popInput('{{$one ?? 0 }}');
     });
     
 </script>
