@@ -103,9 +103,10 @@ class Trigger extends BaseController
     }
     public function delete()
     {
+        // TODO 删除触发器？
         $id = $this->request->post('id');
         $param = TriggerModel::get($id);
-        DeviceLogModel::Log($param['device_id'], 'del_trigger', '删除触发器：' . $param['trigger_name'] ?? null);
+        DeviceLogModel::Log($param['device_id'], 'del_trigger', '删除触发器：“' . ($param['trigger_name'] ?? null).'”');
         $param->delete();
         return self::ajaxMsg();
     }

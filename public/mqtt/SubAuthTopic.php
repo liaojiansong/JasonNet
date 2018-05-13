@@ -82,21 +82,27 @@ class SubAuthTopic extends Base
         $this->mysql->where('api_key', $payload->api_key);
         // 返回结果集数组
         $res_product = $this->mysql->get(self::product_table);
+        $device_id = $payload->device_id;
         if (empty($res_product)) {
-            $this->publishResponse($payload->response_topic, $payload->device_id, self::ERROR[1]);
+            $this->publishResponse($payload->response_topic, $device_id, self::ERROR[1]);
             return false;
         }
 
+        // 如果在白名单就不用再次鉴权
+        if ($this->existsWhiteList($device_id)) {
+            $this->redis->expire(self::DEVICE_WHITE_LIST. $device_id, self::expire_time);
+            return $device_id;
+        }
         // 再鉴定product_id 和 device 和 device_auth是否匹配
-        $this->mysql->where('id', $payload->device_id);
+        $this->mysql->where('id', $device_id);
         $this->mysql->where('product_id', $payload->product_id);
         $this->mysql->where('device_auth', $payload->device_auth);
         $res_device = $this->mysql->get(self::device_table);
         if (empty($res_device)) {
-            $this->publishResponse($payload->response_topic, $payload->device_id, self::ERROR[2]);
+            $this->publishResponse($payload->response_topic, $device_id, self::ERROR[2]);
             return false;
         }else{
-            return $payload->device_id;
+            return $device_id;
         }
     }
 
@@ -133,6 +139,7 @@ class SubAuthTopic extends Base
 //            echo "\n";
             if ($this->beforeCheckAuth($payload)) {
                 $device_id = $this->checkAuth($payload);
+                // 鉴权通过
                 if ($device_id != false) {
                     $this->insertIntoWhiteList($device_id);
                     $this->publishResponse($payload->response_topic, $payload->device_id, 'pass');

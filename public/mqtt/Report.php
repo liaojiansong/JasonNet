@@ -55,11 +55,12 @@ class Report extends Base
     public function getReportInfo()
     {
         // todo 每一个target_device 包含完成的报警信息
-        $len = $this->redis->lLen(self::REPORT_LIST);
-        if ($len > 1) {
+        $len = $this->redis->sCard(self::REPORT_LIST);
+        if ($len > 0) {
             for ($i = 0; $i < $len; $i++) {
                 // 报警列表存的是需要报警的target_name
-                $one_target_name = $this->redis->rPop(self::REPORT_LIST) ?? null;
+                $one_target_name = $this->redis->sPop(self::REPORT_LIST) ?? null;
+
                 if ($one_target_name != null) {
                     if ($this->redis->exists($one_target_name))
                     $target_info = $this->redis->hGetAll($one_target_name);
@@ -72,6 +73,7 @@ class Report extends Base
 //                        $this->redis->lPush(self::REPORT_LIST,$one_target_name);
 //                    }
                 }
+                unset($one_target_name);
             }
         }
     }
@@ -80,7 +82,7 @@ class Report extends Base
     {
         while (true) {
             $this->getReportInfo();
-            sleep(50);
+            sleep(5);
         }
 
     }

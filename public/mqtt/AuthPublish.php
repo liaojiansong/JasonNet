@@ -15,20 +15,6 @@ class AuthPublish extends Base
 
     public function foreverPublish($pub_topic = 'auth')
     {
-        /**
-         * // api_key(必填)
-         * "api_key": "MTUyNTU3NDI3MzY2MTUw",
-         * // 产品id(必填)
-         * "product_id": 1,
-         * // 设备id(必填)
-         * "device_id": "20181516",
-         * // 消息类型
-         * "data_type": "auth",
-         * // 鉴权信息(必填)
-         * "device_auth": "device_mi7",
-         * // 接收鉴权的主题(必填)
-         * "response_topic":"response_1"
-         */
         while (true) {
             $this->mqtt->loop();
             $product_id = rand(1, 3);
@@ -51,6 +37,10 @@ class AuthPublish extends Base
 //            echo "\n";
 
             $this->mqtt->loop();
+            unset($product_id);
+            unset($auth_box);
+            unset($device_id);
+            unset($payload);
             sleep(30);
         }
         $this->mqtt->disconnect();
