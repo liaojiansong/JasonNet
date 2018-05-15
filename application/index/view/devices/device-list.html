@@ -283,6 +283,7 @@
             let info = {'type': 'send_ids', 'content': ids};
             return JSON.stringify(info);
         },
+        // 更新设备在线状态
         changeStatus(info) {
             $('.device_id').each(function () {
                 let device_id = parseInt($(this).val());

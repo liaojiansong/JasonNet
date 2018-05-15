@@ -231,6 +231,7 @@
         },]
     });
     let Main = {
+        // 获取websocket连接
         get_ws() {
             web_socket(function (data) {
                 switch (data.type) {
@@ -245,6 +246,7 @@
                 }
             })
         },
+        // 发送设备id
         send_data() {
             setInterval(function () {
                 let info = {
@@ -256,6 +258,7 @@
                 console.log('done');
             }, 15000);
         },
+        // 处理返回数据
         dealData(data_content) {
             let points = [];
             $.each(data_content, function (index, value) {

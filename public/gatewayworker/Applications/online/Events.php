@@ -112,15 +112,17 @@ class Events
         return $info;
     }
 
+    /**
+     * 获取设备最新数据
+     * @param $device_id
+     * @return mixed
+     */
     public static function getNewDataInfo($device_id)
     {
-
         $mysql = self::$mysql;
         $mysql->where('device_id', $device_id)->orderBy('create_time');
         $new_data = $mysql->get(self::device_data_table, 1);
         return $new_data;
-
-
     }
    
    /**

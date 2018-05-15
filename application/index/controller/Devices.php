@@ -170,6 +170,7 @@ class Devices extends BaseController
             'create_time' => time(),
             'update_time' => time(),
         ];
+        // 发送向指定主题命令
         $mid = $mqtt->publish('order', json_encode($payload), 1, 0);
         $mqtt->loop();
 
@@ -183,8 +184,6 @@ class Devices extends BaseController
         }
         $mqtt->disconnect();
         unset($mqtt);
-
-
     }
 
 

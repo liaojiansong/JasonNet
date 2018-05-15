@@ -40,6 +40,7 @@ class Index extends BaseController
         return $this->fetch('product-create');
     }
 
+    // 保存产品
     public function store()
     {
         $param = $this->request->param();

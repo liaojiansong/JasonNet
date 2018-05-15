@@ -70,6 +70,7 @@ class BaseController extends Controller
 
     }
 
+    // 检测用户是否登录
     protected function checkLogin()
     {
         if (!Session::has('user_info')) {
