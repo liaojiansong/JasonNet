@@ -74,7 +74,7 @@ class DeviceDataMode extends BaseModel
             ->setCellValue('D1', '数据类型')
             ->setCellValue('E1', '数据内容')
             ->setCellValue('F1', '创建时间')
-            ->setCellValue('F1', '更新时间')
+            ->setCellValue('G1', '更新时间')
             ->fromArray($data, '无', 'A2');
 
         // Rename worksheet
