@@ -102,11 +102,11 @@ class Events
         $info = [];
         $redis = self::$redis;
         $redis->connect('127.0.0.1');
-        foreach ($ids as $value) {
-            if ($redis->exists('device_white_list_' . $value)) {
-                $info[$value] = 'online';
+        foreach ($ids as $id) {
+            if ($redis->exists('device_white_list_' . $id)) {
+                $info[$id] = 'online';
             } else {
-                $info[$value] = 'outline';
+                $info[$id] = 'outline';
             }
         }
         return $info;

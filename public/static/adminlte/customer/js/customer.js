@@ -10,7 +10,7 @@
 function deleteAlert($url,$id,$_obj) {
     swal({
         title: '确定要删除？',
-        text: "真的真的真的要删除它吗",
+        text: "删除后无法恢复，您确定吗？",
         icon: 'warning',
         buttons: {
             delete: '删除',

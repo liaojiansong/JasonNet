@@ -146,7 +146,7 @@ class Login extends Controller
         if ($flag == null) {
             return null;
         } else {
-            return '用户已存在';
+            return '该手机号已被注册';
         }
     }
 }

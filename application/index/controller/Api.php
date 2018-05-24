@@ -284,6 +284,7 @@ class Api extends BaseController
     }
 
 
+    // 鉴权方法
     public static function checkAuthFirst()
     {
         self::checkParam(['product_id', 'api_key', 'type']);
@@ -327,6 +328,11 @@ class Api extends BaseController
     }
 
 
+    /**
+     * 构建错误信息并输出
+     * @param $var_name
+     * @param null $msg
+     */
     public static function buildErrorMsg($var_name, $msg = null)
     {
         if ($msg == null) {
