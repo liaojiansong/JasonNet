@@ -27,7 +27,7 @@ API列表
                                 <th>API名称</th>
                             </tr>
                             </thead>
-                                <tbody>
+                                <tbody class="pointer">
                                 <tr>
                                     <td rowspan="3">产品</td>
                                 </tr>
@@ -38,13 +38,13 @@ API列表
                                     <td><a onclick="$('#doc-2').modal('show');">产品设备列表</a></td>
                                 </tr>
                                 <tr>
-                                    <td rowspan="6">设备</td>
+                                    <td rowspan="7">设备</td>
                                 </tr>
                                 <tr>
-                                    <td>新增</td>
+                                    <td><a onclick="$('#doc-6').modal('show');">新增设备</a></td>
                                 </tr>
                                 <tr>
-                                    <td>更新</td>
+                                    <td><a onclick="$('#doc-7').modal('show');">更新设备</a></td>
                                 </tr>
                                 <tr>
                                     <td><a onclick="$('#doc-3').modal('show');">查询设备日志</a></td>
@@ -53,45 +53,40 @@ API列表
                                     <td><a onclick="$('#doc-4').modal('show');">查询设备详情和数据</a></td>
                                 </tr>
                                 <tr>
-                                    <td><a onclick="$('#doc-5').modal('show');">批量查询设备状态</a></td>
+                                    <td><a onclick="$('#doc-5').modal('show');" class="pointer">批量查询设备状态</a></td>
+                                </tr>
+                                <tr>
+                                    <td><a onclick="$('#doc-12').modal('show');" >删除</a></td>
                                 </tr>
 
 
                                 <tr>
-                                    <td rowspan="6">触发器</td>
-                                    <td>新增</td>
+                                    <td rowspan="4">触发器</td>
+                                    <td><a onclick="$('#doc-8').modal('show');">新增触发器</a></td>
                                 </tr>
                                 <tr>
-                                    <td>更新</td>
+                                    <td><a onclick="$('#doc-9').modal('show');">更新触发器</a></td>
                                 </tr>
                                 <tr>
-                                    <td>查询单个触发器</td>
+                                    <td><a onclick="$('#doc-10').modal('show');">查询单个触发器</a></td>
                                 </tr>
                                 <tr>
-                                    <td>模糊查询触发器</td>
-                                </tr>
-                                <tr>
-                                    <td>删除</td>
-                                </tr>
-                                <tr>
-                                    <td>触发数据内容</td>
+                                    <td><a onclick="$('#doc-11').modal('show');">删除</a></td>
                                 </tr>
                                 <tr>
                                     <td rowspan="3">命令</td>
-                                    <td>发送命令</td>
+                                    <td><a onclick="$('#doc-13').modal('show');">发送命令</a></td>
                                 </tr>
                                 <tr>
-                                    <td>查询命令响应</td>
+                                    <td><a onclick="$('#doc-14').modal('show');">查询命令响应</a></td>
                                 </tr>
                                 <tr>
-                                    <td>查询设备历史命令</td>
+                                    <td><a onclick="$('#doc-15').modal('show');">查询设备历史命令</a></td>
                                 </tr>
                                 </tbody>
                             </table>
                     </div>
                 </div>
-
-
             </div>
 		</div>
 	</section>
@@ -156,7 +151,6 @@ API列表
             </div>
         </div>
     </div>
-
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-2" aria-labelledby="myLargeModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -454,35 +448,628 @@ API列表
                                 <p style="text-indent: 2em">  "product_id": "1",</p>
                                 <p style="text-indent: 2em">  "device_ids": [1, 2, 3],</p>
                                 <p style="text-indent: 2em">  "type": "get_devices_status"</p>
-                                <p style="text-indent: 0em">},</p>
-                                <p style="text-indent: 0em">// 返回示例</p>
-                                <p style="text-indent: 0em">{</p>
-                                <p style="text-indent: 2em">  "code": 10000,</p>
-                                <p style="text-indent: 2em">  "error": "success",</p>
-                                <p style="text-indent: 2em">  "data": [</p>
-                                <p style="text-indent: 4em">    {</p>
-                                <p style="text-indent: 6em">      "id": 3,</p>
-                                <p style="text-indent: 6em">      "product_id": 1,</p>
-                                <p style="text-indent: 6em">      "data_template_id": 3,</p>
-                                <p style="text-indent: 6em">      "device_name": "米家 LED 智能台灯",</p>
-                                <p style="text-indent: 6em">      "device_description": " 照明之上，光的艺术品",</p>
-                                <p style="text-indent: 6em">      "status": 1,</p>
-                                <p style="text-indent: 6em">      "device_auth": "mi_seven",</p>
-                                <p style="text-indent: 6em">      "icon": "fa-desktop",</p>
-                                <p style="text-indent: 6em">      "create_time": "2018-04-15 18:57:26",</p>
-                                <p style="text-indent: 6em">      "update_time": "2018-05-05 11:31:13",</p>
-                                <p style="text-indent: 6em">      "online": 1</p>
-                                <p style="text-indent: 4em">    },</p>
-                                <p style="text-indent: 4em">    {</p>
-                                <p style="text-indent: 4em">    ...</p>
-                                <p style="text-indent: 4em">    }</p>
-                                <p style="text-indent: 2em">  ]</p>
                                 <p style="text-indent: 0em">}</p>
                             </td>
                         </tr>
                         <tr>
                             <td>返回示例</td>
                             <td>
+                                <p style="text-indent: 0em">// 返回示例</p>
+                                <p style="text-indent: 0em">{</p>
+                                <p style="text-indent: 2em"> "code": 10000,</p>
+                                <p style="text-indent: 2em"> "error": "success",</p>
+                                <p style="text-indent: 2em"> "data": [</p>
+                                <p style="text-indent: 4em"> {</p>
+                                <p style="text-indent: 6em"> "id": 3,</p>
+                                <p style="text-indent: 6em"> "product_id": 1,</p>
+                                <p style="text-indent: 6em"> "data_template_id": 3,</p>
+                                <p style="text-indent: 6em"> "device_name": "米家 LED 智能台灯",</p>
+                                <p style="text-indent: 6em"> "device_description": " 照明之上，光的艺术品",</p>
+                                <p style="text-indent: 6em"> "status": 1,</p>
+                                <p style="text-indent: 6em"> "device_auth": "mi_seven",</p>
+                                <p style="text-indent: 6em"> "icon": "fa-desktop",</p>
+                                <p style="text-indent: 6em"> "create_time": "2018-04-15 18:57:26",</p>
+                                <p style="text-indent: 6em"> "update_time": "2018-05-05 11:31:13",</p>
+                                <p style="text-indent: 6em"> "online": 1</p>
+                                <p style="text-indent: 4em"> },</p>
+                                <p style="text-indent: 4em"> {</p>
+                                <p style="text-indent: 4em"> ...</p>
+                                <p style="text-indent: 4em"> }</p>
+                                <p style="text-indent: 2em"> ]</p>
+                                <p style="text-indent: 0em">}</p>
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-6" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">新增设备</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>为指定产品添加设备</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/device</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+                                      // 新增设备
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "add_device",
+    // 设备信息
+    "data": {
+      // 设备名称
+      "device_name": "小米8",
+      // 鉴权信息
+      "device_auth": "mi_8",
+      // 设备描述（可选）
+      "device_description": "奋斗联盟的一员"
+    }
+  },
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "errno": 10000,
+    "error": "success",
+    "data": {
+      //平台分配的设备ID
+      "device_id": "156888"
+    }
+  },
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-7" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">更新设备</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>更新设备信息</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/device</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "update_device",
+    // 设备信息
+    "data": {
+      // 设备名称（可选）
+      "device_name": "小米8",
+      // 鉴权信息（可选）
+      "device_auth": "mi_8",
+      // 设备描述（可选）
+      "device_description": "奋斗联盟的一员"
+    }
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "errno": 10000,
+    "error": "success"
+  }
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-8" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">更新设备</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>新增触发器</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/trigger</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 2,
+    // 请求类型
+    "type": "add_trigger",
+    // 触发器信息
+    "data": {
+      // 设备id
+      "device_id": 8,
+      // 触发器名称
+      "trigger_name": "高温报警",
+      // 判断条件
+      "target_condition": ">",
+      // >= | < | <= | == | change,
+      // 阈值
+      "target_value": 60,
+      // 目标邮箱
+      "email": "729999@gamil.com",
+      // 报警信息（可选）
+      "report_msg": "设备温度过高,请检查"
+    }
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "code": 10000,
+    "error": "success",
+    "data": {
+      //平台分配的触发器ID
+      "trigger_id": "28985"
+    }
+  }
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-9" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">更新设备</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>更新触发器</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/trigger</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "update_trigger",
+    // 触发器信息
+    "data": {
+      // 触发器id
+      "trigger_id": "28985",
+      // 触发器名称（可选）
+      "trigger_name": "低温报警",
+      // 判断条件（可选）
+      "target_condition": "<",
+      // >= | < | <= | == | change,
+      // 阈值（可选）
+      "target_value": -20,
+      // 目标邮箱（可选）
+      "email": "729999@gamil.com",
+      // 报警信息（可选）
+      "report_msg": "设备温度过低,请检查"
+    }
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "errno": 10000,
+    "error": "success"
+  }
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-10" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">查询单个触发器</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>查询单个触发器的基本信息</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/trigger</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": 8,
+    "trigger_id": 25677,
+    "type": "get_trigger_info"
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "errno": 10000,
+    "error": "success",
+    "data": {
+      "id":18,
+      "alias":"1526136142",
+      "device_id":"6",
+      "trigger_name":"低温报警",
+      "target_condition":"<",
+      "target_value":"20",
+      "email":"729999@gamil.com",
+      "report_msg": "设备温度过低,请检查",
+      "create_time":"1526136142",
+      "update_time":"1526136142"
+    }
+  }
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-11" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">删除触发器</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>删除触发器</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/trigger</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "del_trigger",
+    // 触发器ID
+    "trigger_id" : "28985"
+
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "errno": 10000,
+    "error": "success"
+  }
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-13" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">发送命令</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>向指定的设备发送命令</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/order</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": "1",
+    // 设备id
+    "device_ids": 256844,
+    // 请求类型
+    "type": "send_order",
+    // 命令内容
+    "order_content": "reboot"
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "errno": 10000,
+    "error": "success"，
+  }
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-14" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">查询命令响应状态</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>查询指定设备命令的执行情况</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/order</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": "1",
+    // 请求类型
+    "type": "order_response",
+    // 设备id
+    "device_id": 256844,
+    // 命令内容
+    "order_content": "reboot"
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "code": 10000,
+    "error": "success",
+    // 时间戳
+    "data": {
+      "id" :"155",
+      "device_id" :"15556",
+      "record_type" :"response_order",
+      "content" :"响应命令“reboot”成功",
+      "create_time" :"1525661166",
+      "update_time" :"1525661166"
+    }
+  }
+                                </pre>
+
+                            </td>
+                        </tr>
+                        <!--</tbody>-->
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="doc-12" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">查询命令响应状态</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover" style=";">
+
+                        <tr>
+                            <td>API功能</td>
+                            <td>删除指定设备</td>
+                        </tr>
+                        <tr>
+                            <td>请求方法</td>
+                            <td>POST</td>
+                        </tr>
+                        <tr>
+                            <td>请求地址</td>
+                            <td>http://jasonnet.com/index/api/order</td>
+                        </tr>
+                        <tr>
+                            <td>请求参数</td>
+                            <td>
+                                <pre>
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 7,
+    // 请求类型
+    "type": "del_device",
+    // 触发器ID
+    "device_id": "28985"
+  }
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>返回示例</td>
+                            <td>
+                                <pre>
+  {
+    "code": 10000,
+    "error": "success"
+  },
+                                </pre>
 
                             </td>
                         </tr>

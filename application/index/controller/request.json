@@ -1,4 +1,3 @@
-
 [
   // 设备接入示例
   {
@@ -13,7 +12,7 @@
     // 鉴权信息(必填)
     "device_auth": "device_mi7",
     // 接收鉴权的主题(必填)
-    "response_topic":"response_1"
+    "response_topic": "response_1"
   },
   // 服务器返回信息
   {
@@ -22,25 +21,22 @@
     // 鉴权结果,成功返回'pass',失败返回'failure'
     "result": "pass"
   },
-
-
   // 数据上报
   {
     // 设备ID(必填)
-    "device_id":"20181516",
+    "device_id": "20181516",
     // 接收响应的主题(自定义)
     "response_topic": "response_1",
     // 数据类型(必填)
-    "data_type":"data",
+    "data_type": "data",
     // 数据内容(必填)
     "data_content": 68,
     // 创建时间(必填)
-    "create_time":"1524905493",
+    "create_time": "1524905493",
     // 更新时间(必填)
-    "update_time":"1524905493"
+    "update_time": "1524905493"
   },
-
-  // 服务器返回消失示例
+  // 服务器返回消息示例
   {
     // 设备id
     "device_id": 20181516,
@@ -48,9 +44,6 @@
     // 若是设备不在白名单,将返回'failure',需要设备再次发送鉴权信息
     "result": "1524905493"
   },
-
-
-
   // 查询产品下的设备列表
   {
     // 令牌 = api + 密码 => md5()
@@ -85,12 +78,177 @@
       ]
     }
   },
+  // 新增设备
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "add_device",
+    // 设备信息
+    "data": {
+      // 设备名称
+      "device_name": "小米8",
+      // 鉴权信息
+      "device_auth": "mi_8",
+      // 设备描述（可选）
+      "device_description": "奋斗联盟的一员"
+    }
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    "data": {
+      //平台分配的设备ID
+      "device_id": "156888"
+    }
+  },
+  // 更新设备
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "update_device",
+    // 设备信息
+    "data": {
+      // 设备id
+      "device_id": "156888",
+      // 设备名称（可选）
+      "device_name": "小米8",
+      // 鉴权信息（可选）
+      "device_auth": "mi_8",
+      // 设备描述（可选）
+      "device_description": "奋斗联盟的一员"
+    }
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success"
+  },
+  // 删除设备
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 7,
+    // 请求类型
+    "type": "del_device",
+    // 触发器ID
+    "device_id": "28985"
+  },
+  {
+    "code": 10000,
+    "error": "success"
+  },
 
 
 
+  // 新增触发器
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 2,
+    // 请求类型
+    "type": "add_trigger",
+    // 触发器信息
+    "data": {
+      // 设备id
+      "device_id": 8,
+      // 触发器名称
+      "trigger_name": "高温报警",
+      // 判断条件
+      "target_condition": ">",
+      // >= | < | <= | == | change,
+      // 阈值
+      "target_value": 60,
+      // 目标邮箱
+      "email": "729999@gamil.com",
+      // 报警信息（可选）
+      "report_msg": "设备温度过高,请检查"
+    }
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    "data": {
+      //平台分配的触发器ID
+      "trigger_id": "28985"
+    }
+  },
 
+  // 更新触发器
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "update_trigger",
+    // 触发器信息
+    "data": {
+      // 触发器id
+      "trigger_id": "28985",
+      // 触发器名称（可选）
+      "trigger_name": "低温报警",
+      // 判断条件（可选）
+      "target_condition": "<",
+      // >= | < | <= | == | change,
+      // 阈值（可选）
+      "target_value": -20,
+      // 目标邮箱（可选）
+      "email": "729999@gamil.com",
+      // 报警信息（可选）
+      "report_msg": "设备温度过低,请检查"
+    }
+  },
+  // 返回示例
+  {
+    "errno": 10000,
+    "error": "success"
+  },
 
+  // 删除触发器
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    // 产品id
+    "product_id": 1,
+    // 请求类型
+    "type": "del_trigger",
+    // 触发器ID
+    "trigger_id" : "28985"
+  },
+  // 返回示例
+  {
+    "errno": 10000,
+    "error": "success"
+  },
+  // 查询单个触发器
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": 8,
+    "trigger_id": 25677,
+    "type": "get_trigger_info"
+  },
+  // 返回示例
+  {
+    "errno": 10000,
+    "error": "success",
+    "data": {
+      "id":18,
+      "alias":"1526136142",
+      "device_id":"6",
+      "trigger_name":"低温报警",
+      "target_condition":"<",
+      "target_value":"20",
+      "email":"729999@gamil.com",
+      "report_msg": "设备温度过低,请检查",
+      "create_time":"1526136142",
+      "update_time":"1526136142"
 
+    }
+  },
 
   // 请求设备数据统计
   {
@@ -109,12 +267,9 @@
       "product_id": 1,
       "product_name": 30,
       "device_count": 1,
-      "trigger_count":60
+      "trigger_count": 60
     }
   },
-
-
-
   // 查询设备详情和数据
   {
     "api_key": "MTUyNTU3NDI3MzY2MTUw",
@@ -178,18 +333,17 @@
       ]
     }
   },
-
-
-
-
   // 获取设备在线状态
   {
     "api_key": "MTUyNTU3NDI3MzY2MTUw",
     "product_id": "1",
-    "device_ids": [1, 2, 3],
+    "device_ids": [
+      1,
+      2,
+      3
+    ],
     "type": "get_devices_status"
   },
-
   // 返回示例
   {
     "code": 10000,
@@ -209,13 +363,9 @@
         "online": 1
       },
       {
-
       }
-
     ]
   },
-
-
   // 获取设备日志
   {
     "api_key": "MTUyNTU3NDI3MzY2MTUw",
@@ -262,6 +412,49 @@
           "update_time": "2018-05-03 21:16:34"
         }
       ]
+    }
+  },
+  // 发送命令
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": "1",
+    // 设备id
+    "device_ids": 256844,
+    // 请求类型
+    "type": "send_order",
+    // 命令内容
+    "order_content": "reboot"
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    // 时间戳
+    "time" : 1524905493
+  },
+  // 查询设备响应
+  {
+    "api_key": "MTUyNTU3NDI3MzY2MTUw",
+    "product_id": "1",
+    // 请求类型
+    "type": "order_response",
+    // 设备id
+    "device_id": 256844,
+    // 命令内容
+    "order_content": "reboot"
+  },
+  // 返回示例
+  {
+    "code": 10000,
+    "error": "success",
+    // 时间戳
+    "data": {
+      "id" :"155",
+      "device_id" :"15556",
+      "record_type" :"response_order",
+      "content" :"响应命令“reboot”成功",
+      "create_time" :"1525661166",
+      "update_time" :"1525661166"
     }
   }
 
