@@ -30,11 +30,11 @@ class AuthPublish extends Base
                 'response_topic' => 'response_1',
             ];
             $mid = $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
-            echo "当前发送鉴权信息 ID: {$mid}\n";
-            echo '-----------------------发送的鉴权消息为-------------------------------------';
-            echo "\n";
-            var_dump($payload);
-            echo "\n";
+//            echo "当前发送鉴权信息 ID: {$mid}\n";
+//            echo '-----------------------发送的鉴权消息为-------------------------------------';
+//            echo "\n";
+//            var_dump($payload);
+//            echo "\n";
 
             $this->mqtt->loop();
             unset($product_id);
