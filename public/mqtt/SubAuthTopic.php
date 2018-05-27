@@ -31,20 +31,6 @@ class SubAuthTopic extends Base
      */
     public function checkPayloadIsComplete(stdClass $payload)
     {
-        /**
-         * // api_key(必填)
-         * "api_key": "MTUyNTU3NDI3MzY2MTUw",
-         * // 产品id(必填)
-         * "product_id": 1,
-         * // 设备id(必填)
-         * "device_id": "20181516",
-         * // 消息类型
-         * "data_type": "auth",
-         * // 鉴权信息(必填)
-         * "device_auth": "device_mi7",
-         * // 接收鉴权的主题(必填)
-         * "response_topic":"response_1"
-         */
         $fields = ['api_key', 'product_id', 'device_id', 'data_type', 'device_auth', 'response_topic'];
         foreach ($fields as $value) {
             if (($payload->$value ?? null) == null) {
@@ -133,10 +119,10 @@ class SubAuthTopic extends Base
         $this->mqtt->subscribe($topic, 1);
         $this->mqtt->onMessage(function ($msg) {
             $payload = json_decode($msg->payload);
-//            echo '-----------------------接收到的鉴权信息-------------------------------------';
-//            echo "\n";
-//            var_dump($payload);
-//            echo "\n";
+            echo '-----------------------接收到的鉴权信息-------------------------------------';
+            echo "\n";
+            var_dump($payload);
+            echo "\n";
             if ($this->beforeCheckAuth($payload)) {
                 $device_id = $this->checkAuth($payload);
                 // 鉴权通过

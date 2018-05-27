@@ -69,7 +69,7 @@ class Events
     */
    public static function onMessage($client_id, $message) {
        $json_obj = json_decode($message);
-       echo "----------------------------------以下是发过来的信息---------------------\n";
+//       echo "----------------------------------以下是发过来的信息---------------------\n";
 //       var_dump($json_obj);
        $type =  $json_obj->type ?? null;
 //       print_r($json_obj->content);

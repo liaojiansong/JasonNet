@@ -26,37 +26,6 @@ class Base
     const device_table = 'devices';
     const device_log = 'device_log';
     const product_table = 'products';
-    const device_info = [
-        1 => [
-            1 => 'mi_seven',
-            2 => 'dianfanbao',
-            3 => 'ledlight',
-        ],
-        2 => [
-            4 => 'cramarm',
-            5 => 'water',
-            6 => 'car',
-            7 => 'nicvre',
-            12 => 'mi_6x',
-            13 => 'fang',
-            14 => 'hot',
-            15 => 'light',
-            16 => 'bed_light',
-        ],
-        3 => [
-            8 => 'water',
-            9 => 'fresh',
-            10 => 'health',
-        ],
-
-    ];
-    const api_key = [
-        0 => 666,
-
-        1 => 'MTUyNTU3NDI3MzY2MTUw',
-        2 => 'MTUyNTU3NDMyODg5NjYw',
-        3 => 'MTUyNTU3NDM1OTcyOTk5',
-    ];
     /**
      * 初始化连接
      * Base constructor.
@@ -150,4 +119,95 @@ class Base
         }
     }
 
+    /**
+     * 生成鉴权信息
+     * @return array
+     */
+    public static function getAuthInfo()
+    {
+        $auth_info = [
+            '20189598' => [
+                'api_key' => 'ODQ2MC42NDA1MDEwNDE1ODMxMjg=',
+                'devices' => [
+                    '96545' => 'temperature_A_01',
+                    '96546' => 'humidity_B_01',
+                    '96548' => 'light_level_B_01',
+                    '96549' => 'CO2_D_01',
+                    '96550' => 'mould_E_01',
+                    '96551' => 'CO2_D_02',
+                    '96552' => 'humidity_B_02',
+                    '96553' => 'temperature_A_02',
+                ]
+            ],
+            '20189657' => [
+                'api_key' => 'MTUyNTU3NDI3MzY2MTUw',
+                'devices' => [
+                    '96554' => 'temperature_no_1',
+                    '96555' => 'weigth',
+                    '96556' => 'water',
+                    '96557' => 'fresh',
+                    '96558' => 'health',
+                    '96559' => 'cramarm',
+                    '96660' => 'water',
+                    '96661' => 'car',
+                    '96662' => 'nicvre',
+                    '96663' => 'bed_light',
+                    '96664' => 'mi_seven',
+                    '96665' => 'dianfanbao',
+                    '96666' => 'ledlight',
+                    '96667' => 'mi_6x',
+                    '96668' => 'fang',
+                    '96669' => 'hot',
+                    '96670' => 'light',
+                ]
+            ]
+        ];
+        $product_id = array_rand($auth_info);
+        $api_key = $auth_info[$product_id]['api_key'];
+        $devices = $auth_info[$product_id]['devices'];
+        $device_id = array_rand($devices);
+        $device_auth = $devices[$device_id];
+        return [
+            'product_id' => $product_id,
+            'api_key' => $api_key,
+            'device_id' => $device_id,
+            'device_auth' => $device_auth,
+        ];
+    }
+
+    /**
+     * 返回一个设备id
+     * @return mixed
+     */
+    public static function getDeviceId()
+    {
+        $device_ids = [
+            '96545' => '96545',
+            '96546' => '96546',
+            '96548' => '96548',
+            '96549' => '96549',
+            '96550' => '96550',
+            '96551' => '96551',
+            '96552' => '96552',
+            '96553' => '96553',
+            '96554' => '96554',
+            '96555' => '96555',
+            '96556' => '96556',
+            '96557' => '96557',
+            '96558' => '96558',
+            '96559' => '96559',
+            '96660' => '96660',
+            '96661' => '96661',
+            '96662' => '96662',
+            '96663' => '96663',
+            '96664' => '96664',
+            '96665' => '96665',
+            '96666' => '96666',
+            '96667' => '96667',
+            '96668' => '96668',
+            '96669' => '96669',
+            '96670' => '96670',
+        ];
+        return array_rand($device_ids);
+    }
 }

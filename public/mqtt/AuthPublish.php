@@ -5,8 +5,11 @@
  * @Date: 2018/5/3
  */
 require_once('Base.php');
+
 class AuthPublish extends Base
 {
+
+
     public function __construct()
     {
         parent::__construct(false, false, true);
@@ -17,24 +20,21 @@ class AuthPublish extends Base
     {
         while (true) {
             $this->mqtt->loop();
-            $product_id = rand(1, 3);
-            $auth_box = self::device_info[$product_id];
-            $device_id = array_rand($auth_box);
-
+            $auth_info = self::getAuthInfo();
             $payload = [
-                'api_key'=>self::api_key[$product_id],
-                'product_id'=> $product_id,
-                'device_id' => $device_id,
+                'api_key' => $auth_info['api_key'],
+                'product_id' => $auth_info['product_id'] ,
+                'device_id' => $auth_info['device_id'],
                 'data_type' => 'auth',
-                'device_auth' => $auth_box[$device_id],
+                'device_auth' => $auth_info['device_auth'],
                 'response_topic' => 'response_1',
             ];
             $mid = $this->mqtt->publish($pub_topic, json_encode($payload), 1, 0);
-//            echo "当前发送鉴权信息 ID: {$mid}\n";
-//            echo '-----------------------发送的鉴权消息为-------------------------------------';
-//            echo "\n";
-//            var_dump($payload);
-//            echo "\n";
+            echo "当前发送鉴权信息 ID: {$mid}\n";
+            echo '-----------------------发送的鉴权消息为-------------------------------------';
+            echo "\n";
+            var_dump($payload);
+            echo "\n";
 
             $this->mqtt->loop();
             unset($product_id);

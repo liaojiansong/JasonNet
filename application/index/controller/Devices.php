@@ -105,6 +105,8 @@ class Devices extends BaseController
         $template = $one->template;
         $items = $one->deviceData()->limit(25)->order('create_time')->select();
         $all_count = DeviceDataMode::getCount($id);
+        // highchart 起始时间点
+        $point_start = $items[0]['create_time'] ?? null;
 
         $info = [];
         foreach ($items as $value) {
@@ -118,6 +120,7 @@ class Devices extends BaseController
             'all_count' => $all_count,
             'logs' => $logs,
             'template' => $template,
+            'point_start' => strtotime($point_start) * 1000,
         ]);
         return $this->fetch('device-detail');
     }

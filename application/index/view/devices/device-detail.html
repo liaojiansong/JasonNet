@@ -161,9 +161,13 @@
         window.last_point = null;
         Main.get_ws();
         Main.send_data();
-
     });
-
+    // 设置时间偏移
+    Highcharts.setOptions({
+        global: {
+            timezoneOffset: -8 * 60
+        }
+    });
     let chart = Highcharts.chart('container', {
         chart: {
             type: 'spline'
@@ -206,8 +210,7 @@
                 label: {
                     connectorAllowed: false
                 },
-                // TODO 起始时间？
-                pointStart: Date.UTC(2018,4,15,12,18,16)
+                pointStart: parseInt('{{$point_start}}')
             }
         },
         responsive: {
