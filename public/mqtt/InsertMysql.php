@@ -105,7 +105,7 @@ class InsertMysql extends Base
             $data_box = $this->getDeviceDataBox();
             $this->insetIntoTable($data_box);
             unset($data_box);
-            sleep(15);
+            sleep(8);
         }
     }
 

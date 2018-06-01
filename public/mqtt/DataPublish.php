@@ -46,7 +46,7 @@ class DataPublish extends Base
 //            echo "当前发送数据消息 ID: {$mid}\n";
             $this->mqtt->loop();
             unset($payload);
-            sleep(6);
+            sleep(3);
         }
         $this->mqtt->disconnect();
 

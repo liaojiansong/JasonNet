@@ -41,7 +41,7 @@ class AuthPublish extends Base
             unset($auth_box);
             unset($device_id);
             unset($payload);
-            sleep(30);
+            sleep(10);
         }
         $this->mqtt->disconnect();
 
